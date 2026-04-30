@@ -11,17 +11,23 @@ interface Meal {
     title: string;
     calories: number;
     macros: { p: number; f: number; c: number };
-    ingredients?: any[]; // Добавили опциональное поле
+    dishes?: any[];
 }
 
 interface MealFeedItemProps {
     meal: Meal;
-    onPress?: () => void; // Добавили обработчик
+    onPress?: () => void;
 }
 
 export const MealFeedItem = ({ meal, onPress }: MealFeedItemProps) => {
     const theme = useTheme();
     const appearance = getMealAppearance(meal.typeCode, theme);
+
+    // Формируем подзаголовок: список блюд или дефолтные макросы
+    const subtitleText =
+        meal.dishes && meal.dishes.length > 0
+            ? meal.dishes.map((d) => d.name).join(", ")
+            : `Б: ${meal.macros.p}г • Ж: ${meal.macros.f}г • У: ${meal.macros.c}г`;
 
     return (
         <TouchableRipple
@@ -32,7 +38,6 @@ export const MealFeedItem = ({ meal, onPress }: MealFeedItemProps) => {
             <View
                 style={[
                     styles.compactCard,
-                    // Используем чистый цвет контейнера вместо elevation (теней)
                     { backgroundColor: theme.colors.elevation.level1 },
                 ]}
             >
@@ -73,9 +78,9 @@ export const MealFeedItem = ({ meal, onPress }: MealFeedItemProps) => {
                             color: theme.colors.onSurfaceVariant,
                             marginTop: 2,
                         }}
+                        numberOfLines={1} // Включаем эллипсис, если список блюд слишком длинный
                     >
-                        Б: {meal.macros.p}г • Ж: {meal.macros.f}г • У:{" "}
-                        {meal.macros.c}г
+                        {subtitleText}
                     </Text>
                 </View>
 
@@ -127,7 +132,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
     },
-    compactCardCenter: { flex: 1, justifyContent: "center" },
+    compactCardCenter: { flex: 1, justifyContent: "center", paddingRight: 8 },
     compactCardRight: { alignItems: "flex-end", marginLeft: 8 },
     smallCaloriePill: {
         paddingHorizontal: 8,

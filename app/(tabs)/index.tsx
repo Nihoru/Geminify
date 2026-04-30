@@ -28,7 +28,6 @@ export default function HomeScreen() {
     const [period, setPeriod] = useState("day");
     const [selectedMeal, setSelectedMeal] = useState<any>(null);
 
-    // Оставляем только контроль видимости и загрузки
     const [isModalVisible, setModalVisible] = useState(false);
     const [isAnalyzing, setIsAnalyzing] = useState(false);
 
@@ -39,7 +38,6 @@ export default function HomeScreen() {
 
     const paddingTop = insets.top + 64 + 56 + 20 + 24;
 
-    // Функция теперь принимает готовый текст из модалки
     const handleSaveMeal = async (textPrompt: string) => {
         setIsAnalyzing(true);
 
@@ -53,7 +51,7 @@ export default function HomeScreen() {
                     totalProtein: analysisResult.totalProtein,
                     totalFat: analysisResult.totalFat,
                     totalCarbs: analysisResult.totalCarbs,
-                    ingredients: analysisResult.ingredients,
+                    dishes: analysisResult.dishes,
                 });
             });
 
@@ -112,21 +110,31 @@ export default function HomeScreen() {
                                 f: meal.totalFat,
                                 c: meal.totalCarbs,
                             },
-                            // Прокидываем ингредиенты из Realm в чистый массив объектов
-                            ingredients: meal.ingredients.map((ing: any) => ({
-                                name: ing.name,
-                                weight: ing.weight,
-                                calories: ing.calories,
-                                protein: ing.protein,
-                                fat: ing.fat,
-                                carbs: ing.carbs,
+                            // Извлекаем двухуровневую иерархию из Realm
+                            dishes: meal.dishes.map((dish: any) => ({
+                                name: dish.name,
+                                totalWeight: dish.totalWeight,
+                                totalCalories: dish.totalCalories,
+                                totalProtein: dish.totalProtein,
+                                totalFat: dish.totalFat,
+                                totalCarbs: dish.totalCarbs,
+                                ingredients: dish.ingredients.map(
+                                    (ing: any) => ({
+                                        name: ing.name,
+                                        weight: ing.weight,
+                                        calories: ing.calories,
+                                        protein: ing.protein,
+                                        fat: ing.fat,
+                                        carbs: ing.carbs,
+                                    }),
+                                ),
                             })),
                         };
                         return (
                             <MealFeedItem
                                 key={mappedMeal.id}
                                 meal={mappedMeal}
-                                onPress={() => setSelectedMeal(mappedMeal)} // Передаем данные при клике
+                                onPress={() => setSelectedMeal(mappedMeal)}
                             />
                         );
                     })}
@@ -154,7 +162,6 @@ export default function HomeScreen() {
                 ]}
             />
 
-            {/* Изолированная модалка */}
             <AddMealModal
                 visible={isModalVisible}
                 onDismiss={() => setModalVisible(false)}

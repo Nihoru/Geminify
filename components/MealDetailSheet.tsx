@@ -5,7 +5,7 @@ import {
 } from "@gorhom/bottom-sheet";
 import React, { useCallback, useEffect, useMemo, useRef } from "react";
 import { StyleSheet, View, useWindowDimensions } from "react-native";
-import { Text, useTheme } from "react-native-paper";
+import { List, Text, useTheme } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { getMealAppearance } from "../src/utils/mealHelpers";
 
@@ -23,6 +23,16 @@ interface IngredientInfo {
     carbs: number;
 }
 
+interface DishInfo {
+    name: string;
+    totalWeight: number;
+    totalCalories: number;
+    totalProtein: number;
+    totalFat: number;
+    totalCarbs: number;
+    ingredients: IngredientInfo[];
+}
+
 interface MealDetailSheetProps {
     visible: boolean;
     onDismiss: () => void;
@@ -32,7 +42,7 @@ interface MealDetailSheetProps {
         calories: number;
         typeCode: string;
         macros: { p: number; f: number; c: number };
-        ingredients: IngredientInfo[];
+        dishes: DishInfo[];
     } | null;
 }
 
@@ -205,104 +215,140 @@ export const MealDetailSheet = ({
                         variant="labelMedium"
                         style={{ color: theme.colors.onSurfaceVariant }}
                     >
-                        {meal.ingredients.length} позиций
+                        {meal.dishes.length} блюд(а)
                     </Text>
                 </View>
 
                 <View style={styles.ingredientsList}>
-                    {meal.ingredients.map((ing, index) => (
-                        <View
-                            key={index}
-                            style={[
-                                styles.ingredientCard,
-                                {
-                                    backgroundColor:
-                                        theme.colors.elevation.level1,
-                                },
-                            ]}
+                    {meal.dishes.map((dish, dishIndex) => (
+                        <List.Accordion
+                            key={dishIndex}
+                            title={capitalize(dish.name)}
+                            description={`${dish.totalCalories} ккал • ${dish.totalWeight}г`}
+                            titleStyle={{
+                                fontWeight: "700",
+                                color: theme.colors.onSurface,
+                            }}
+                            descriptionStyle={{
+                                color: theme.colors.onSurfaceVariant,
+                                marginTop: 2,
+                            }}
+                            style={{
+                                backgroundColor: theme.colors.elevation.level1,
+                                borderRadius: 24,
+                                marginBottom: 8,
+                            }}
+                            theme={{ colors: { background: "transparent" } }}
                         >
-                            <View
-                                style={[
-                                    styles.ingLeadingBadge,
-                                    {
-                                        backgroundColor:
-                                            theme.colors.primaryContainer,
-                                    },
-                                ]}
-                            >
-                                <Text
-                                    variant="titleMedium"
-                                    style={{
-                                        color: theme.colors.onPrimaryContainer,
-                                        fontWeight: "800",
-                                        lineHeight: 20,
-                                    }}
-                                >
-                                    {ing.calories}
-                                </Text>
-                                <Text
-                                    variant="labelSmall"
-                                    style={{
-                                        color: theme.colors.onPrimaryContainer,
-                                        opacity: 0.8,
-                                        fontSize: 9,
-                                        lineHeight: 12,
-                                    }}
-                                >
-                                    ккал
-                                </Text>
-                            </View>
-
-                            <View style={styles.ingMainContent}>
-                                <Text
-                                    variant="titleSmall"
-                                    style={{
-                                        color: theme.colors.onSurface,
-                                        fontWeight: "700",
-                                    }}
-                                    numberOfLines={1}
-                                >
-                                    {capitalize(ing.name)}
-                                </Text>
+                            {dish.ingredients.map((ing, ingIndex) => (
                                 <View
+                                    key={ingIndex}
                                     style={[
-                                        styles.ingMacrosRow,
-                                        { marginTop: 4 },
+                                        styles.ingredientCard,
+                                        {
+                                            backgroundColor: "transparent", // Фон дает сам аккордеон
+                                            paddingLeft: 24, // Сдвигаем левее для визуальной иерархии
+                                            paddingRight: 16,
+                                            paddingBottom:
+                                                ingIndex ===
+                                                dish.ingredients.length - 1
+                                                    ? 16
+                                                    : 4, // Отступ у последнего элемента
+                                        },
                                     ]}
                                 >
-                                    {renderMiniMacro(
-                                        theme.colors.secondaryContainer,
-                                        theme.colors.onSecondaryContainer,
-                                        "Б",
-                                        ing.protein,
-                                    )}
-                                    {renderMiniMacro(
-                                        theme.colors.tertiaryContainer,
-                                        theme.colors.onTertiaryContainer,
-                                        "Ж",
-                                        ing.fat,
-                                    )}
-                                    {renderMiniMacro(
-                                        theme.colors.primaryContainer,
-                                        theme.colors.onPrimaryContainer,
-                                        "У",
-                                        ing.carbs,
-                                    )}
-                                </View>
-                            </View>
+                                    {/* --- ТУТ НАЧИНАЕТСЯ ТВОЯ СТАРАЯ ВЕРСТКА КАРТОЧКИ --- */}
+                                    <View
+                                        style={[
+                                            styles.ingLeadingBadge,
+                                            {
+                                                backgroundColor:
+                                                    theme.colors
+                                                        .primaryContainer,
+                                            },
+                                        ]}
+                                    >
+                                        <Text
+                                            variant="titleMedium"
+                                            style={{
+                                                color: theme.colors
+                                                    .onPrimaryContainer,
+                                                fontWeight: "800",
+                                                lineHeight: 20,
+                                            }}
+                                        >
+                                            {ing.calories}
+                                        </Text>
+                                        <Text
+                                            variant="labelSmall"
+                                            style={{
+                                                color: theme.colors
+                                                    .onPrimaryContainer,
+                                                opacity: 0.8,
+                                                fontSize: 9,
+                                                lineHeight: 12,
+                                            }}
+                                        >
+                                            ккал
+                                        </Text>
+                                    </View>
 
-                            <View style={styles.ingTrailing}>
-                                <Text
-                                    variant="labelMedium"
-                                    style={{
-                                        color: theme.colors.onSurfaceVariant,
-                                        fontWeight: "700",
-                                    }}
-                                >
-                                    {ing.weight}г
-                                </Text>
-                            </View>
-                        </View>
+                                    <View style={styles.ingMainContent}>
+                                        <Text
+                                            variant="titleSmall"
+                                            style={{
+                                                color: theme.colors.onSurface,
+                                                fontWeight: "700",
+                                            }}
+                                            numberOfLines={1}
+                                        >
+                                            {capitalize(ing.name)}
+                                        </Text>
+                                        <View
+                                            style={[
+                                                styles.ingMacrosRow,
+                                                { marginTop: 4 },
+                                            ]}
+                                        >
+                                            {renderMiniMacro(
+                                                theme.colors.secondaryContainer,
+                                                theme.colors
+                                                    .onSecondaryContainer,
+                                                "Б",
+                                                ing.protein,
+                                            )}
+                                            {renderMiniMacro(
+                                                theme.colors.tertiaryContainer,
+                                                theme.colors
+                                                    .onTertiaryContainer,
+                                                "Ж",
+                                                ing.fat,
+                                            )}
+                                            {renderMiniMacro(
+                                                theme.colors.primaryContainer,
+                                                theme.colors.onPrimaryContainer,
+                                                "У",
+                                                ing.carbs,
+                                            )}
+                                        </View>
+                                    </View>
+
+                                    <View style={styles.ingTrailing}>
+                                        <Text
+                                            variant="labelMedium"
+                                            style={{
+                                                color: theme.colors
+                                                    .onSurfaceVariant,
+                                                fontWeight: "700",
+                                            }}
+                                        >
+                                            {ing.weight}г
+                                        </Text>
+                                    </View>
+                                    {/* --- ТУТ ЗАКАНЧИВАЕТСЯ ТВОЯ СТАРАЯ ВЕРСТКА КАРТОЧКИ --- */}
+                                </View>
+                            ))}
+                        </List.Accordion>
                     ))}
                 </View>
             </BottomSheetScrollView>
