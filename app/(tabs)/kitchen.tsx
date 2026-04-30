@@ -14,7 +14,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { EditIngredientSheet } from "@/components/EditIngredientSheet";
 import { MaterialSymbol } from "@/components/MaterialSymbol";
 import { LAYOUT } from "@/src/constants/layout";
-import localFoodDB from "../../src/assets/food_db_merged.json";
+import localFoodDB from "../../src/assets/food_db_ru_optimized.json";
 
 // Утилита для заглавной буквы
 const capitalize = (str: string) => {

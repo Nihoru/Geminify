@@ -4,18 +4,19 @@ import {
     type Schema,
 } from "@google/generative-ai";
 import Fuse from "fuse.js";
-import localFoodDB from "../assets/food_db_merged.json";
+import localFoodDB from "../assets/food_db_ru_optimized.json";
 import { storage, STORAGE_KEYS } from "../shared/store/storage";
 
 const fuse = new Fuse(localFoodDB, {
     keys: ["name"],
     includeScore: true,
-    threshold: 0.4, // Допускаем небольшие опечатки, но отсекаем откровенный мусор
-    ignoreLocation: true, // Ищем совпадения в любом месте строки
+    threshold: 0.35, // 🔒 Закручиваем гайки обратно! Отсекаем мусор.
+    ignoreLocation: true,
+    useExtendedSearch: true,
+    ignoreFieldNorm: true, // 💊 ОТКЛЮЧАЕМ ШТРАФ ЗА ДЛИНУ СТРОКИ
 });
 
 const extractionSchema: Schema = {
-    // ... (схема осталась без изменений)
     type: SchemaType.OBJECT,
     properties: {
         mealName: { type: SchemaType.STRING },
@@ -31,6 +32,7 @@ const extractionSchema: Schema = {
                             type: SchemaType.OBJECT,
                             properties: {
                                 name: { type: SchemaType.STRING },
+                                searchQuery: { type: SchemaType.STRING }, // <-- Новое поле для чистого поиска
                                 weight: { type: SchemaType.INTEGER },
                                 calories_per_100g: { type: SchemaType.INTEGER },
                                 protein_per_100g: { type: SchemaType.INTEGER },
@@ -39,6 +41,7 @@ const extractionSchema: Schema = {
                             },
                             required: [
                                 "name",
+                                "searchQuery", // <-- Обязательно требуем от ИИ
                                 "weight",
                                 "calories_per_100g",
                                 "protein_per_100g",
@@ -79,6 +82,7 @@ export const analyzeFoodText = async (textPrompt: string) => {
         },
     });
 
+    // Обновленный промпт с правилом Search Query Rule
     const prompt = `You are an expert culinary analyzer. Group the input into distinct dishes, and break down each home-cooked dish into raw ingredients.
 
 Analyzed text: "${textPrompt}"
@@ -89,7 +93,11 @@ Strict Instructions:
    - For home-cooked meals, provide the list of atomic ingredients inside that dish.
    - For standard commercial products, complex pastries, or fast-food (e.g., "тульский пряник", "чизбургер", "сникерс"), treat the dish itself as a single ingredient. Put the commercial name in 'dishName' and duplicate it in the single 'ingredient' name. DO NOT break it down into flour, sugar, etc.
 3. Naming Rule: For ingredient names, output the base product followed by its specific type in Russian (e.g., "курица грудка", "рис бурый").
-4. AI Fallback Macros: Estimate realistic nutritional values per 100 grams for each ingredient.
+4. Search Query Rule: Provide a 'searchQuery' field. This must be a clean, generic search phrase. Drop brands and packaging, but ALWAYS KEEP the core product and its main flavor. 
+   - Beverages: For plain beverages (tea, coffee), if no sugar/milk is mentioned, the searchQuery MUST explicitly state it is a brewed drink without sugar (e.g., instead of just "чай", use "чай черный заваренный без сахара"). This prevents matching with dry tea leaves or sugary concentrates.
+   - Dairy & Plain Products: If no specific flavor/additive (like vanilla, nuts, berries) is mentioned for products like yogurt or cottage cheese, explicitly add "классический без добавок" (e.g., use "творог мягкий классический без добавок"). This strictly prevents matching with flavored/sugary variants in the database.
+5. AI Fallback Macros: Estimate realistic nutritional values per 100 grams for each ingredient.
+
 Return data strictly matching the JSON schema.`;
 
     try {
@@ -111,7 +119,6 @@ Return data strictly matching the JSON schema.`;
             dishes: [] as any[],
         };
 
-        // Двухуровневый цикл: перебираем блюда, а внутри них - ингредиенты
         for (const dishData of extractionResult.dishes) {
             console.log(
                 `\n[Analyze] 🍲 Обработка блюда: "${dishData.dishName}"`,
@@ -128,10 +135,13 @@ Return data strictly matching the JSON schema.`;
             };
 
             for (const item of dishData.ingredients) {
+                const query = item.searchQuery || item.name;
                 console.log(
-                    `  - Ингредиент от ИИ: "${item.name}" (${item.weight}г). Поиск в локальной БД...`,
+                    `  - Ингредиент от ИИ: "${item.name}" (Поиск по: "${query}", ${item.weight}г). Поиск в локальной БД...`,
                 );
-                const searchResults = fuse.search(item.name);
+
+                // Ищем по очищенному запросу
+                const searchResults = fuse.search(query);
 
                 let macros = {
                     calories: item.calories_per_100g,
@@ -140,7 +150,11 @@ Return data strictly matching the JSON schema.`;
                     carbs: item.carbs_per_100g,
                 };
 
-                if (searchResults.length > 0 && searchResults[0].score! < 0.4) {
+                // Проверяем порог с учетом нового значения (<= 0.5)
+                if (
+                    searchResults.length > 0 &&
+                    searchResults[0].score! <= 0.5
+                ) {
                     const bestMatch = searchResults[0].item;
                     console.log(
                         `    ✅ Найдено в БД: "${bestMatch.name}" (score: ${searchResults[0].score?.toFixed(3)}). Используем макросы из базы.`,
