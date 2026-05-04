@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Alert, ScrollView, StyleSheet, View } from "react-native";
 import { AnimatedFAB, Text, useTheme } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -12,7 +12,10 @@ import { MealDetailSheet } from "../../components/MealDetailSheet";
 import { MealFeedItem } from "../../components/MealFeedItem";
 import { UnifiedHeader } from "../../components/UnifiedHeader";
 
-import { analyzeFoodText } from "../../src/core/gemini";
+// НОВЫЕ ИМПОРТЫ
+import { foodAnalysisService } from "../../src/services/foodAnalysis";
+import { initVectorDB } from "../../src/services/vectorSearch";
+
 import { MealRealmContext } from "../../src/shared/store/models";
 import { getMealTypeFromDate } from "../../src/utils/mealHelpers";
 
@@ -31,6 +34,26 @@ export default function HomeScreen() {
     const [isModalVisible, setModalVisible] = useState(false);
     const [isAnalyzing, setIsAnalyzing] = useState(false);
 
+    // ИНИЦИАЛИЗАЦИЯ ВЕКТОРНОЙ БАЗЫ ПРИ ЗАПУСКЕ ЭКРАНА
+    useEffect(() => {
+        const setupDatabase = async () => {
+            try {
+                console.log("[App] Инициализация векторной базы Скурихина...");
+                await initVectorDB();
+                console.log(
+                    "[App] ✅ Векторная база успешно загружена в память!",
+                );
+            } catch (error) {
+                console.error(
+                    "[App] ❌ Ошибка инициализации векторной базы:",
+                    error,
+                );
+            }
+        };
+
+        setupDatabase();
+    }, []);
+
     const onScroll = ({ nativeEvent }: any) => {
         const y = Math.floor(nativeEvent?.contentOffset?.y) ?? 0;
         setIsExtended(y <= 20);
@@ -42,7 +65,9 @@ export default function HomeScreen() {
         setIsAnalyzing(true);
 
         try {
-            const analysisResult = await analyzeFoodText(textPrompt);
+            // ИСПОЛЬЗУЕМ НОВЫЙ СЕРВИС-ОРКЕСТРАТОР
+            const analysisResult =
+                await foodAnalysisService.analyzeText(textPrompt);
 
             realm.write(() => {
                 realm.create("Meal", {
@@ -51,6 +76,8 @@ export default function HomeScreen() {
                     totalProtein: analysisResult.totalProtein,
                     totalFat: analysisResult.totalFat,
                     totalCarbs: analysisResult.totalCarbs,
+                    // Если вы добавили totalWeight в схему Realm, раскомментируйте строку ниже:
+                    // totalWeight: analysisResult.totalWeight,
                     dishes: analysisResult.dishes,
                 });
             });
@@ -110,7 +137,6 @@ export default function HomeScreen() {
                                 f: meal.totalFat,
                                 c: meal.totalCarbs,
                             },
-                            // Извлекаем двухуровневую иерархию из Realm
                             dishes: meal.dishes.map((dish: any) => ({
                                 name: dish.name,
                                 totalWeight: dish.totalWeight,
@@ -121,7 +147,8 @@ export default function HomeScreen() {
                                 ingredients: dish.ingredients.map(
                                     (ing: any) => ({
                                         name: ing.name,
-                                        weight: ing.weight,
+                                        // ИЗМЕНЕНИЕ: используем cooked_weight, так как мы переименовали поле
+                                        weight: ing.cooked_weight || ing.weight,
                                         calories: ing.calories,
                                         protein: ing.protein,
                                         fat: ing.fat,

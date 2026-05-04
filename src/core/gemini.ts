@@ -4,13 +4,13 @@ import {
     type Schema,
 } from "@google/generative-ai";
 import Fuse from "fuse.js";
-import localFoodDB from "../assets/food_db_ru_optimized.json";
+import localFoodDB from "../assets/food_db.json";
 import { storage, STORAGE_KEYS } from "../shared/store/storage";
 
 const fuse = new Fuse(localFoodDB, {
     keys: ["name"],
     includeScore: true,
-    threshold: 0.35, // 🔒 Закручиваем гайки обратно! Отсекаем мусор.
+    threshold: 0.35, // Базовый жесткий порог для отсечения мусора
     ignoreLocation: true,
     useExtendedSearch: true,
     ignoreFieldNorm: true, // 💊 ОТКЛЮЧАЕМ ШТРАФ ЗА ДЛИНУ СТРОКИ
@@ -32,7 +32,12 @@ const extractionSchema: Schema = {
                             type: SchemaType.OBJECT,
                             properties: {
                                 name: { type: SchemaType.STRING },
-                                searchQuery: { type: SchemaType.STRING }, // <-- Новое поле для чистого поиска
+                                searchQueries: {
+                                    type: SchemaType.ARRAY,
+                                    items: { type: SchemaType.STRING },
+                                    description:
+                                        "Array of exactly 3 search queries ordered from specific to broad.",
+                                },
                                 weight: { type: SchemaType.INTEGER },
                                 calories_per_100g: { type: SchemaType.INTEGER },
                                 protein_per_100g: { type: SchemaType.INTEGER },
@@ -41,7 +46,7 @@ const extractionSchema: Schema = {
                             },
                             required: [
                                 "name",
-                                "searchQuery", // <-- Обязательно требуем от ИИ
+                                "searchQueries", // Требуем массив запросов
                                 "weight",
                                 "calories_per_100g",
                                 "protein_per_100g",
@@ -82,7 +87,6 @@ export const analyzeFoodText = async (textPrompt: string) => {
         },
     });
 
-    // Обновленный промпт с правилом Search Query Rule
     const prompt = `You are an expert culinary analyzer. Group the input into distinct dishes, and break down each home-cooked dish into raw ingredients.
 
 Analyzed text: "${textPrompt}"
@@ -93,10 +97,13 @@ Strict Instructions:
    - For home-cooked meals, provide the list of atomic ingredients inside that dish.
    - For standard commercial products, complex pastries, or fast-food (e.g., "тульский пряник", "чизбургер", "сникерс"), treat the dish itself as a single ingredient. Put the commercial name in 'dishName' and duplicate it in the single 'ingredient' name. DO NOT break it down into flour, sugar, etc.
 3. Naming Rule: For ingredient names, output the base product followed by its specific type in Russian (e.g., "курица грудка", "рис бурый").
-4. Search Query Rule: Provide a 'searchQuery' field. This must be a clean, generic search phrase. Drop brands and packaging, but ALWAYS KEEP the core product and its main flavor. 
-   - Beverages: For plain beverages (tea, coffee), if no sugar/milk is mentioned, the searchQuery MUST explicitly state it is a brewed drink without sugar (e.g., instead of just "чай", use "чай черный заваренный без сахара"). This prevents matching with dry tea leaves or sugary concentrates.
-   - Dairy & Plain Products: If no specific flavor/additive (like vanilla, nuts, berries) is mentioned for products like yogurt or cottage cheese, explicitly add "классический без добавок" (e.g., use "творог мягкий классический без добавок"). This strictly prevents matching with flavored/sugary variants in the database.
-5. AI Fallback Macros: Estimate realistic nutritional values per 100 grams for each ingredient.
+4. Cascade Search Rule: Provide a 'searchQueries' array with EXACTLY 3 descending levels of detail in Russian.
+   - [0] Highly Specific: Brand + Core product + Flavor (e.g., "ясная поляна тульский пряник сгущенка").
+   - [1] Generic: Core product + Flavor (e.g., "тульский пряник сгущенка").
+   - [2] Base: Core product (e.g., "пряник").
+   CRITICAL FOR PLAIN FOODS: If the item is plain/unflavored (like plain cottage cheese, plain tea, plain milk), YOU MUST include the word "классический" or "заваренный без сахара" in ALL THREE levels (e.g., [0] "творог мягкий вкусвилл классический", [1] "творог мягкий классический", [2] "творог классический"). NEVER leave a level as just "творог" or "чай", because a short query will accidentally match heavily flavored/sugary junk in the database!
+5. Liquid Meal Rule: If the user logs a PORTION of a liquid or semi-liquid dish (like soup, stew, or porridge) without giving the exact whole-pot recipe, you MUST automatically include 'вода' or 'бульон' as an ingredient. Distribute the total portion weight using standard culinary ratios (e.g., standard soups are 70-80% water, porridges are 60-70% water).Example: User says "300g chicken potato soup". You output: Вода (220g), Курица (40g), Картофель (40g).
+6. AI Fallback Macros: Estimate realistic nutritional values per 100 grams for each ingredient.
 
 Return data strictly matching the JSON schema.`;
 
@@ -119,6 +126,9 @@ Return data strictly matching the JSON schema.`;
             dishes: [] as any[],
         };
 
+        const PENALTY_WEIGHTS = [0.0, 0.15, 0.3];
+        const BASE_THRESHOLD = 0.35;
+
         for (const dishData of extractionResult.dishes) {
             console.log(
                 `\n[Analyze] 🍲 Обработка блюда: "${dishData.dishName}"`,
@@ -135,13 +145,49 @@ Return data strictly matching the JSON schema.`;
             };
 
             for (const item of dishData.ingredients) {
-                const query = item.searchQuery || item.name;
                 console.log(
-                    `  - Ингредиент от ИИ: "${item.name}" (Поиск по: "${query}", ${item.weight}г). Поиск в локальной БД...`,
+                    `  - Ингредиент от ИИ: "${item.name}" (${item.weight}г). Запуск каскадного поиска...`,
                 );
 
-                // Ищем по очищенному запросу
-                const searchResults = fuse.search(query);
+                let bestGlobalMatch: any = null;
+                let bestGlobalScore = 1.0;
+
+                const queries = Array.isArray(item.searchQueries)
+                    ? item.searchQueries
+                    : [item.name];
+
+                for (let i = 0; i < queries.length; i++) {
+                    const query = queries[i];
+                    const cascadePenalty =
+                        PENALTY_WEIGHTS[i] !== undefined
+                            ? PENALTY_WEIGHTS[i]
+                            : 0.4;
+
+                    const searchResults = fuse.search(query);
+
+                    if (searchResults.length > 0) {
+                        const match = searchResults[0];
+                        const rawScore = match.score!;
+
+                        if (rawScore <= BASE_THRESHOLD) {
+                            // Больше никаких штрафов за длину! Только штраф уровня каскада.
+                            const penalizedScore = rawScore + cascadePenalty;
+
+                            console.log(
+                                `      🔍 Уровень [${i}] ("${query}"): найден "${match.item.base_name}". Raw: ${rawScore.toFixed(3)}, Итог: ${penalizedScore.toFixed(3)}`,
+                            );
+
+                            if (penalizedScore < bestGlobalScore) {
+                                bestGlobalScore = penalizedScore;
+                                bestGlobalMatch = match.item;
+                            }
+                        }
+                    } else {
+                        console.log(
+                            `      ❌ Уровень [${i}] ("${query}"): ничего не найдено.`,
+                        );
+                    }
+                }
 
                 let macros = {
                     calories: item.calories_per_100g,
@@ -150,24 +196,19 @@ Return data strictly matching the JSON schema.`;
                     carbs: item.carbs_per_100g,
                 };
 
-                // Проверяем порог с учетом нового значения (<= 0.5)
-                if (
-                    searchResults.length > 0 &&
-                    searchResults[0].score! <= 0.5
-                ) {
-                    const bestMatch = searchResults[0].item;
+                if (bestGlobalMatch) {
                     console.log(
-                        `    ✅ Найдено в БД: "${bestMatch.name}" (score: ${searchResults[0].score?.toFixed(3)}). Используем макросы из базы.`,
+                        `    ✅ ПОБЕДИТЕЛЬ: "${bestGlobalMatch.name}" (Итоговый score: ${bestGlobalScore.toFixed(3)}). Берем из БД.`,
                     );
                     macros = {
-                        calories: bestMatch.calories,
-                        protein: bestMatch.protein,
-                        fat: bestMatch.fat,
-                        carbs: bestMatch.carbs,
+                        calories: bestGlobalMatch.calories,
+                        protein: bestGlobalMatch.protein,
+                        fat: bestGlobalMatch.fat,
+                        carbs: bestGlobalMatch.carbs,
                     };
                 } else {
                     console.log(
-                        `    ⚠️ В БД не найдено (или плохой score). Используем оценку Gemini: ${macros.calories} ккал/100г.`,
+                        `    ⚠️ В БД ничего не подошло. Используем AI Fallback: ${macros.calories} ккал/100г.`,
                     );
                 }
 

@@ -14,7 +14,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { EditIngredientSheet } from "@/components/EditIngredientSheet";
 import { MaterialSymbol } from "@/components/MaterialSymbol";
 import { LAYOUT } from "@/src/constants/layout";
-import localFoodDB from "../../src/assets/food_db_ru_optimized.json";
+import localFoodDB from "../../src/assets/food_db.json";
 
 // Утилита для заглавной буквы
 const capitalize = (str: string) => {
@@ -56,7 +56,7 @@ export default function KitchenScreen() {
     const fuse = useMemo(
         () =>
             new Fuse(localFoodDB, {
-                keys: ["name"],
+                keys: ["base_name"],
                 threshold: 0.3,
                 distance: 100,
             }),
@@ -232,7 +232,7 @@ export default function KitchenScreen() {
                 onScroll={onScroll}
                 scrollEventThrottle={16}
                 data={displayData}
-                keyExtractor={(item, index) => item.name + index}
+                keyExtractor={(item, index) => item.base_name + index}
                 renderItem={renderItem}
                 initialNumToRender={15} // Сколько элементов рендерить при первой загрузке экрана
                 maxToRenderPerBatch={20} // Сколько элементов дорендеривать за один кадр при скролле
