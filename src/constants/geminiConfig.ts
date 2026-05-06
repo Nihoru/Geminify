@@ -109,6 +109,10 @@ Strict Instructions:
    - Determine the 'preparationMethod' (e.g., "варка", "жарка", "тушение", "запекание", "без обработки") for the dish and each ingredient.
    - Provide 'estimated_dish_loss' with percentages of loss for mass, proteins, fats, carbs, and energy value based on standard culinary science (Skurikhin methodology).
    - CRITICAL: Mass gain (e.g., boiling pasta or grains that absorb water) MUST be represented as a NEGATIVE 'mass_loss_percent' (e.g., -150). All other values remain standard percentages.
+9. Database Routing (searchTarget): 
+   - Assign "skurikhin" if the item is a basic agricultural product, whole food (e.g., fresh apple, raw meat, plain rice, vegetables), or a basic component of a home-cooked dish.
+   - Assign "openfood" ONLY if the item is a specific commercial brand, fast-food item, or complex store-bought product (e.g., "Snickers", "Big Mac", "Lay's chips").
+
 Skurikhin Database Categories (SELECT ONE FOR EACH DISH):
 ${SKURIKHIN_CATEGORIES.join(", ")}
 Return data strictly matching the JSON schema.`;
@@ -168,6 +172,11 @@ export const extractionSchema: Schema = {
                                         "Exact category from the provided Skurikhin list",
                                 },
                                 name: { type: SchemaType.STRING },
+                                searchTarget: {
+                                    type: SchemaType.STRING,
+                                    description:
+                                        "MUST BE 'skurikhin' for all raw ingredients, whole foods (fruits, vegetables, meats, grains), and home-cooked meal parts. MUST BE 'openfood' ONLY for commercial branded products (e.g., Snickers, Coca-Cola), fast food, or complex store-bought ready meals.",
+                                },
                                 preparationMethod: {
                                     type: SchemaType.STRING,
                                     description:
@@ -187,6 +196,7 @@ export const extractionSchema: Schema = {
                             },
                             required: [
                                 "name",
+                                "searchTarget",
                                 "preparationMethod",
                                 "searchQueries",
                                 "weight",

@@ -1,0 +1,1829 @@
+[
+  {
+    "category": "Зерновые",
+    "items": [
+      {
+        "name": "Пшеница мягкая озимая",
+        "water": 14,
+        "proteins": 11.2,
+        "fats": 2.1,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1.2,
+          "starch": 54
+        },
+        "fiber": 2.4,
+        "ash": {
+          "total": 1.7
+        },
+        "minerals": {
+          "Na": 8,
+          "K": 323,
+          "Ca": 50,
+          "Mg": 111,
+          "P": 340,
+          "Fe": 5.1
+        },
+        "vitamins": {
+          "beta_carotene": 0.01,
+          "B1": 0.41,
+          "B2": 0.17,
+          "PP": 5.04
+        },
+        "energy_value": 290
+      },
+      {
+        "name": "Пшеница мягкая яровая",
+        "water": 14,
+        "proteins": 12.5,
+        "fats": 2.3,
+        "carbohydrates": {
+          "mono_and_disaccharides": 0.9,
+          "starch": 53
+        },
+        "fiber": 2.5,
+        "ash": {
+          "total": 1.7
+        },
+        "minerals": {
+          "Na": 8,
+          "K": 350,
+          "Ca": 57,
+          "Mg": 104,
+          "P": 400,
+          "Fe": 5.7
+        },
+        "vitamins": {
+          "beta_carotene": 0.01,
+          "B1": 0.46,
+          "B2": 0.13,
+          "PP": 5.6
+        },
+        "energy_value": 291
+      },
+      {
+        "name": "Пшеница твердая",
+        "water": 14,
+        "proteins": 13,
+        "fats": 2.5,
+        "carbohydrates": {
+          "mono_and_disaccharides": 0.8,
+          "starch": 54.5
+        },
+        "fiber": 2.3,
+        "ash": {
+          "total": 1.7
+        },
+        "minerals": {
+          "Na": 8,
+          "K": 325,
+          "Ca": 62,
+          "Mg": 114,
+          "P": 368,
+          "Fe": 5.3
+        },
+        "vitamins": {
+          "beta_carotene": 0.01,
+          "B1": 0.37,
+          "B2": 0.1,
+          "PP": 4.94
+        },
+        "energy_value": 301
+      },
+      {
+        "name": "Рожь",
+        "water": 14,
+        "proteins": 9.9,
+        "fats": 2.2,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1.5,
+          "starch": 54
+        },
+        "fiber": 2.6,
+        "ash": {
+          "total": 1.7
+        },
+        "minerals": {
+          "Na": 4,
+          "K": 424,
+          "Ca": 59,
+          "Mg": 120,
+          "P": 366,
+          "Fe": 5.4
+        },
+        "vitamins": {
+          "beta_carotene": 0.02,
+          "B1": 0.44,
+          "B2": 0.2,
+          "PP": 1.3
+        },
+        "energy_value": 287
+      },
+      {
+        "name": "Тритикале",
+        "water": 14,
+        "proteins": 12.8,
+        "fats": 2.1,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1,
+          "starch": 53.5
+        },
+        "fiber": 2.6,
+        "ash": {
+          "total": 1.7
+        },
+        "minerals": {
+          "Na": 5,
+          "K": 368,
+          "Ca": 55,
+          "Mg": 120,
+          "P": 396,
+          "Fe": 5
+        },
+        "energy_value": 293
+      },
+      {
+        "name": "Овес",
+        "water": 13.5,
+        "proteins": 10,
+        "fats": 6.2,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1.1,
+          "starch": 36.5
+        },
+        "fiber": 10.7,
+        "ash": {
+          "total": 3.2
+        },
+        "minerals": {
+          "Na": 37,
+          "K": 421,
+          "Ca": 117,
+          "Mg": 135,
+          "P": 361,
+          "Fe": 5.5
+        },
+        "vitamins": {
+          "beta_carotene": 0.02,
+          "B1": 0.48,
+          "B2": 0.12,
+          "PP": 1.5
+        },
+        "energy_value": 250
+      },
+      {
+        "name": "Ячмень",
+        "water": 14,
+        "proteins": 10.3,
+        "fats": 2.4,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1.3,
+          "starch": 48.1
+        },
+        "fiber": 4.3,
+        "ash": {
+          "total": 2.4
+        },
+        "minerals": {
+          "Na": 32,
+          "K": 453,
+          "Ca": 93,
+          "Mg": 150,
+          "P": 353,
+          "Fe": 7.4
+        },
+        "vitamins": {
+          "beta_carotene": 0,
+          "B1": 0.33,
+          "B2": 0.13,
+          "PP": 4.48
+        },
+        "energy_value": 264
+      },
+      {
+        "name": "Просо",
+        "water": 13.5,
+        "proteins": 11.2,
+        "fats": 3.9,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1.9,
+          "starch": 54.7
+        },
+        "fiber": 7.9,
+        "ash": {
+          "total": 2.9
+        },
+        "minerals": {
+          "Na": 28,
+          "K": 328,
+          "Ca": 51,
+          "Mg": 130,
+          "P": 320,
+          "Fe": 3.5
+        },
+        "vitamins": {
+          "beta_carotene": 0.01,
+          "B1": 0.32,
+          "B2": 0.07,
+          "PP": 2.85
+        },
+        "energy_value": 311
+      },
+      {
+        "name": "Гречиха",
+        "water": 14,
+        "proteins": 10.8,
+        "fats": 3.2,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1.5,
+          "starch": 52.9
+        },
+        "fiber": 10.8,
+        "ash": {
+          "total": 2
+        },
+        "minerals": {
+          "Na": 4,
+          "K": 325,
+          "Ca": 70,
+          "Mg": 258,
+          "P": 334,
+          "Fe": 8.3
+        },
+        "vitamins": {
+          "beta_carotene": 0.01,
+          "B1": 0.3,
+          "B2": 0.14,
+          "PP": 3.87
+        },
+        "energy_value": 295
+      },
+      {
+        "name": "Рис",
+        "water": 14,
+        "proteins": 7.5,
+        "fats": 2.6,
+        "carbohydrates": {
+          "mono_and_disaccharides": 0.9,
+          "starch": 55.2
+        },
+        "fiber": 9,
+        "ash": {
+          "total": 3.9
+        },
+        "minerals": {
+          "Na": 30,
+          "K": 314,
+          "Ca": 40,
+          "Mg": 116,
+          "P": 328,
+          "Fe": 2.1
+        },
+        "vitamins": {
+          "beta_carotene": 0,
+          "B1": 0.34,
+          "B2": 0.08,
+          "PP": 3.82
+        },
+        "energy_value": 283
+      },
+      {
+        "name": "Сорго",
+        "water": 13.5,
+        "proteins": 10.6,
+        "fats": 4.1,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1.6,
+          "starch": 58
+        },
+        "fiber": 3.5,
+        "ash": {
+          "total": 2.2
+        },
+        "minerals": {
+          "Na": 28,
+          "K": 246,
+          "Ca": 99,
+          "Mg": 127,
+          "P": 298,
+          "Fe": 4.4
+        },
+        "vitamins": {
+          "B1": 0.46,
+          "B2": 0.16,
+          "PP": 3.3
+        },
+        "energy_value": 323
+      },
+      {
+        "name": "Кукуруза зубовидная",
+        "water": 14,
+        "proteins": 8.3,
+        "fats": 4,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1.6,
+          "starch": 59.8
+        },
+        "fiber": 2.1,
+        "ash": {
+          "total": 1.2
+        },
+        "minerals": {
+          "Na": 14,
+          "K": 387,
+          "Ca": 52,
+          "Mg": 120,
+          "P": 308,
+          "Fe": 4.5
+        },
+        "energy_value": 320
+      },
+      {
+        "name": "Кукуруза кремнистая",
+        "water": 14,
+        "proteins": 9.2,
+        "fats": 4.2,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1.6,
+          "starch": 57.3
+        },
+        "fiber": 2.2,
+        "ash": {
+          "total": 1.2
+        },
+        "energy_value": 316
+      },
+      {
+        "name": "Кукуруза крахмалистая",
+        "water": 14,
+        "proteins": 9.4,
+        "fats": 4.8,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1.6,
+          "starch": 58
+        },
+        "fiber": 2,
+        "ash": {
+          "total": 1.1
+        },
+        "energy_value": 325
+      },
+      {
+        "name": "Кукуруза восковидная",
+        "water": 14,
+        "proteins": 10.1,
+        "fats": 5,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1.5,
+          "starch": 54.3
+        },
+        "fiber": 2,
+        "ash": {
+          "total": 1.5
+        },
+        "energy_value": 314
+      },
+      {
+        "name": "Кукуруза сахарная",
+        "water": 14,
+        "proteins": 11.2,
+        "fats": 4.5,
+        "carbohydrates": {
+          "mono_and_disaccharides": 8,
+          "starch": 29.9
+        },
+        "fiber": 2.5,
+        "ash": {
+          "total": 1.3
+        },
+        "energy_value": 338
+      },
+      {
+        "name": "Кукуруза лопающаяся",
+        "water": 14,
+        "proteins": 10.7,
+        "fats": 4.3,
+        "carbohydrates": {
+          "mono_and_disaccharides": 3,
+          "starch": 55
+        },
+        "fiber": 2,
+        "ash": {
+          "total": 1.1
+        },
+        "energy_value": 318
+      },
+      {
+        "name": "Кукуруза (в среднем) белая",
+        "water": 14,
+        "proteins": 10.3,
+        "fats": 4.9,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1.6,
+          "starch": 56.9
+        },
+        "fiber": 2.1,
+        "ash": {
+          "total": 1.2
+        },
+        "minerals": {
+          "Na": 27,
+          "K": 340,
+          "Ca": 34,
+          "Mg": 104,
+          "P": 301,
+          "Fe": 3.7
+        },
+        "vitamins": {
+          "B1": 0.38,
+          "B2": 0.14,
+          "PP": 2.1
+        },
+        "energy_value": 325
+      },
+      {
+        "name": "Кукуруза (в среднем) жёлтая",
+        "water": 14,
+        "proteins": 10.3,
+        "fats": 4.9,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1.6,
+          "starch": 56.9
+        },
+        "fiber": 2.1,
+        "ash": {
+          "total": 1.2
+        },
+        "minerals": {
+          "Na": 27,
+          "K": 340,
+          "Ca": 34,
+          "Mg": 104,
+          "P": 301,
+          "Fe": 3.7
+        },
+        "vitamins": {
+          "beta_carotene": 0.32,
+          "B1": 0.38,
+          "B2": 0.14,
+          "PP": 2.1
+        },
+        "energy_value": 325
+      },
+      {
+        "name": "Кукуруза высоколизиновая",
+        "water": 14,
+        "proteins": 11.2,
+        "fats": 4.8,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1.3,
+          "starch": 53.9
+        },
+        "fiber": 2.1,
+        "ash": {
+          "total": 1.4
+        },
+        "minerals": {
+          "Na": 20,
+          "K": 360,
+          "Ca": 44,
+          "Mg": 180,
+          "P": 320,
+          "Fe": 5
+        },
+        "vitamins": {
+          "beta_carotene": 0.21
+        },
+        "energy_value": 314
+      }
+    ]
+  },
+  {
+    "category": "Зернобобовые",
+    "items": [
+      {
+        "name": "Горох",
+        "water": 14,
+        "proteins": 20.5,
+        "fats": 2,
+        "carbohydrates": {
+          "mono_and_disaccharides": 4.6,
+          "starch": 44
+        },
+        "fiber": 5.7,
+        "ash": {
+          "total": 2.8
+        },
+        "minerals": {
+          "Na": 33,
+          "K": 873,
+          "Ca": 115,
+          "Mg": 107,
+          "P": 329,
+          "Fe": 6.8
+        },
+        "vitamins": {
+          "beta_carotene": 0.01,
+          "B1": 0.81,
+          "B2": 0.15,
+          "PP": 2.2
+        },
+        "energy_value": 298
+      },
+      {
+        "name": "Фасоль",
+        "water": 14,
+        "proteins": 21,
+        "fats": 2,
+        "carbohydrates": {
+          "mono_and_disaccharides": 3.2,
+          "starch": 43.4
+        },
+        "fiber": 3.9,
+        "ash": {
+          "total": 3.6
+        },
+        "minerals": {
+          "Na": 40,
+          "K": 1100,
+          "Ca": 150,
+          "Mg": 103,
+          "P": 480,
+          "Fe": 5.9
+        },
+        "vitamins": {
+          "beta_carotene": 0,
+          "B1": 0.5,
+          "B2": 0.18,
+          "PP": 2.1
+        },
+        "energy_value": 292
+      },
+      {
+        "name": "Маш",
+        "water": 14,
+        "proteins": 23.5,
+        "fats": 2,
+        "carbohydrates": {
+          "mono_and_disaccharides": 3.8,
+          "starch": 42.4
+        },
+        "fiber": 3.8,
+        "ash": {
+          "total": 3.5
+        },
+        "minerals": {
+          "Na": 40,
+          "K": 1000,
+          "Ca": 192,
+          "Mg": 174,
+          "P": 358,
+          "Fe": 6
+        },
+        "energy_value": 300
+      },
+      {
+        "name": "Чина",
+        "water": 14,
+        "proteins": 24.4,
+        "fats": 2.2,
+        "carbohydrates": {
+          "mono_and_disaccharides": 3.1,
+          "starch": 38.2
+        },
+        "fiber": 4.9,
+        "ash": {
+          "total": 3
+        },
+        "minerals": {
+          "Na": 49,
+          "K": 633,
+          "Ca": 141,
+          "Mg": 99,
+          "P": 360,
+          "Fe": 8.3
+        },
+        "energy_value": 286
+      },
+      {
+        "name": "Чечевица",
+        "water": 14,
+        "proteins": 24,
+        "fats": 1.5,
+        "carbohydrates": {
+          "mono_and_disaccharides": 2.9,
+          "starch": 39.8
+        },
+        "fiber": 3.7,
+        "ash": {
+          "total": 2.7
+        },
+        "minerals": {
+          "Na": 55,
+          "K": 672,
+          "Ca": 83,
+          "Mg": 80,
+          "P": 390,
+          "Fe": 11.8
+        },
+        "vitamins": {
+          "beta_carotene": 0.03,
+          "B1": 0.5,
+          "B2": 0.21,
+          "PP": 1.8
+        },
+        "energy_value": 284
+      },
+      {
+        "name": "Нут",
+        "water": 14,
+        "proteins": 20.1,
+        "fats": 4.3,
+        "carbohydrates": {
+          "mono_and_disaccharides": 3.2,
+          "starch": 43.2
+        },
+        "fiber": 3.7,
+        "ash": {
+          "total": 3
+        },
+        "minerals": {
+          "Na": 72,
+          "K": 968,
+          "Ca": 193,
+          "Mg": 126,
+          "P": 444,
+          "Fe": 2.6
+        },
+        "vitamins": {
+          "beta_carotene": 0.09,
+          "B1": 0.08
+        },
+        "energy_value": 309
+      },
+      {
+        "name": "Соя",
+        "water": 12,
+        "proteins": 34.9,
+        "fats": 17.3,
+        "carbohydrates": {
+          "mono_and_disaccharides": 5.7,
+          "starch": 3.5
+        },
+        "fiber": 4.3,
+        "ash": {
+          "total": 5
+        },
+        "minerals": {
+          "Na": 6,
+          "K": 1607,
+          "Ca": 348,
+          "Mg": 226,
+          "P": 603,
+          "Fe": 15
+        },
+        "vitamins": {
+          "beta_carotene": 0.07,
+          "B1": 0.94,
+          "B2": 0.22,
+          "PP": 2.2
+        },
+        "energy_value": 332
+      }
+    ]
+  },
+  {
+    "category": "Мука",
+    "items": [
+      {
+        "name": "Пшеничная высшего сорта",
+        "water": 14,
+        "proteins": 10.3,
+        "fats": 1.1,
+        "carbohydrates": {
+          "mono_and_disaccharides": 0.2,
+          "starch": 68.7
+        },
+        "fiber": 0.1,
+        "ash": {
+          "total": 0.5
+        },
+        "minerals": {
+          "Na": 3,
+          "K": 122,
+          "Ca": 18,
+          "Mg": 16,
+          "P": 86,
+          "Fe": 1.2
+        },
+        "vitamins": {
+          "beta_carotene": 0,
+          "B1": 0.17,
+          "B2": 0.04,
+          "PP": 1.2
+        },
+        "energy_value": 334
+      },
+      {
+        "name": "Пшеничная высшего сорта витаминизированная",
+        "water": 14,
+        "proteins": 10.3,
+        "fats": 1.1,
+        "carbohydrates": {
+          "mono_and_disaccharides": 0.2,
+          "starch": 68.7
+        },
+        "fiber": 0.1,
+        "ash": {
+          "total": 0.5
+        },
+        "minerals": {
+          "Na": 3,
+          "K": 122,
+          "Ca": 18,
+          "Mg": 16,
+          "P": 86,
+          "Fe": 1.2
+        },
+        "vitamins": {
+          "beta_carotene": 0,
+          "B1": 0.57,
+          "B2": 0.44,
+          "PP": 3.2
+        },
+        "energy_value": 334
+      },
+      {
+        "name": "Пшеничная высшего сорта мукомольных заводов, оснащенных высокопроизводительным комплектным оборудованием",
+        "water": 14,
+        "proteins": 11,
+        "fats": 1.4,
+        "carbohydrates": {
+          "mono_and_disaccharides": 0.3,
+          "starch": 67
+        },
+        "fiber": 0.3,
+        "ash": {
+          "total": 0.5
+        },
+        "minerals": {
+          "Na": 4,
+          "K": 158,
+          "Ca": 28,
+          "Mg": 33,
+          "P": 102,
+          "Fe": 2.4
+        },
+        "vitamins": {
+          "beta_carotene": 0,
+          "B1": 0.17,
+          "B2": 0.06
+        },
+        "energy_value": 332
+      },
+      {
+        "name": "Пшеничная I сорта",
+        "water": 14,
+        "proteins": 10.6,
+        "fats": 1.3,
+        "carbohydrates": {
+          "mono_and_disaccharides": 0.5,
+          "starch": 67.1
+        },
+        "fiber": 0.2,
+        "ash": {
+          "total": 0.7
+        },
+        "minerals": {
+          "Na": 4,
+          "K": 176,
+          "Ca": 24,
+          "Mg": 44,
+          "P": 115,
+          "Fe": 2.1
+        },
+        "vitamins": {
+          "beta_carotene": 0,
+          "B1": 0.25,
+          "B2": 0.08,
+          "PP": 2.2
+        },
+        "energy_value": 331
+      },
+      {
+        "name": "Пшеничная I сорта витаминизированная",
+        "water": 14,
+        "proteins": 10.6,
+        "fats": 1.3,
+        "carbohydrates": {
+          "mono_and_disaccharides": 0.5,
+          "starch": 67.1
+        },
+        "fiber": 0.2,
+        "ash": {
+          "total": 0.7
+        },
+        "minerals": {
+          "Na": 4,
+          "K": 176,
+          "Ca": 24,
+          "Mg": 44,
+          "P": 115,
+          "Fe": 2.1
+        },
+        "vitamins": {
+          "beta_carotene": 0,
+          "B1": 0.65,
+          "B2": 0.48,
+          "PP": 4.2
+        },
+        "energy_value": 331
+      },
+      {
+        "name": "Пшеничная II сорта",
+        "water": 14,
+        "proteins": 11.7,
+        "fats": 1.8,
+        "carbohydrates": {
+          "mono_and_disaccharides": 0.9,
+          "starch": 62.8
+        },
+        "fiber": 0.6,
+        "ash": {
+          "total": 1.1
+        },
+        "minerals": {
+          "Na": 6,
+          "K": 251,
+          "Ca": 32,
+          "Mg": 73,
+          "P": 184,
+          "Fe": 3.9
+        },
+        "vitamins": {
+          "beta_carotene": 0.01,
+          "B1": 0.37,
+          "B2": 0.12,
+          "PP": 4.55
+        },
+        "energy_value": 324
+      },
+      {
+        "name": "Пшеничная обойная",
+        "water": 14,
+        "proteins": 11.5,
+        "fats": 2.2,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1,
+          "starch": 55.8
+        },
+        "fiber": 1.9,
+        "ash": {
+          "total": 1.5
+        },
+        "minerals": {
+          "Na": 7,
+          "K": 310,
+          "Ca": 39,
+          "Mg": 94,
+          "P": 336,
+          "Fe": 4.7
+        },
+        "vitamins": {
+          "beta_carotene": 0.01,
+          "B1": 0.41,
+          "B2": 0.15,
+          "PP": 5.5
+        },
+        "energy_value": 298
+      },
+      {
+        "name": "Ржаная сеяная",
+        "water": 14,
+        "proteins": 6.9,
+        "fats": 1.4,
+        "carbohydrates": {
+          "mono_and_disaccharides": 0.7,
+          "starch": 63.6
+        },
+        "fiber": 0.5,
+        "ash": {
+          "total": 0.6
+        },
+        "minerals": {
+          "Na": 1,
+          "K": 200,
+          "Ca": 19,
+          "Mg": 25,
+          "P": 129,
+          "Fe": 2.9
+        },
+        "vitamins": {
+          "beta_carotene": 0,
+          "B1": 0.17,
+          "B2": 0.04,
+          "PP": 0.99
+        },
+        "energy_value": 304
+      },
+      {
+        "name": "Ржаная обдирная",
+        "water": 14,
+        "proteins": 8.9,
+        "fats": 1.7,
+        "carbohydrates": {
+          "mono_and_disaccharides": 0.9,
+          "starch": 59.3
+        },
+        "fiber": 1.2,
+        "ash": {
+          "total": 1.2
+        },
+        "minerals": {
+          "Na": 2,
+          "K": 350,
+          "Ca": 34,
+          "Mg": 60,
+          "P": 189,
+          "Fe": 3.5
+        },
+        "vitamins": {
+          "beta_carotene": 0,
+          "B1": 0.35,
+          "B2": 0.13,
+          "PP": 1.02
+        },
+        "energy_value": 298
+      },
+      {
+        "name": "Ржаная обойная",
+        "water": 14,
+        "proteins": 10.7,
+        "fats": 1.9,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1.1,
+          "starch": 55.7
+        },
+        "fiber": 1.8,
+        "ash": {
+          "total": 1.6
+        },
+        "minerals": {
+          "Na": 3,
+          "K": 396,
+          "Ca": 43,
+          "Mg": 75,
+          "P": 256,
+          "Fe": 4.1
+        },
+        "vitamins": {
+          "beta_carotene": 0.01,
+          "B1": 0.42,
+          "B2": 0.15,
+          "PP": 1.16
+        },
+        "energy_value": 293
+      },
+      {
+        "name": "Соевая необезжиренная",
+        "water": 9,
+        "proteins": 36.5,
+        "fats": 18.6,
+        "carbohydrates": {
+          "mono_and_disaccharides": 5,
+          "starch": 10
+        },
+        "fiber": 2.6,
+        "ash": {
+          "total": 4.7
+        },
+        "minerals": {
+          "Na": 5,
+          "K": 1600,
+          "Ca": 217,
+          "Mg": 200,
+          "P": 600,
+          "Fe": 14.3
+        },
+        "energy_value": 374
+      },
+      {
+        "name": "Соевая полуобезжиренная",
+        "water": 9,
+        "proteins": 43,
+        "fats": 9.5,
+        "carbohydrates": {
+          "mono_and_disaccharides": 5.6,
+          "starch": 11.1
+        },
+        "fiber": 2.9,
+        "ash": {
+          "total": 4.9
+        },
+        "vitamins": {
+          "B1": 0.38,
+          "B2": 0.24,
+          "PP": 2.05
+        },
+        "energy_value": 325
+      },
+      {
+        "name": "Соевая обезжиренная",
+        "water": 9,
+        "proteins": 48.9,
+        "fats": 1,
+        "carbohydrates": {
+          "mono_and_disaccharides": 6.2,
+          "starch": 15.5
+        },
+        "fiber": 2.8,
+        "ash": {
+          "total": 5.3
+        },
+        "vitamins": {
+          "B2": 0.3,
+          "PP": 2.3
+        },
+        "energy_value": 292
+      },
+      {
+        "name": "Ячменная",
+        "water": 14,
+        "proteins": 10,
+        "fats": 1.6,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1,
+          "starch": 55.1
+        },
+        "fiber": 1.5,
+        "ash": {
+          "total": 1.4
+        },
+        "minerals": {
+          "Na": 10,
+          "K": 147,
+          "Ca": 58,
+          "Mg": 63,
+          "P": 275,
+          "Fe": 0.7
+        },
+        "vitamins": {
+          "beta_carotene": 0,
+          "B1": 0.28,
+          "B2": 0.11,
+          "PP": 2.5
+        },
+        "energy_value": 284
+      },
+      {
+        "name": "Кукурузная",
+        "water": 14,
+        "proteins": 7.2,
+        "fats": 1.5,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1.3,
+          "starch": 68.9
+        },
+        "fiber": 0.7,
+        "ash": {
+          "total": 0.8
+        },
+        "vitamins": {
+          "beta_carotene": 0.2,
+          "B1": 0.4,
+          "B2": 0.13,
+          "PP": 1.8
+        },
+        "energy_value": 330
+      }
+    ]
+  },
+  {
+    "category": "Крупа",
+    "items": [
+      {
+        "name": "Манная",
+        "water": 14,
+        "proteins": 10.3,
+        "fats": 1,
+        "carbohydrates": {
+          "mono_and_disaccharides": 0.3,
+          "starch": 67.4
+        },
+        "fiber": 0.2,
+        "ash": {
+          "total": 0.5
+        },
+        "minerals": {
+          "Na": 3,
+          "K": 130,
+          "Ca": 20,
+          "Mg": 18,
+          "P": 85,
+          "Fe": 1
+        },
+        "vitamins": {
+          "beta_carotene": 0,
+          "B1": 0.14,
+          "B2": 0.04,
+          "PP": 1.2
+        },
+        "energy_value": 328
+      },
+      {
+        "name": "Гречневая ядрица",
+        "water": 14,
+        "proteins": 12.6,
+        "fats": 3.3,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1.4,
+          "starch": 60.7
+        },
+        "fiber": 1.1,
+        "ash": {
+          "total": 1.7
+        },
+        "minerals": {
+          "Na": 3,
+          "K": 380,
+          "Ca": 20,
+          "Mg": 200,
+          "P": 298,
+          "Fe": 6.7
+        },
+        "vitamins": {
+          "beta_carotene": 0.01,
+          "B1": 0.43,
+          "B2": 0.2,
+          "PP": 4.19
+        },
+        "energy_value": 335
+      },
+      {
+        "name": "Гречневая продел",
+        "water": 14,
+        "proteins": 9.5,
+        "fats": 2.3,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1.1,
+          "starch": 64.8
+        },
+        "fiber": 1.1,
+        "ash": {
+          "total": 1.3
+        },
+        "minerals": {
+          "Na": 3,
+          "K": 320,
+          "Ca": 20,
+          "Mg": 150,
+          "P": 253,
+          "Fe": 4.9
+        },
+        "vitamins": {
+          "beta_carotene": 0,
+          "B1": 0.42,
+          "B2": 0.17,
+          "PP": 3.76
+        },
+        "energy_value": 329
+      },
+      {
+        "name": "Рисовая",
+        "water": 14,
+        "proteins": 7,
+        "fats": 1,
+        "carbohydrates": {
+          "mono_and_disaccharides": 0.7,
+          "starch": 70.7
+        },
+        "fiber": 0.4,
+        "ash": {
+          "total": 0.7
+        },
+        "minerals": {
+          "Na": 12,
+          "K": 100,
+          "Ca": 8,
+          "Mg": 50,
+          "P": 150,
+          "Fe": 1
+        },
+        "vitamins": {
+          "beta_carotene": 0,
+          "B1": 0.08,
+          "B2": 0.04,
+          "PP": 1.6
+        },
+        "energy_value": 330
+      },
+      {
+        "name": "Пшено",
+        "water": 14,
+        "proteins": 11.5,
+        "fats": 3.3,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1.7,
+          "starch": 64.8
+        },
+        "fiber": 0.7,
+        "ash": {
+          "total": 1.1
+        },
+        "minerals": {
+          "Na": 10,
+          "K": 211,
+          "Ca": 27,
+          "Mg": 83,
+          "P": 233,
+          "Fe": 2.7
+        },
+        "vitamins": {
+          "beta_carotene": 0.02,
+          "B1": 0.42,
+          "B2": 0.04,
+          "PP": 1.55
+        },
+        "energy_value": 348
+      },
+      {
+        "name": "Толокно",
+        "water": 10,
+        "proteins": 11.5,
+        "fats": 6,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1.5,
+          "starch": 48.7
+        },
+        "fiber": 1.9,
+        "ash": {
+          "total": 1.8
+        },
+        "minerals": {
+          "Na": 23,
+          "K": 351,
+          "Ca": 58,
+          "Mg": 111,
+          "P": 325,
+          "Fe": 3
+        },
+        "vitamins": {
+          "beta_carotene": 0,
+          "B1": 0.22,
+          "B2": 0.06,
+          "PP": 0.7
+        },
+        "energy_value": 306
+      },
+      {
+        "name": "Овсяная",
+        "water": 12,
+        "proteins": 11,
+        "fats": 6.1,
+        "carbohydrates": {
+          "mono_and_disaccharides": 0.9,
+          "starch": 48.8
+        },
+        "fiber": 2.8,
+        "ash": {
+          "total": 2.1
+        },
+        "minerals": {
+          "Na": 35,
+          "K": 362,
+          "Ca": 64,
+          "Mg": 116,
+          "P": 349,
+          "Fe": 3.9
+        },
+        "vitamins": {
+          "beta_carotene": 0,
+          "B1": 0.49,
+          "B2": 0.11,
+          "PP": 1.1
+        },
+        "energy_value": 303
+      },
+      {
+        "name": "Овсяные хлопья «Геркулес»",
+        "water": 12,
+        "proteins": 11,
+        "fats": 6.2,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1.2,
+          "starch": 48.9
+        },
+        "fiber": 1.3,
+        "ash": {
+          "total": 1.7
+        },
+        "minerals": {
+          "Na": 20,
+          "K": 330,
+          "Ca": 52,
+          "Mg": 129,
+          "P": 328,
+          "Fe": 3.6
+        },
+        "vitamins": {
+          "beta_carotene": 0,
+          "B1": 0.45,
+          "B2": 0.1,
+          "PP": 1
+        },
+        "energy_value": 305
+      },
+      {
+        "name": "Перловая",
+        "water": 14,
+        "proteins": 9.3,
+        "fats": 1.1,
+        "carbohydrates": {
+          "mono_and_disaccharides": 0.9,
+          "starch": 65.6
+        },
+        "fiber": 1,
+        "ash": {
+          "total": 0.9
+        },
+        "minerals": {
+          "Na": 10,
+          "K": 172,
+          "Ca": 38,
+          "Mg": 40,
+          "P": 323,
+          "Fe": 1.8
+        },
+        "vitamins": {
+          "beta_carotene": 0,
+          "B1": 0.12,
+          "B2": 0.06,
+          "PP": 2
+        },
+        "energy_value": 320
+      },
+      {
+        "name": "Ячневая",
+        "water": 14,
+        "proteins": 10,
+        "fats": 1.3,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1.1,
+          "starch": 65.2
+        },
+        "fiber": 1.4,
+        "ash": {
+          "total": 1.2
+        },
+        "minerals": {
+          "Na": 15,
+          "K": 205,
+          "Ca": 80,
+          "Mg": 50,
+          "P": 343,
+          "Fe": 1.8
+        },
+        "vitamins": {
+          "beta_carotene": 0,
+          "B1": 0.27,
+          "B2": 0.08,
+          "PP": 2.74
+        },
+        "energy_value": 324
+      },
+      {
+        "name": "Пшеничная «Полтавская»",
+        "water": 14,
+        "proteins": 11.5,
+        "fats": 1.3,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1,
+          "starch": 62.1
+        },
+        "fiber": 0.7,
+        "ash": {
+          "total": 0.9
+        },
+        "minerals": {
+          "P": 261,
+          "Fe": 4.4
+        },
+        "vitamins": {
+          "beta_carotene": 0,
+          "B1": 0.3,
+          "B2": 0.1,
+          "PP": 1.4
+        },
+        "energy_value": 316
+      },
+      {
+        "name": "Пшеничная «Артек»",
+        "water": 14,
+        "proteins": 11,
+        "fats": 1.2,
+        "carbohydrates": {
+          "mono_and_disaccharides": 0.8,
+          "starch": 67.5
+        },
+        "fiber": 0.3,
+        "ash": {
+          "total": 0.7
+        },
+        "minerals": {
+          "P": 276,
+          "Fe": 4.7
+        },
+        "vitamins": {
+          "beta_carotene": 0,
+          "B1": 0.3,
+          "B2": 0.1,
+          "PP": 1.4
+        },
+        "energy_value": 335
+      },
+      {
+        "name": "Кукурузная",
+        "water": 14,
+        "proteins": 8.3,
+        "fats": 1.2,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1.2,
+          "starch": 70.4
+        },
+        "fiber": 0.8,
+        "ash": {
+          "total": 0.7
+        },
+        "minerals": {
+          "Na": 4,
+          "K": 147,
+          "Ca": 20,
+          "Mg": 36,
+          "P": 109,
+          "Fe": 2.7
+        },
+        "vitamins": {
+          "beta_carotene": 0.2,
+          "B1": 0.13,
+          "B2": 0.07,
+          "PP": 1.1
+        },
+        "energy_value": 337
+      },
+      {
+        "name": "Горох лущеный",
+        "water": 14,
+        "proteins": 23,
+        "fats": 1.6,
+        "carbohydrates": {
+          "mono_and_disaccharides": 3.4,
+          "starch": 47.4
+        },
+        "fiber": 1.1,
+        "ash": {
+          "total": 2.6
+        },
+        "minerals": {
+          "Na": 27,
+          "K": 731,
+          "Ca": 89,
+          "Mg": 88,
+          "P": 226,
+          "Fe": 7
+        },
+        "vitamins": {
+          "beta_carotene": 0.01,
+          "B1": 0.9,
+          "B2": 0.18,
+          "PP": 2.37
+        },
+        "energy_value": 314
+      },
+      {
+        "name": "Здоровье",
+        "water": 13,
+        "proteins": 15.9,
+        "fats": 0.6,
+        "fiber": 0.3,
+        "ash": {
+          "total": 2.2
+        },
+        "minerals": {
+          "K": 311,
+          "Ca": 257,
+          "Mg": 58,
+          "P": 267,
+          "Fe": 1.5
+        },
+        "vitamins": {
+          "beta_carotene": 0,
+          "B1": 0.22,
+          "B2": 0.49,
+          "PP": 5.13
+        }
+      },
+      {
+        "name": "Пионерская",
+        "water": 13,
+        "proteins": 17.7,
+        "fats": 2.2,
+        "minerals": {
+          "K": 245,
+          "Ca": 278,
+          "Mg": 118,
+          "P": 415,
+          "Fe": 1.7
+        },
+        "vitamins": {
+          "beta_carotene": 0,
+          "B1": 0.41,
+          "B2": 0.49,
+          "PP": 4.02
+        }
+      },
+      {
+        "name": "Флотская",
+        "water": 13,
+        "proteins": 11.5,
+        "fats": 2.1,
+        "minerals": {
+          "K": 35,
+          "Ca": 52,
+          "Mg": 110,
+          "P": 277,
+          "Fe": 1.9
+        },
+        "vitamins": {
+          "beta_carotene": 0,
+          "B1": 0.45,
+          "B2": 0.2,
+          "PP": 3.76
+        }
+      },
+      {
+        "name": "Сильная",
+        "water": 13,
+        "proteins": 21.2,
+        "fats": 2,
+        "minerals": {
+          "K": 686,
+          "Ca": 56,
+          "Mg": 97,
+          "P": 319,
+          "Fe": 4
+        },
+        "vitamins": {
+          "beta_carotene": 0,
+          "B1": 0.86,
+          "B2": 0.85,
+          "PP": 2.21
+        }
+      },
+      {
+        "name": "Спортивная",
+        "water": 13,
+        "proteins": 18.7,
+        "fats": 5.4,
+        "minerals": {
+          "K": 529,
+          "Ca": 293,
+          "Mg": 135,
+          "P": 442,
+          "Fe": 3.7
+        },
+        "vitamins": {
+          "beta_carotene": 0,
+          "B1": 0.4,
+          "B2": 0.49,
+          "PP": 5.92
+        }
+      },
+      {
+        "name": "Южная",
+        "water": 13,
+        "proteins": 13.3,
+        "fats": 3.1,
+        "minerals": {
+          "K": 580,
+          "Ca": 27,
+          "Mg": 82,
+          "P": 220,
+          "Fe": 2.7
+        },
+        "vitamins": {
+          "beta_carotene": 0,
+          "B1": 0.44,
+          "B2": 0.15,
+          "PP": 2.3
+        }
+      }
+    ]
+  },
+  {
+    "category": "Макаронные изделия",
+    "items": [
+      {
+        "name": "Макаронные изделия высшего сорта",
+        "details": "Пшеничная высшего сорта",
+        "water": 13,
+        "proteins": 10.4,
+        "fats": 1.1,
+        "carbohydrates": {
+          "mono_and_disaccharides": 2,
+          "starch_and_dextrins": 67.7
+        },
+        "fiber": 0.1,
+        "ash": {
+          "total": 0.5
+        },
+        "minerals": {
+          "Na": 3,
+          "K": 123,
+          "Ca": 19,
+          "Mg": 16,
+          "P": 87,
+          "Fe": 1.6
+        },
+        "vitamins": {
+          "B1": 0.17,
+          "B2": 0.04,
+          "PP": 1.21
+        },
+        "energy_value": 337
+      },
+      {
+        "name": "Макаронные изделия высшего сорта",
+        "details": "Пшеничная высшего сорта витаминизированная",
+        "water": 13,
+        "proteins": 10.4,
+        "fats": 1.1,
+        "carbohydrates": {
+          "mono_and_disaccharides": 2,
+          "starch_and_dextrins": 67.7
+        },
+        "fiber": 0.1,
+        "ash": {
+          "total": 0.5
+        },
+        "minerals": {
+          "Na": 3,
+          "K": 123,
+          "Ca": 19,
+          "Mg": 16,
+          "P": 87,
+          "Fe": 1.6
+        },
+        "vitamins": {
+          "B1": 0.58,
+          "B2": 0.44,
+          "PP": 3.24
+        },
+        "energy_value": 337
+      },
+      {
+        "name": "Макаронные изделия I сорта",
+        "details": "Пшеничная I сорта",
+        "water": 13,
+        "proteins": 10.7,
+        "fats": 1.3,
+        "carbohydrates": {
+          "mono_and_disaccharides": 2.3,
+          "starch_and_dextrins": 66.1
+        },
+        "fiber": 0.2,
+        "ash": {
+          "total": 0.7
+        },
+        "minerals": {
+          "Na": 4,
+          "K": 178,
+          "Ca": 25,
+          "Mg": 45,
+          "P": 116,
+          "Fe": 1.5
+        },
+        "vitamins": {
+          "B1": 0.25,
+          "B2": 0.08,
+          "PP": 2.2
+        },
+        "energy_value": 335
+      },
+      {
+        "name": "Макаронные изделия высшего сорта, яичные",
+        "details": "Пшеничная высшего сорта, яичный порошок",
+        "water": 13,
+        "proteins": 11.3,
+        "fats": 2.1,
+        "carbohydrates": {
+          "mono_and_disaccharides": 2,
+          "starch_and_dextrins": 66
+        },
+        "fiber": 0.1,
+        "ash": {
+          "total": 0.6
+        },
+        "minerals": {
+          "Na": 17,
+          "K": 132,
+          "Ca": 42,
+          "Mg": 17,
+          "P": 106,
+          "Fe": 2.1
+        },
+        "vitamins": {
+          "B1": 0.17,
+          "B2": 0.08,
+          "PP": 1.21
+        },
+        "energy_value": 345
+      },
+      {
+        "name": "Макаронные изделия высшего сорта с увеличенным содержанием яиц",
+        "details": "Пшеничная высшего сорта, яичный порошок",
+        "water": 13,
+        "proteins": 11.8,
+        "fats": 2.8,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1.9,
+          "starch_and_dextrins": 65.1
+        },
+        "fiber": 0.1,
+        "ash": {
+          "total": 0.6
+        },
+        "minerals": {
+          "Na": 24,
+          "K": 136,
+          "Ca": 26,
+          "Mg": 17,
+          "P": 116,
+          "Fe": 2.1
+        },
+        "vitamins": {
+          "B1": 0.17,
+          "B2": 0.1,
+          "PP": 1.21
+        },
+        "energy_value": 346
+      },
+      {
+        "name": "Макаронные изделия высшего сорта, молочные",
+        "details": "Пшеничная высшего сорта, сухое цельное молоко",
+        "water": 13,
+        "proteins": 11.5,
+        "fats": 2.9,
+        "carbohydrates": {
+          "mono_and_disaccharides": 4.8,
+          "starch_and_dextrins": 62.2
+        },
+        "fiber": 0.1,
+        "ash": {
+          "total": 0.9
+        },
+        "minerals": {
+          "Na": 33,
+          "K": 188,
+          "Ca": 86,
+          "Mg": 25,
+          "P": 139,
+          "Fe": 1.2
+        },
+        "vitamins": {
+          "B1": 0.17,
+          "B2": 0.13,
+          "PP": 1.17
+        },
+        "energy_value": 345
+      },
+      {
+        "name": "Макаронные изделия высшего сорта, «Мозаика»",
+        "details": "Пшеничная высшего сорта, томат-паста, шпинат-пюре, морковный сок",
+        "water": 13,
+        "proteins": 11.2,
+        "fats": 1.1,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1.9,
+          "starch_and_dextrins": 67.2
+        },
+        "fiber": 0.3,
+        "ash": {
+          "total": 0.9
+        },
+        "minerals": {
+          "Na": 45,
+          "K": 212,
+          "Ca": 34,
+          "Mg": 22,
+          "P": 94,
+          "Fe": 1.6
+        },
+        "vitamins": {
+          "B1": 0.18,
+          "B2": 0.05,
+          "PP": 1.3
+        },
+        "energy_value": 337
+      }
+    ]
+  }
+]

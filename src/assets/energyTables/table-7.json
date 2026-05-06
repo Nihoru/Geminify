@@ -1,0 +1,4336 @@
+[
+  {
+    "category": "Мясо",
+    "items": [
+      {
+        "name": "Баранина I категории",
+        "water": 67.3,
+        "proteins": 15.6,
+        "fats": 16.3,
+        "ash": {
+          "total": 0.8
+        },
+        "minerals": {
+          "Na": 80,
+          "K": 270,
+          "Ca": 9,
+          "Mg": 20,
+          "P": 168,
+          "Fe": 2
+        },
+        "vitamins": {
+          "A": 0,
+          "B1": 0.08,
+          "B2": 0.14,
+          "PP": 3.8,
+          "C": 0
+        },
+        "energy_value": 209
+      },
+      {
+        "name": "Баранина II категории",
+        "water": 69.7,
+        "proteins": 19.8,
+        "fats": 9.6,
+        "ash": {
+          "total": 0.9
+        },
+        "minerals": {
+          "Na": 101,
+          "K": 345,
+          "Ca": 11,
+          "Mg": 25,
+          "P": 190,
+          "Fe": 2.3
+        },
+        "vitamins": {
+          "A": 0,
+          "B1": 0.09,
+          "B2": 0.16,
+          "PP": 4.1,
+          "C": 0
+        },
+        "energy_value": 166
+      },
+      {
+        "name": "Буйволятина I категории",
+        "water": 66.8,
+        "proteins": 19,
+        "fats": 13.2,
+        "ash": {
+          "total": 1
+        },
+        "minerals": {
+          "Na": 80,
+          "K": 250,
+          "Ca": 11,
+          "Mg": 25,
+          "P": 197,
+          "Fe": 2.2
+        },
+        "energy_value": 195
+      },
+      {
+        "name": "Буйволятина II категории",
+        "water": 72.3,
+        "proteins": 20.8,
+        "fats": 5.8,
+        "ash": {
+          "total": 1.1
+        },
+        "minerals": {
+          "Na": 98,
+          "K": 330,
+          "Ca": 12,
+          "Mg": 27,
+          "P": 216,
+          "Fe": 2.4
+        },
+        "energy_value": 135
+      },
+      {
+        "name": "Верблюжатина I категории",
+        "water": 70.7,
+        "proteins": 18.9,
+        "fats": 9.4,
+        "ash": {
+          "total": 1
+        },
+        "minerals": {
+          "Na": 108,
+          "K": 263,
+          "Ca": 8,
+          "Mg": 25,
+          "P": 187,
+          "Fe": 1.3
+        },
+        "vitamins": {
+          "A": 0,
+          "B1": 0.11,
+          "B2": 0.18,
+          "PP": 2.3,
+          "C": 0.7
+        },
+        "energy_value": 160
+      },
+      {
+        "name": "Верблюжатина II категории",
+        "water": 73,
+        "proteins": 19.7,
+        "fats": 6.2,
+        "ash": {
+          "total": 1.1
+        },
+        "minerals": {
+          "Na": 115,
+          "K": 227,
+          "Ca": 9,
+          "Mg": 27,
+          "P": 200,
+          "Fe": 1.4
+        },
+        "vitamins": {
+          "A": 0,
+          "B1": 0.12,
+          "B2": 0.2,
+          "PP": 2.4,
+          "C": 0.7
+        },
+        "energy_value": 135
+      },
+      {
+        "name": "Говядина I категории",
+        "water": 64.5,
+        "proteins": 18.6,
+        "fats": 16,
+        "ash": {
+          "total": 0.9
+        },
+        "minerals": {
+          "Na": 65,
+          "K": 325,
+          "Ca": 9,
+          "Mg": 22,
+          "P": 188,
+          "Fe": 2.7
+        },
+        "vitamins": {
+          "A": 0,
+          "B1": 0.06,
+          "B2": 0.15,
+          "PP": 4.7,
+          "C": 0
+        },
+        "energy_value": 218
+      },
+      {
+        "name": "Говядина II категории",
+        "water": 69.2,
+        "proteins": 20,
+        "fats": 9.8,
+        "ash": {
+          "total": 1
+        },
+        "minerals": {
+          "Na": 73,
+          "K": 355,
+          "Ca": 10,
+          "Mg": 25,
+          "P": 200,
+          "Fe": 2.9
+        },
+        "vitamins": {
+          "A": 0,
+          "B1": 0.07,
+          "B2": 0.18,
+          "PP": 5,
+          "C": 0
+        },
+        "energy_value": 168
+      },
+      {
+        "name": "Конина I категории",
+        "water": 69.6,
+        "proteins": 19.5,
+        "fats": 9.9,
+        "ash": {
+          "total": 1
+        },
+        "minerals": {
+          "Na": 50,
+          "K": 370,
+          "Ca": 13,
+          "Mg": 23,
+          "P": 185,
+          "Fe": 3.1
+        },
+        "vitamins": {
+          "B1": 0.07,
+          "B2": 0.1,
+          "PP": 3,
+          "C": 0
+        },
+        "energy_value": 167
+      },
+      {
+        "name": "Конина II категории",
+        "water": 73.9,
+        "proteins": 20.9,
+        "fats": 4.1,
+        "ash": {
+          "total": 1.1
+        },
+        "minerals": {
+          "Na": 54,
+          "K": 397,
+          "Ca": 14,
+          "Mg": 25,
+          "P": 198,
+          "Fe": 3.3
+        },
+        "vitamins": {
+          "B1": 0.08,
+          "B2": 0.11,
+          "PP": 3.2,
+          "C": 0
+        },
+        "energy_value": 121
+      },
+      {
+        "name": "Мясо косули",
+        "water": 71.8,
+        "proteins": 21.1,
+        "fats": 6,
+        "ash": {
+          "total": 1.1
+        },
+        "energy_value": 138
+      },
+      {
+        "name": "Мясо кролика",
+        "water": 66.7,
+        "proteins": 21.1,
+        "fats": 11,
+        "ash": {
+          "total": 1.2
+        },
+        "minerals": {
+          "Na": 57,
+          "K": 335,
+          "Ca": 20,
+          "Mg": 25,
+          "P": 190,
+          "Fe": 3.3
+        },
+        "vitamins": {
+          "A": 0.01,
+          "B1": 0.12,
+          "B2": 0.18,
+          "PP": 6.2,
+          "C": 0.8
+        },
+        "energy_value": 183
+      },
+      {
+        "name": "Мясо лося",
+        "water": 75.8,
+        "proteins": 21.4,
+        "fats": 1.7,
+        "ash": {
+          "total": 1.1
+        },
+        "energy_value": 101
+      },
+      {
+        "name": "Мясо поросят",
+        "water": 75.4,
+        "proteins": 20.6,
+        "fats": 3,
+        "ash": {
+          "total": 1
+        },
+        "minerals": {
+          "Ca": 12,
+          "Mg": 22,
+          "P": 230,
+          "Fe": 1.2
+        },
+        "vitamins": {
+          "B1": 1.4,
+          "B2": 0.19,
+          "PP": 3.6
+        },
+        "energy_value": 109
+      },
+      {
+        "name": "Мясо сайгака",
+        "water": 64,
+        "proteins": 21.2,
+        "fats": 13.7,
+        "ash": {
+          "total": 1.1
+        },
+        "energy_value": 208
+      },
+      {
+        "name": "Мясо яка",
+        "water": 75.3,
+        "proteins": 20,
+        "fats": 3.5,
+        "ash": {
+          "total": 1.2
+        },
+        "minerals": {
+          "Na": 85,
+          "K": 339,
+          "Ca": 12,
+          "Mg": 24,
+          "P": 216,
+          "Fe": 3
+        },
+        "vitamins": {
+          "B1": 0.12,
+          "B2": 0.16
+        },
+        "energy_value": 112
+      },
+      {
+        "name": "Оленина I категории",
+        "water": 71,
+        "proteins": 19.5,
+        "fats": 8.5,
+        "ash": {
+          "total": 1
+        },
+        "minerals": {
+          "Na": 77,
+          "K": 305,
+          "Ca": 10,
+          "Mg": 21,
+          "P": 194,
+          "Fe": 2.7
+        },
+        "vitamins": {
+          "B1": 0.3,
+          "B2": 0.68,
+          "PP": 5.5
+        },
+        "energy_value": 155
+      },
+      {
+        "name": "Оленина II категории",
+        "water": 73.3,
+        "proteins": 21,
+        "fats": 4.5,
+        "ash": {
+          "total": 1.2
+        },
+        "minerals": {
+          "Na": 83,
+          "K": 325,
+          "Ca": 15,
+          "Mg": 22,
+          "P": 220,
+          "Fe": 3
+        },
+        "energy_value": 125
+      },
+      {
+        "name": "Свинина беконная",
+        "water": 54.2,
+        "proteins": 17,
+        "fats": 27.8,
+        "ash": {
+          "total": 1
+        },
+        "minerals": {
+          "Na": 64,
+          "K": 316,
+          "Ca": 8,
+          "Mg": 27,
+          "P": 182,
+          "Fe": 1.9
+        },
+        "vitamins": {
+          "A": 0,
+          "B1": 0.6,
+          "B2": 0.16,
+          "PP": 2.8,
+          "C": 0
+        },
+        "energy_value": 318
+      },
+      {
+        "name": "Свинина жирная",
+        "water": 38.4,
+        "proteins": 11.7,
+        "fats": 49.3,
+        "ash": {
+          "total": 0.6
+        },
+        "minerals": {
+          "Na": 47,
+          "K": 230,
+          "Ca": 6,
+          "Mg": 20,
+          "P": 130,
+          "Fe": 1.4
+        },
+        "vitamins": {
+          "A": 0,
+          "B1": 0.4,
+          "B2": 0.1,
+          "PP": 2.2,
+          "C": 0
+        },
+        "energy_value": 491
+      },
+      {
+        "name": "Свинина мясная",
+        "water": 51.5,
+        "proteins": 14.3,
+        "fats": 33.3,
+        "ash": {
+          "total": 0.9
+        },
+        "minerals": {
+          "Na": 58,
+          "K": 285,
+          "Ca": 7,
+          "Mg": 24,
+          "P": 164,
+          "Fe": 1.7
+        },
+        "vitamins": {
+          "A": 0,
+          "B1": 0.52,
+          "B2": 0.14,
+          "PP": 2.6,
+          "C": 0
+        },
+        "energy_value": 357
+      },
+      {
+        "name": "Телятина I категории",
+        "water": 77.3,
+        "proteins": 19.7,
+        "fats": 2,
+        "ash": {
+          "total": 1
+        },
+        "minerals": {
+          "Na": 108,
+          "K": 345,
+          "Ca": 12,
+          "Mg": 24,
+          "P": 206,
+          "Fe": 2.9
+        },
+        "vitamins": {
+          "A": 0,
+          "B1": 0.14,
+          "B2": 0.23,
+          "PP": 5.8,
+          "C": 0
+        },
+        "energy_value": 97
+      },
+      {
+        "name": "Телятина II категории",
+        "water": 78,
+        "proteins": 20.4,
+        "fats": 0.9,
+        "ash": {
+          "total": 1.1
+        },
+        "minerals": {
+          "Na": 112,
+          "K": 357,
+          "Ca": 13,
+          "Mg": 25,
+          "P": 213,
+          "Fe": 3
+        },
+        "vitamins": {
+          "A": 0,
+          "B1": 0.15,
+          "B2": 0.24,
+          "PP": 6,
+          "C": 0
+        },
+        "energy_value": 89
+      },
+      {
+        "name": "Ягнятина",
+        "water": 67.9,
+        "proteins": 17.2,
+        "fats": 14.1,
+        "ash": {
+          "total": 0.8
+        },
+        "energy_value": 196
+      }
+    ]
+  },
+  {
+    "category": "Крупнокусковые полуфабрикаты",
+    "subcategories": [
+      {
+        "category": "Говядина",
+        "subcategories": [
+          {
+            "category": "Тазобедренная часть",
+            "items": [
+              {
+                "name": "Верхний кусок",
+                "water": 76,
+                "proteins": 20.4,
+                "fats": 2.5,
+                "ash": {
+                  "total": 1.1
+                },
+                "minerals": {
+                  "Na": 61,
+                  "K": 370,
+                  "Ca": 9,
+                  "Mg": 30,
+                  "P": 215,
+                  "Fe": 2
+                },
+                "vitamins": {
+                  "B1": 0.12,
+                  "B2": 0.2,
+                  "PP": 4.8
+                },
+                "energy_value": 104
+              },
+              {
+                "name": "Внутренний",
+                "water": 76,
+                "proteins": 20.3,
+                "fats": 2.6,
+                "ash": {
+                  "total": 1.1
+                },
+                "minerals": {
+                  "Na": 60,
+                  "K": 335,
+                  "Ca": 9,
+                  "Mg": 28,
+                  "P": 217,
+                  "Fe": 2
+                },
+                "vitamins": {
+                  "B1": 0.11,
+                  "B2": 0.17,
+                  "PP": 4.28
+                },
+                "energy_value": 105
+              },
+              {
+                "name": "Боковой",
+                "water": 76.6,
+                "proteins": 20,
+                "fats": 2.3,
+                "ash": {
+                  "total": 1.1
+                },
+                "minerals": {
+                  "Na": 58,
+                  "K": 316,
+                  "Ca": 9,
+                  "Mg": 26,
+                  "P": 207,
+                  "Fe": 2.1
+                },
+                "vitamins": {
+                  "B1": 0.1,
+                  "B2": 0.21,
+                  "PP": 4.06
+                },
+                "energy_value": 101
+              },
+              {
+                "name": "Наружный",
+                "water": 76,
+                "proteins": 20.3,
+                "fats": 2.6,
+                "ash": {
+                  "total": 1.1
+                },
+                "minerals": {
+                  "Na": 64,
+                  "K": 330,
+                  "Ca": 9,
+                  "Mg": 26,
+                  "P": 211,
+                  "Fe": 1.9
+                },
+                "vitamins": {
+                  "B1": 0.11,
+                  "B2": 0.17,
+                  "PP": 4.7
+                },
+                "energy_value": 105
+              }
+            ]
+          },
+          {
+            "category": "Лопаточная часть",
+            "items": [
+              {
+                "name": "Плечевая мышца",
+                "water": 75.9,
+                "proteins": 19.4,
+                "fats": 3.6,
+                "ash": {
+                  "total": 1.1
+                },
+                "minerals": {
+                  "Na": 60,
+                  "K": 350,
+                  "Ca": 8,
+                  "Mg": 25,
+                  "P": 205,
+                  "Fe": 1.8
+                },
+                "vitamins": {
+                  "B1": 0.11,
+                  "B2": 0.21,
+                  "PP": 4.54
+                },
+                "energy_value": 110
+              },
+              {
+                "name": "Заплечная мышца",
+                "water": 75.9,
+                "proteins": 19.3,
+                "fats": 3.8,
+                "ash": {
+                  "total": 1
+                },
+                "minerals": {
+                  "Na": 60,
+                  "K": 324,
+                  "Ca": 8,
+                  "Mg": 25,
+                  "P": 183,
+                  "Fe": 2.8
+                },
+                "vitamins": {
+                  "B1": 0.11,
+                  "B2": 0.21,
+                  "PP": 4.54
+                },
+                "energy_value": 111
+              },
+              {
+                "name": "Подлопаточная часть",
+                "water": 74.7,
+                "proteins": 17.8,
+                "fats": 6.5,
+                "ash": {
+                  "total": 1
+                },
+                "minerals": {
+                  "Na": 70,
+                  "K": 326,
+                  "Ca": 8,
+                  "Mg": 26,
+                  "P": 181,
+                  "Fe": 1.9
+                },
+                "vitamins": {
+                  "B1": 0.11,
+                  "B2": 0.21,
+                  "PP": 4
+                },
+                "energy_value": 131
+              },
+              {
+                "name": "Грудная часть",
+                "water": 64.1,
+                "proteins": 16.3,
+                "fats": 18.7,
+                "ash": {
+                  "total": 0.9
+                },
+                "minerals": {
+                  "Na": 75,
+                  "K": 268,
+                  "Ca": 9,
+                  "Mg": 25,
+                  "P": 172,
+                  "Fe": 1.3
+                },
+                "vitamins": {
+                  "B1": 0.06,
+                  "B2": 0.19,
+                  "PP": 3.67
+                },
+                "energy_value": 233
+              },
+              {
+                "name": "Покромка",
+                "water": 67.5,
+                "proteins": 17.6,
+                "fats": 14,
+                "ash": {
+                  "total": 0.9
+                },
+                "minerals": {
+                  "Na": 73,
+                  "K": 315,
+                  "Ca": 8,
+                  "Mg": 25,
+                  "P": 162,
+                  "Fe": 1.1
+                },
+                "vitamins": {
+                  "B1": 0.06,
+                  "B2": 0.17,
+                  "PP": 3.72
+                },
+                "energy_value": 196
+              },
+              {
+                "name": "Котлетное мясо",
+                "water": 71.3,
+                "proteins": 17.8,
+                "fats": 10,
+                "ash": {
+                  "total": 0.9
+                },
+                "minerals": {
+                  "Na": 71,
+                  "K": 320,
+                  "Ca": 9,
+                  "Mg": 26,
+                  "P": 163,
+                  "Fe": 1.1
+                },
+                "vitamins": {
+                  "B1": 0.06,
+                  "B2": 0.16,
+                  "PP": 4.18
+                },
+                "energy_value": 162
+              }
+            ]
+          }
+        ],
+        "items": [
+          {
+            "name": "Вырезка",
+            "water": 75.9,
+            "proteins": 20.2,
+            "fats": 2.8,
+            "ash": {
+              "total": 1.1
+            },
+            "minerals": {
+              "Na": 55,
+              "K": 342,
+              "Ca": 10,
+              "Mg": 27,
+              "P": 211,
+              "Fe": 2.5
+            },
+            "vitamins": {
+              "B1": 0.12,
+              "B2": 0.23,
+              "PP": 5.7
+            },
+            "energy_value": 106
+          },
+          {
+            "name": "Спинная часть",
+            "water": 75.5,
+            "proteins": 20.5,
+            "fats": 2.9,
+            "ash": {
+              "total": 1.1
+            },
+            "minerals": {
+              "Na": 59,
+              "K": 300,
+              "Ca": 8,
+              "Mg": 26,
+              "P": 204,
+              "Fe": 2
+            },
+            "vitamins": {
+              "B1": 0.08,
+              "B2": 0.18,
+              "PP": 5.26
+            },
+            "energy_value": 108
+          },
+          {
+            "name": "Поясничная часть",
+            "water": 75.7,
+            "proteins": 20,
+            "fats": 3.3,
+            "ash": {
+              "total": 1
+            },
+            "minerals": {
+              "Na": 64,
+              "K": 315,
+              "Ca": 9,
+              "Mg": 26,
+              "P": 210,
+              "Fe": 1.6
+            },
+            "vitamins": {
+              "B1": 0.1,
+              "B2": 0.18,
+              "PP": 5.14
+            },
+            "energy_value": 110
+          }
+        ]
+      },
+      {
+        "category": "Свинина",
+        "items": [
+          {
+            "name": "Вырезка",
+            "water": 72.4,
+            "proteins": 19.4,
+            "fats": 7.1,
+            "ash": {
+              "total": 1.1
+            },
+            "minerals": {
+              "Na": 41,
+              "K": 345,
+              "Ca": 8,
+              "Mg": 26,
+              "P": 220,
+              "Fe": 1.6
+            },
+            "vitamins": {
+              "B1": 1.45,
+              "B2": 0.16,
+              "PP": 2.63
+            },
+            "energy_value": 142
+          },
+          {
+            "name": "Корейка",
+            "water": 49.1,
+            "proteins": 13.7,
+            "fats": 36.5,
+            "ash": {
+              "total": 0.7
+            },
+            "minerals": {
+              "Na": 29,
+              "K": 180,
+              "Ca": 8,
+              "Mg": 20,
+              "P": 150,
+              "Fe": 1.5
+            },
+            "vitamins": {
+              "B1": 0.85,
+              "B2": 0.11,
+              "PP": 2.34
+            },
+            "energy_value": 384
+          },
+          {
+            "name": "Грудинка",
+            "water": 28.3,
+            "proteins": 8,
+            "fats": 63.3,
+            "ash": {
+              "total": 0.4
+            },
+            "minerals": {
+              "Na": 28,
+              "K": 108,
+              "Ca": 6,
+              "Mg": 10,
+              "P": 70,
+              "Fe": 0.7
+            },
+            "vitamins": {
+              "B1": 0.4,
+              "B2": 0.1,
+              "PP": 1.7
+            },
+            "energy_value": 602
+          },
+          {
+            "name": "Тазобедренная часть",
+            "water": 57,
+            "proteins": 15,
+            "fats": 27.2,
+            "ash": {
+              "total": 0.8
+            },
+            "minerals": {
+              "Na": 40,
+              "K": 240,
+              "Ca": 8,
+              "Mg": 24,
+              "P": 165,
+              "Fe": 1.1
+            },
+            "vitamins": {
+              "B1": 0.87,
+              "B2": 0.13,
+              "PP": 2.2
+            },
+            "energy_value": 305
+          },
+          {
+            "name": "Лопаточная часть",
+            "water": 55.1,
+            "proteins": 14.7,
+            "fats": 29.4,
+            "ash": {
+              "total": 0.8
+            },
+            "minerals": {
+              "Na": 40,
+              "K": 200,
+              "Ca": 8,
+              "Mg": 19,
+              "P": 146,
+              "Fe": 1.2
+            },
+            "vitamins": {
+              "B1": 0.7,
+              "B2": 0.16,
+              "PP": 1.6
+            },
+            "energy_value": 325
+          },
+          {
+            "name": "Шейно-подлопаточная часть",
+            "water": 53.7,
+            "proteins": 13.6,
+            "fats": 31.9,
+            "ash": {
+              "total": 0.8
+            },
+            "minerals": {
+              "Na": 41,
+              "K": 190,
+              "Ca": 7,
+              "Mg": 18,
+              "P": 144,
+              "Fe": 1.4
+            },
+            "vitamins": {
+              "B1": 0.71,
+              "B2": 0.16,
+              "PP": 1.75
+            },
+            "energy_value": 343
+          },
+          {
+            "name": "Котлетное мясо",
+            "water": 46.2,
+            "proteins": 11.4,
+            "fats": 41.7,
+            "ash": {
+              "total": 0.7
+            },
+            "minerals": {
+              "Na": 42,
+              "K": 170,
+              "Ca": 8,
+              "Mg": 19,
+              "P": 114,
+              "Fe": 1.3
+            },
+            "vitamins": {
+              "B1": 0.59,
+              "B2": 0.12,
+              "PP": 2.5
+            },
+            "energy_value": 421
+          }
+        ]
+      },
+      {
+        "category": "Баранина",
+        "items": [
+          {
+            "name": "Корейка",
+            "water": 61.7,
+            "proteins": 15.9,
+            "fats": 21.5,
+            "ash": {
+              "total": 0.9
+            },
+            "minerals": {
+              "Na": 95,
+              "K": 238,
+              "Ca": 8,
+              "Mg": 24,
+              "P": 156,
+              "Fe": 2.4
+            },
+            "vitamins": {
+              "B1": 0.11,
+              "B2": 0.12,
+              "PP": 5
+            },
+            "energy_value": 255
+          },
+          {
+            "name": "Грудинка",
+            "water": 59.4,
+            "proteins": 14,
+            "fats": 25.8,
+            "ash": {
+              "total": 0.8
+            },
+            "minerals": {
+              "Na": 110,
+              "K": 212,
+              "Ca": 7,
+              "Mg": 23,
+              "P": 133,
+              "Fe": 2.3
+            },
+            "vitamins": {
+              "B1": 0.07,
+              "B2": 0.11,
+              "PP": 3.8
+            },
+            "energy_value": 288
+          },
+          {
+            "name": "Тазобедренная часть",
+            "water": 67.7,
+            "proteins": 17,
+            "fats": 14.4,
+            "ash": {
+              "total": 0.9
+            },
+            "minerals": {
+              "Na": 90,
+              "K": 300,
+              "Ca": 10,
+              "Mg": 25,
+              "P": 183,
+              "Fe": 2.2
+            },
+            "vitamins": {
+              "B1": 0.12,
+              "B2": 0.16,
+              "PP": 5
+            },
+            "energy_value": 198
+          },
+          {
+            "name": "Лопаточная часть",
+            "water": 68.1,
+            "proteins": 16.1,
+            "fats": 14.9,
+            "ash": {
+              "total": 0.9
+            },
+            "minerals": {
+              "Na": 88,
+              "K": 300,
+              "Ca": 8,
+              "Mg": 25,
+              "P": 162,
+              "Fe": 2
+            },
+            "vitamins": {
+              "B1": 0.08,
+              "B2": 0.16,
+              "PP": 4.5
+            },
+            "energy_value": 199
+          },
+          {
+            "name": "Котлетное мясо",
+            "water": 63.8,
+            "proteins": 16,
+            "fats": 19.3,
+            "ash": {
+              "total": 0.9
+            },
+            "minerals": {
+              "Na": 108,
+              "K": 290,
+              "Ca": 9,
+              "Mg": 25,
+              "P": 148,
+              "Fe": 2.3
+            },
+            "vitamins": {
+              "B1": 0.07,
+              "B2": 0.12,
+              "PP": 2.7
+            },
+            "energy_value": 238
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Полуфабрикаты рубленые",
+    "subcategories": [
+      {
+        "category": "Котлеты",
+        "items": [
+          {
+            "name": "Домашние",
+            "water": 59.8,
+            "proteins": 10.4,
+            "fats": 18.7,
+            "carbohydrates": {
+              "total": 9.1
+            },
+            "ash": {
+              "total": 2
+            },
+            "minerals": {
+              "Na": 566,
+              "K": 181,
+              "Ca": 18,
+              "Mg": 23,
+              "P": 108,
+              "Fe": 1.2
+            },
+            "vitamins": {
+              "B1": 0.2,
+              "B2": 0.1,
+              "PP": 2.14
+            },
+            "energy_value": 246
+          },
+          {
+            "name": "Киевские",
+            "water": 54.4,
+            "proteins": 8,
+            "fats": 25.6,
+            "carbohydrates": {
+              "total": 10
+            },
+            "ash": {
+              "total": 2
+            },
+            "minerals": {
+              "Na": 562,
+              "K": 148,
+              "Ca": 18,
+              "Mg": 20,
+              "P": 82,
+              "Fe": 1.2
+            },
+            "vitamins": {
+              "B1": 0.32,
+              "B2": 0.06,
+              "PP": 1.48
+            },
+            "energy_value": 302
+          },
+          {
+            "name": "Крестьянские",
+            "water": 59.4,
+            "proteins": 10.6,
+            "fats": 19.4,
+            "carbohydrates": {
+              "total": 8.5
+            },
+            "ash": {
+              "total": 2.1
+            },
+            "minerals": {
+              "Na": 659,
+              "K": 183,
+              "Ca": 21,
+              "Mg": 24,
+              "P": 122,
+              "Fe": 1.6
+            },
+            "vitamins": {
+              "B1": 0.38,
+              "B2": 0.11,
+              "PP": 1.65
+            },
+            "energy_value": 251
+          },
+          {
+            "name": "Московские",
+            "water": 64,
+            "proteins": 10.4,
+            "fats": 13.6,
+            "carbohydrates": {
+              "total": 10
+            },
+            "ash": {
+              "total": 2
+            },
+            "minerals": {
+              "Na": 570,
+              "K": 192,
+              "Ca": 18,
+              "Mg": 22,
+              "P": 102,
+              "Fe": 1
+            },
+            "vitamins": {
+              "B1": 0.13,
+              "B2": 0.1,
+              "PP": 2.41
+            },
+            "energy_value": 204
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Субпродукты",
+    "subcategories": [
+      {
+        "category": "Бараньи",
+        "items": [
+          {
+            "name": "Легкое",
+            "water": 79.3,
+            "proteins": 15.6,
+            "fats": 2.3,
+            "extractive_substances": 2,
+            "ash": {
+              "total": 0.8
+            },
+            "minerals": {
+              "Ca": 11,
+              "Mg": 19,
+              "P": 217,
+              "Fe": 10.2
+            },
+            "vitamins": {
+              "A": 0
+            },
+            "energy_value": 83
+          },
+          {
+            "name": "Мозги",
+            "water": 78.9,
+            "proteins": 9.7,
+            "fats": 9.4,
+            "extractive_substances": 0.5,
+            "ash": {
+              "total": 1.5
+            },
+            "minerals": {
+              "Na": 125,
+              "K": 219,
+              "Ca": 11,
+              "P": 273,
+              "Fe": 6
+            },
+            "vitamins": {
+              "A": 0,
+              "B1": 0.1,
+              "B2": 0.26,
+              "PP": 3.7,
+              "C": 0
+            },
+            "energy_value": 123
+          },
+          {
+            "name": "Печень",
+            "water": 71.2,
+            "proteins": 18.7,
+            "fats": 2.9,
+            "extractive_substances": 5.8,
+            "ash": {
+              "total": 1.4
+            },
+            "minerals": {
+              "Na": 52,
+              "K": 200,
+              "Ca": 7,
+              "Mg": 16,
+              "P": 300,
+              "Fe": 6.4
+            },
+            "vitamins": {
+              "A": 3.6,
+              "B1": 0.29,
+              "B2": 2.6,
+              "PP": 7.1,
+              "C": 25
+            },
+            "energy_value": 101
+          },
+          {
+            "name": "Почки",
+            "water": 79.7,
+            "proteins": 13.6,
+            "fats": 2.5,
+            "extractive_substances": 3,
+            "ash": {
+              "total": 1.2
+            },
+            "minerals": {
+              "Na": 200,
+              "K": 230,
+              "Ca": 10,
+              "Mg": 23,
+              "P": 233,
+              "Fe": 8.9
+            },
+            "vitamins": {
+              "A": 0.08,
+              "B1": 0.38,
+              "B2": 2,
+              "PP": 3.8,
+              "C": 11
+            },
+            "energy_value": 77
+          },
+          {
+            "name": "Рубец",
+            "water": 82.7,
+            "proteins": 11.5,
+            "fats": 4,
+            "extractive_substances": 1.4,
+            "ash": {
+              "total": 0.4
+            },
+            "energy_value": 82
+          },
+          {
+            "name": "Сердце",
+            "water": 78.5,
+            "proteins": 13.5,
+            "fats": 3.5,
+            "extractive_substances": 3.4,
+            "ash": {
+              "total": 1.1
+            },
+            "minerals": {
+              "Na": 110,
+              "K": 265,
+              "Ca": 7,
+              "Mg": 25,
+              "P": 181,
+              "Fe": 6
+            },
+            "vitamins": {
+              "A": 0,
+              "B1": 0.31,
+              "B2": 0.66,
+              "PP": 4,
+              "C": 1
+            },
+            "energy_value": 86
+          },
+          {
+            "name": "Язык",
+            "water": 67.9,
+            "proteins": 12.6,
+            "fats": 16.1,
+            "extractive_substances": 2.5,
+            "ash": {
+              "total": 0.9
+            },
+            "minerals": {
+              "Ca": 9,
+              "Mg": 23,
+              "P": 166,
+              "Fe": 4.8
+            },
+            "vitamins": {
+              "A": 0,
+              "B1": 0.11,
+              "B2": 0.37,
+              "PP": 3.1,
+              "C": 0
+            },
+            "energy_value": 195
+          }
+        ]
+      },
+      {
+        "category": "Говяжьи",
+        "items": [
+          {
+            "name": "Вымя",
+            "water": 72.6,
+            "proteins": 12.3,
+            "fats": 13.7,
+            "extractive_substances": 0.6,
+            "ash": {
+              "total": 0.8
+            },
+            "minerals": {
+              "Ca": 49,
+              "Mg": 11,
+              "P": 141,
+              "Fe": 3.3
+            },
+            "energy_value": 173
+          },
+          {
+            "name": "Головы",
+            "water": 67.8,
+            "proteins": 18.1,
+            "fats": 12.5,
+            "extractive_substances": 0.9,
+            "ash": {
+              "total": 0.7
+            },
+            "energy_value": 185
+          },
+          {
+            "name": "Калтыки",
+            "water": 72.3,
+            "proteins": 15.6,
+            "fats": 10,
+            "extractive_substances": 0.7,
+            "ash": {
+              "total": 1.4
+            },
+            "energy_value": 152
+          },
+          {
+            "name": "Легкое",
+            "water": 77.5,
+            "proteins": 15.2,
+            "fats": 4.7,
+            "extractive_substances": 1.6,
+            "ash": {
+              "total": 1
+            },
+            "minerals": {
+              "Ca": 10,
+              "Mg": 12,
+              "P": 194,
+              "Fe": 10
+            },
+            "vitamins": {
+              "A": 0,
+              "B1": 0.1,
+              "B2": 0.4,
+              "PP": 3.2,
+              "C": 2
+            },
+            "energy_value": 103
+          },
+          {
+            "name": "Мозги",
+            "water": 77.6,
+            "proteins": 11.7,
+            "fats": 8.6,
+            "extractive_substances": 0.8,
+            "ash": {
+              "total": 1.3
+            },
+            "minerals": {
+              "Na": 167,
+              "K": 281,
+              "Ca": 11,
+              "Mg": 16,
+              "P": 321,
+              "Fe": 2.6
+            },
+            "vitamins": {
+              "A": 0,
+              "B1": 0.12,
+              "B2": 0.19,
+              "PP": 3,
+              "C": 0
+            },
+            "energy_value": 124
+          },
+          {
+            "name": "Мясная обрезь",
+            "water": 73.5,
+            "proteins": 18.9,
+            "fats": 5.5,
+            "extractive_substances": 0.9,
+            "ash": {
+              "total": 1.2
+            },
+            "energy_value": 125
+          },
+          {
+            "name": "Печень",
+            "water": 71.7,
+            "proteins": 17.9,
+            "fats": 3.7,
+            "extractive_substances": 5.3,
+            "ash": {
+              "total": 1.4
+            },
+            "minerals": {
+              "Na": 104,
+              "K": 277,
+              "Ca": 9,
+              "Mg": 18,
+              "P": 314,
+              "Fe": 6.9
+            },
+            "vitamins": {
+              "A": 8.2,
+              "beta_carotene": 1,
+              "B1": 0.3,
+              "B2": 2.19,
+              "PP": 9,
+              "C": 33
+            },
+            "energy_value": 105
+          },
+          {
+            "name": "Почки",
+            "water": 79,
+            "proteins": 15.2,
+            "fats": 2.8,
+            "extractive_substances": 1.9,
+            "ash": {
+              "total": 1.1
+            },
+            "minerals": {
+              "Na": 218,
+              "K": 237,
+              "Ca": 13,
+              "Mg": 18,
+              "P": 239,
+              "Fe": 6
+            },
+            "vitamins": {
+              "A": 0.23,
+              "B1": 0.39,
+              "B2": 1.8,
+              "PP": 5.7,
+              "C": 10
+            },
+            "energy_value": 86
+          },
+          {
+            "name": "Рубец",
+            "water": 80,
+            "proteins": 14.8,
+            "fats": 4.2,
+            "extractive_substances": 0.5,
+            "ash": {
+              "total": 0.5
+            },
+            "minerals": {
+              "Ca": 15,
+              "Mg": 14,
+              "P": 84,
+              "Fe": 3
+            },
+            "vitamins": {
+              "B2": 0.15,
+              "PP": 1.6
+            },
+            "energy_value": 97
+          },
+          {
+            "name": "Селезенка",
+            "water": 77.9,
+            "proteins": 16.4,
+            "fats": 2.4,
+            "extractive_substances": 1.8,
+            "ash": {
+              "total": 1.5
+            },
+            "minerals": {
+              "Na": 72,
+              "K": 324,
+              "Ca": 2,
+              "Mg": 13,
+              "P": 231
+            },
+            "vitamins": {
+              "B1": 0.13,
+              "B2": 0.28,
+              "PP": 4.2,
+              "C": 6
+            },
+            "energy_value": 87
+          },
+          {
+            "name": "Сердце",
+            "water": 77.5,
+            "proteins": 16,
+            "fats": 3.5,
+            "extractive_substances": 2,
+            "ash": {
+              "total": 1
+            },
+            "minerals": {
+              "Na": 100,
+              "K": 260,
+              "Ca": 7,
+              "Mg": 23,
+              "P": 210,
+              "Fe": 4.8
+            },
+            "vitamins": {
+              "A": 0.02,
+              "B1": 0.36,
+              "B2": 0.75,
+              "PP": 5,
+              "C": 4
+            },
+            "energy_value": 96
+          },
+          {
+            "name": "Уши",
+            "water": 69.8,
+            "proteins": 25.2,
+            "fats": 2.3,
+            "extractive_substances": 2,
+            "ash": {
+              "total": 0.7
+            },
+            "minerals": {
+              "Ca": 22,
+              "Mg": 11,
+              "P": 65
+            },
+            "energy_value": 122
+          },
+          {
+            "name": "Хвост мясокостный",
+            "water": 71.2,
+            "proteins": 19.7,
+            "fats": 6.5,
+            "extractive_substances": 1.8,
+            "ash": {
+              "total": 0.8
+            },
+            "minerals": {
+              "Ca": 7,
+              "Mg": 19,
+              "P": 162,
+              "Fe": 4.5
+            },
+            "energy_value": 137
+          },
+          {
+            "name": "Язык",
+            "water": 68.8,
+            "proteins": 16,
+            "fats": 12.1,
+            "extractive_substances": 2.2,
+            "ash": {
+              "total": 0.9
+            },
+            "minerals": {
+              "Na": 100,
+              "K": 255,
+              "Ca": 8,
+              "Mg": 19,
+              "P": 224,
+              "Fe": 4.1
+            },
+            "vitamins": {
+              "A": 0,
+              "B1": 0.12,
+              "B2": 0.3,
+              "PP": 4.8,
+              "C": 0
+            },
+            "energy_value": 173
+          }
+        ]
+      },
+      {
+        "category": "Свиные",
+        "items": [
+          {
+            "name": "Легкое",
+            "water": 78.6,
+            "proteins": 14.8,
+            "fats": 3.6,
+            "extractive_substances": 2,
+            "ash": {
+              "total": 1
+            },
+            "minerals": {
+              "Na": 151,
+              "K": 243,
+              "Ca": 9,
+              "Mg": 15,
+              "P": 230,
+              "Fe": 9.1
+            },
+            "vitamins": {
+              "B1": 0.09,
+              "B2": 0.27,
+              "PP": 3.4
+            },
+            "energy_value": 92
+          },
+          {
+            "name": "Мозги",
+            "water": 79.1,
+            "proteins": 10.5,
+            "fats": 8.6,
+            "extractive_substances": 0.8,
+            "ash": {
+              "total": 1
+            },
+            "minerals": {
+              "Na": 153,
+              "K": 312,
+              "Ca": 10,
+              "P": 330,
+              "Fe": 3.6
+            },
+            "vitamins": {
+              "B1": 0.16,
+              "B2": 0.28
+            },
+            "energy_value": 119
+          },
+          {
+            "name": "Мясная обрезь",
+            "water": 50.2,
+            "proteins": 15.3,
+            "fats": 33.1,
+            "extractive_substances": 0.7,
+            "ash": {
+              "total": 0.7
+            },
+            "energy_value": 359
+          },
+          {
+            "name": "Ножки",
+            "water": 60.2,
+            "proteins": 23.5,
+            "fats": 15.6,
+            "ash": {
+              "total": 0.7
+            },
+            "minerals": {
+              "Na": 200,
+              "K": 71,
+              "Ca": 59,
+              "Mg": 7,
+              "P": 55,
+              "Fe": 5
+            },
+            "vitamins": {
+              "B1": 0.04,
+              "B2": 0.1,
+              "PP": 1.1
+            },
+            "energy_value": 234
+          },
+          {
+            "name": "Печень",
+            "water": 71.3,
+            "proteins": 18.8,
+            "fats": 3.8,
+            "extractive_substances": 4.7,
+            "ash": {
+              "total": 1.4
+            },
+            "minerals": {
+              "Na": 81,
+              "K": 271,
+              "Ca": 9,
+              "Mg": 21,
+              "P": 347,
+              "Fe": 20.2
+            },
+            "vitamins": {
+              "A": 3.45,
+              "B1": 0.3,
+              "B2": 2.18,
+              "PP": 12,
+              "C": 21
+            },
+            "energy_value": 109
+          },
+          {
+            "name": "Почки",
+            "water": 77.5,
+            "proteins": 15,
+            "fats": 3.6,
+            "extractive_substances": 2.7,
+            "ash": {
+              "total": 1.2
+            },
+            "minerals": {
+              "Na": 134,
+              "K": 248,
+              "Ca": 9,
+              "Mg": 22,
+              "P": 226,
+              "Fe": 7.5
+            },
+            "vitamins": {
+              "A": 0.1,
+              "B1": 0.29,
+              "B2": 1.56,
+              "PP": 7.3,
+              "C": 10
+            },
+            "energy_value": 92
+          },
+          {
+            "name": "Сердце",
+            "water": 76.2,
+            "proteins": 16.2,
+            "fats": 4,
+            "extractive_substances": 2.6,
+            "ash": {
+              "total": 1
+            },
+            "minerals": {
+              "Na": 63,
+              "K": 151,
+              "Ca": 16,
+              "Mg": 18,
+              "P": 160,
+              "Fe": 4.1
+            },
+            "vitamins": {
+              "A": 0,
+              "B1": 0.36,
+              "B2": 0.8,
+              "PP": 4.9,
+              "C": 3
+            },
+            "energy_value": 101
+          },
+          {
+            "name": "Уши",
+            "water": 60.9,
+            "proteins": 21,
+            "fats": 14.1,
+            "extractive_substances": 3.3,
+            "ash": {
+              "total": 0.7
+            },
+            "minerals": {
+              "Ca": 19,
+              "Mg": 10,
+              "P": 81,
+              "Fe": 2.9
+            },
+            "energy_value": 211
+          },
+          {
+            "name": "Хвост мясокостный",
+            "water": 43.2,
+            "proteins": 16.8,
+            "fats": 39.4,
+            "extractive_substances": 0.6,
+            "ash": {
+              "total": 0.6
+            },
+            "minerals": {
+              "Na": 109,
+              "K": 113,
+              "Ca": 18,
+              "Mg": 6,
+              "P": 50,
+              "Fe": 5.6
+            },
+            "vitamins": {
+              "B1": 0.21,
+              "B2": 0.11,
+              "PP": 2.1
+            },
+            "energy_value": 422
+          },
+          {
+            "name": "Язык",
+            "water": 65.1,
+            "proteins": 15.9,
+            "fats": 16,
+            "extractive_substances": 2.1,
+            "ash": {
+              "total": 0.9
+            },
+            "minerals": {
+              "Na": 93,
+              "K": 178,
+              "Ca": 11,
+              "Mg": 22,
+              "P": 166,
+              "Fe": 3.2
+            },
+            "vitamins": {
+              "A": 0,
+              "B1": 0.15,
+              "B2": 0.36,
+              "PP": 4.4,
+              "C": 0
+            },
+            "energy_value": 208
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Колбасные изделия",
+    "subcategories": [
+      {
+        "category": "Варёные колбасы",
+        "items": [
+          {
+            "name": "Говяжья",
+            "water": 70,
+            "proteins": 15,
+            "fats": 11.7,
+            "ash": {
+              "total": 3.3,
+              "nacl": 2.3
+            },
+            "minerals": {
+              "Na": 959,
+              "K": 281,
+              "Ca": 23,
+              "Mg": 21,
+              "P": 209,
+              "Fe": 3.5
+            },
+            "vitamins": {
+              "B1": 0.06,
+              "B2": 0.13,
+              "PP": 3.5
+            },
+            "energy_value": 165
+          },
+          {
+            "name": "Диабетическая",
+            "water": 62.4,
+            "proteins": 12.1,
+            "fats": 22.8,
+            "ash": {
+              "total": 2.7,
+              "nacl": 2
+            },
+            "minerals": {
+              "Na": 839,
+              "K": 251,
+              "Ca": 21,
+              "Mg": 20,
+              "P": 152,
+              "Fe": 1.4
+            },
+            "vitamins": {
+              "B1": 0.18,
+              "B2": 0.14,
+              "PP": 3.2
+            },
+            "energy_value": 254
+          },
+          {
+            "name": "Диетическая",
+            "water": 71.6,
+            "proteins": 12.1,
+            "fats": 13.5,
+            "ash": {
+              "total": 2.8,
+              "nacl": 2
+            },
+            "minerals": {
+              "Na": 822,
+              "K": 293,
+              "Ca": 38,
+              "Mg": 33,
+              "P": 188,
+              "Fe": 2.2
+            },
+            "vitamins": {
+              "B1": 0.06,
+              "B2": 0.13,
+              "PP": 3.8
+            },
+            "energy_value": 170
+          },
+          {
+            "name": "Для завтрака",
+            "water": 68,
+            "proteins": 13,
+            "fats": 13.9,
+            "carbohydrates": {
+              "total": 2.5
+            },
+            "ash": {
+              "total": 2.6,
+              "nacl": 2.3
+            },
+            "minerals": {
+              "Na": 981,
+              "K": 206,
+              "Ca": 13,
+              "Mg": 19,
+              "P": 155,
+              "Fe": 1.1
+            },
+            "vitamins": {
+              "B1": 0.14,
+              "B2": 0.18,
+              "PP": 2.37
+            },
+            "energy_value": 187
+          },
+          {
+            "name": "Докторская",
+            "water": 60.8,
+            "proteins": 12.8,
+            "fats": 22.2,
+            "carbohydrates": {
+              "total": 1.5
+            },
+            "ash": {
+              "total": 2.7,
+              "nacl": 2
+            },
+            "minerals": {
+              "Na": 828,
+              "K": 243,
+              "Ca": 29,
+              "Mg": 22,
+              "P": 178,
+              "Fe": 1.7
+            },
+            "vitamins": {
+              "B1": 0.22,
+              "B2": 0.15,
+              "PP": 2.45
+            },
+            "energy_value": 257
+          },
+          {
+            "name": "Домашняя",
+            "water": 67.8,
+            "proteins": 12.8,
+            "fats": 16.7,
+            "ash": {
+              "total": 2.7,
+              "nacl": 2.4
+            },
+            "minerals": {
+              "Na": 936,
+              "K": 261,
+              "Ca": 19,
+              "Mg": 23,
+              "P": 150,
+              "Fe": 1.4
+            },
+            "vitamins": {
+              "B1": 0.16,
+              "B2": 0.16,
+              "PP": 2.5
+            },
+            "energy_value": 202
+          },
+          {
+            "name": "Краснодарская",
+            "water": 64.4,
+            "proteins": 12.8,
+            "fats": 20.3,
+            "ash": {
+              "total": 2.5,
+              "nacl": 1.7
+            },
+            "minerals": {
+              "Na": 722,
+              "K": 253,
+              "Ca": 16,
+              "Mg": 19,
+              "P": 155,
+              "Fe": 2.3
+            },
+            "energy_value": 234
+          },
+          {
+            "name": "Любительская",
+            "water": 57,
+            "proteins": 12.2,
+            "fats": 28,
+            "ash": {
+              "total": 2.8,
+              "nacl": 2.2
+            },
+            "minerals": {
+              "Na": 900,
+              "K": 211,
+              "Ca": 19,
+              "Mg": 17,
+              "P": 146,
+              "Fe": 1.7
+            },
+            "vitamins": {
+              "B1": 0.25,
+              "B2": 0.18,
+              "PP": 2.47
+            },
+            "energy_value": 301
+          },
+          {
+            "name": "Любительская свиная",
+            "water": 55.6,
+            "proteins": 12.5,
+            "fats": 29.1,
+            "ash": {
+              "total": 2.8,
+              "nacl": 2.2
+            },
+            "minerals": {
+              "Na": 898,
+              "K": 190,
+              "Ca": 18,
+              "Mg": 17,
+              "P": 132,
+              "Fe": 1.3
+            },
+            "vitamins": {
+              "B1": 0.35,
+              "B2": 0.21,
+              "PP": 2.15
+            },
+            "energy_value": 312
+          },
+          {
+            "name": "Молочная",
+            "water": 62.8,
+            "proteins": 11.7,
+            "fats": 22.8,
+            "ash": {
+              "total": 2.7,
+              "nacl": 2
+            },
+            "minerals": {
+              "Na": 835,
+              "K": 250,
+              "Ca": 40,
+              "Mg": 21,
+              "P": 169,
+              "Fe": 1.7
+            },
+            "vitamins": {
+              "B1": 0.25,
+              "B2": 0.2,
+              "PP": 2.65
+            },
+            "energy_value": 252
+          },
+          {
+            "name": "Московская",
+            "water": 61.7,
+            "proteins": 11.5,
+            "fats": 21.8,
+            "carbohydrates": {
+              "total": 2
+            },
+            "ash": {
+              "total": 3,
+              "nacl": 2.4
+            },
+            "minerals": {
+              "Na": 974,
+              "K": 207,
+              "Ca": 30,
+              "Mg": 17,
+              "P": 133,
+              "Fe": 1.8
+            },
+            "energy_value": 250
+          },
+          {
+            "name": "Обыкновенная",
+            "water": 57.6,
+            "proteins": 11.1,
+            "fats": 25.2,
+            "carbohydrates": {
+              "total": 3.2
+            },
+            "ash": {
+              "total": 2.9,
+              "nacl": 2.3
+            },
+            "minerals": {
+              "Na": 873,
+              "K": 282,
+              "Ca": 41,
+              "Mg": 26,
+              "P": 170,
+              "Fe": 2.1
+            },
+            "energy_value": 284
+          },
+          {
+            "name": "Отдельная",
+            "water": 63,
+            "proteins": 11,
+            "fats": 21,
+            "carbohydrates": {
+              "total": 1.8
+            },
+            "ash": {
+              "total": 3.2,
+              "nacl": 2.6
+            },
+            "minerals": {
+              "Na": 1047,
+              "K": 255,
+              "Ca": 17,
+              "Mg": 19,
+              "P": 167,
+              "Fe": 2.1
+            },
+            "vitamins": {
+              "B1": 0.12,
+              "B2": 0.16,
+              "PP": 3.18
+            },
+            "energy_value": 240
+          },
+          {
+            "name": "Пикантная",
+            "water": 62,
+            "proteins": 12.1,
+            "fats": 19,
+            "carbohydrates": {
+              "total": 4.2
+            },
+            "ash": {
+              "total": 2.7,
+              "nacl": 2.3
+            },
+            "minerals": {
+              "Na": 1022,
+              "K": 230,
+              "Ca": 73,
+              "Mg": 30,
+              "P": 246,
+              "Fe": 1.1
+            },
+            "vitamins": {
+              "B1": 0.21,
+              "B2": 0.13,
+              "PP": 2.5
+            },
+            "energy_value": 236
+          },
+          {
+            "name": "Прима",
+            "water": 65,
+            "proteins": 13,
+            "fats": 19.4,
+            "ash": {
+              "total": 2.6,
+              "nacl": 2.3
+            },
+            "minerals": {
+              "Na": 827,
+              "K": 183,
+              "Ca": 21,
+              "Mg": 20,
+              "P": 149,
+              "Fe": 1.3
+            },
+            "vitamins": {
+              "B1": 0.2,
+              "B2": 0.17,
+              "PP": 2.23
+            },
+            "energy_value": 227
+          },
+          {
+            "name": "Русская",
+            "water": 56.4,
+            "proteins": 11.8,
+            "fats": 28.9,
+            "ash": {
+              "total": 2.9,
+              "nacl": 2.4
+            },
+            "minerals": {
+              "Na": 984,
+              "K": 238,
+              "Ca": 17,
+              "Mg": 19,
+              "P": 126,
+              "Fe": 2
+            },
+            "vitamins": {
+              "B1": 0.19,
+              "B2": 0.15,
+              "PP": 2.63
+            },
+            "energy_value": 302
+          },
+          {
+            "name": "Свиная",
+            "water": 60,
+            "proteins": 10.2,
+            "fats": 25.1,
+            "carbohydrates": {
+              "total": 1.9
+            },
+            "ash": {
+              "total": 2.8,
+              "nacl": 2.2
+            },
+            "minerals": {
+              "Na": 896,
+              "K": 226,
+              "Ca": 18,
+              "Mg": 20,
+              "P": 153,
+              "Fe": 1.5
+            },
+            "energy_value": 274
+          },
+          {
+            "name": "Степная",
+            "water": 63.4,
+            "proteins": 11.1,
+            "fats": 20.1,
+            "carbohydrates": {
+              "total": 2.9
+            },
+            "ash": {
+              "total": 2.5,
+              "nacl": 2.3
+            },
+            "minerals": {
+              "Na": 918,
+              "K": 240,
+              "Ca": 13,
+              "Mg": 23,
+              "P": 139,
+              "Fe": 2.3
+            },
+            "vitamins": {
+              "B1": 0.23,
+              "B2": 0.11,
+              "PP": 2.1
+            },
+            "energy_value": 237
+          },
+          {
+            "name": "Столичная",
+            "water": 53,
+            "proteins": 15.1,
+            "fats": 28.7,
+            "ash": {
+              "total": 3.2,
+              "nacl": 2.4
+            },
+            "minerals": {
+              "Na": 962,
+              "K": 235,
+              "Ca": 19,
+              "Mg": 21,
+              "P": 142,
+              "Fe": 1.9
+            },
+            "energy_value": 319
+          },
+          {
+            "name": "Столовая",
+            "water": 63.7,
+            "proteins": 11.1,
+            "fats": 20.2,
+            "carbohydrates": {
+              "total": 1.9
+            },
+            "ash": {
+              "total": 3.1,
+              "nacl": 2.5
+            },
+            "minerals": {
+              "Na": 1021,
+              "K": 240,
+              "Ca": 18,
+              "Mg": 20,
+              "P": 176,
+              "Fe": 1.8
+            },
+            "vitamins": {
+              "B1": 0.23,
+              "B2": 0.11,
+              "PP": 2.55
+            },
+            "energy_value": 234
+          },
+          {
+            "name": "Телячья",
+            "water": 55,
+            "proteins": 13.8,
+            "fats": 28.3,
+            "ash": {
+              "total": 2.9,
+              "nacl": 2.1
+            },
+            "minerals": {
+              "Na": 883,
+              "K": 222,
+              "Ca": 19,
+              "Mg": 20,
+              "P": 144,
+              "Fe": 2.1
+            },
+            "energy_value": 310
+          },
+          {
+            "name": "Чайная",
+            "water": 64.8,
+            "proteins": 11.7,
+            "fats": 18.4,
+            "carbohydrates": {
+              "total": 1.9
+            },
+            "ash": {
+              "total": 3.2,
+              "nacl": 2.6
+            },
+            "minerals": {
+              "Na": 1057,
+              "K": 219,
+              "Ca": 18,
+              "Mg": 15,
+              "P": 133,
+              "Fe": 1.8
+            },
+            "vitamins": {
+              "B1": 0.1,
+              "B2": 0.16,
+              "PP": 2.3
+            },
+            "energy_value": 216
+          },
+          {
+            "name": "Эстонская",
+            "water": 46.9,
+            "proteins": 6.5,
+            "fats": 39.6,
+            "carbohydrates": {
+              "total": 4.2
+            },
+            "ash": {
+              "total": 2.7,
+              "nacl": 2.3
+            },
+            "minerals": {
+              "Na": 924,
+              "K": 136,
+              "Ca": 18,
+              "Mg": 12,
+              "P": 85,
+              "Fe": 1.2
+            },
+            "energy_value": 400
+          },
+          {
+            "name": "Южная",
+            "water": 65,
+            "proteins": 12.4,
+            "fats": 17.3,
+            "carbohydrates": {
+              "total": 2.5
+            },
+            "ash": {
+              "total": 2.8,
+              "nacl": 2.3
+            },
+            "minerals": {
+              "Na": 895,
+              "K": 176,
+              "Ca": 20,
+              "Mg": 29,
+              "P": 157,
+              "Fe": 1.2
+            },
+            "vitamins": {
+              "B1": 0.17,
+              "B2": 0.12,
+              "PP": 2
+            },
+            "energy_value": 215
+          }
+        ]
+      },
+      {
+        "category": "Сардельки",
+        "items": [
+          {
+            "name": "Говяжьи",
+            "water": 66.1,
+            "proteins": 11.4,
+            "fats": 18.2,
+            "carbohydrates": {
+              "total": 1.5
+            },
+            "ash": {
+              "total": 2.8,
+              "nacl": 2.3
+            },
+            "minerals": {
+              "Na": 823,
+              "K": 193,
+              "Ca": 26,
+              "Mg": 16,
+              "P": 131,
+              "Fe": 1.8
+            },
+            "vitamins": {
+              "B1": 0.04,
+              "B2": 0.09,
+              "PP": 2.24
+            },
+            "energy_value": 215
+          },
+          {
+            "name": "I сорта",
+            "water": 68,
+            "proteins": 10.3,
+            "fats": 17.2,
+            "carbohydrates": {
+              "total": 1.7
+            },
+            "ash": {
+              "total": 2.8,
+              "nacl": 2.3
+            },
+            "minerals": {
+              "Na": 904,
+              "K": 212,
+              "Ca": 18,
+              "Mg": 17,
+              "P": 149,
+              "Fe": 1.9
+            },
+            "energy_value": 203
+          },
+          {
+            "name": "Свиные",
+            "water": 53.7,
+            "proteins": 10.1,
+            "fats": 31.6,
+            "carbohydrates": {
+              "total": 1.9
+            },
+            "ash": {
+              "total": 2.7,
+              "nacl": 2.2
+            },
+            "minerals": {
+              "Na": 898,
+              "K": 215,
+              "Ca": 16,
+              "Mg": 18,
+              "P": 139,
+              "Fe": 1.2
+            },
+            "vitamins": {
+              "B1": 0.25,
+              "B2": 0.12,
+              "PP": 2
+            },
+            "energy_value": 332
+          },
+          {
+            "name": "Шпикачки",
+            "water": 52.2,
+            "proteins": 9.2,
+            "fats": 36.1,
+            "ash": {
+              "total": 2.5,
+              "nacl": 2.2
+            },
+            "minerals": {
+              "Na": 780,
+              "K": 184,
+              "Ca": 15,
+              "Mg": 15,
+              "P": 106,
+              "Fe": 1.6
+            },
+            "energy_value": 362
+          }
+        ]
+      },
+      {
+        "category": "Сосиски",
+        "items": [
+          {
+            "name": "Говяжьи",
+            "water": 65.8,
+            "proteins": 10.4,
+            "fats": 20.1,
+            "carbohydrates": {
+              "total": 0.8
+            },
+            "ash": {
+              "total": 2.9,
+              "nacl": 2.4
+            },
+            "minerals": {
+              "Na": 891,
+              "K": 200,
+              "Ca": 25,
+              "Mg": 15,
+              "P": 139,
+              "Fe": 1.8
+            },
+            "vitamins": {
+              "B1": 0.03,
+              "B2": 0.9,
+              "PP": 2.63
+            },
+            "energy_value": 226
+          },
+          {
+            "name": "Любительские",
+            "water": 58.2,
+            "proteins": 9,
+            "fats": 29.5,
+            "carbohydrates": {
+              "total": 0.7
+            },
+            "ash": {
+              "total": 2.6,
+              "nacl": 2.1
+            },
+            "minerals": {
+              "Na": 770,
+              "K": 239,
+              "Ca": 16,
+              "Mg": 21,
+              "P": 145,
+              "Fe": 1.9
+            },
+            "energy_value": 304
+          },
+          {
+            "name": "Молочные",
+            "water": 60.5,
+            "proteins": 11,
+            "fats": 23.9,
+            "carbohydrates": {
+              "total": 1.6
+            },
+            "ash": {
+              "total": 3,
+              "nacl": 2.2
+            },
+            "minerals": {
+              "Na": 807,
+              "K": 220,
+              "Ca": 35,
+              "Mg": 20,
+              "P": 159,
+              "Fe": 1.8
+            },
+            "energy_value": 266
+          },
+          {
+            "name": "Особые",
+            "water": 60.7,
+            "proteins": 11.8,
+            "fats": 24.7,
+            "ash": {
+              "total": 2.8,
+              "nacl": 2.5
+            },
+            "minerals": {
+              "Na": 838,
+              "K": 241,
+              "Ca": 39,
+              "Mg": 23,
+              "P": 164,
+              "Fe": 2.1
+            },
+            "energy_value": 270
+          },
+          {
+            "name": "Русские",
+            "water": 64.1,
+            "proteins": 11.3,
+            "fats": 22,
+            "ash": {
+              "total": 2.6,
+              "nacl": 2.1
+            },
+            "minerals": {
+              "Na": 795,
+              "K": 206,
+              "Ca": 24,
+              "Mg": 17,
+              "P": 146,
+              "Fe": 1.8
+            },
+            "vitamins": {
+              "B1": 0.18,
+              "B2": 0.15,
+              "PP": 2.3
+            },
+            "energy_value": 243
+          },
+          {
+            "name": "Столичные",
+            "water": 63.8,
+            "proteins": 11.6,
+            "fats": 19.8,
+            "carbohydrates": {
+              "total": 2
+            },
+            "ash": {
+              "total": 2.8,
+              "nacl": 2.2
+            },
+            "minerals": {
+              "Na": 858,
+              "K": 209,
+              "Ca": 21,
+              "Mg": 23,
+              "P": 143,
+              "Fe": 1.5
+            },
+            "vitamins": {
+              "B1": 0.23,
+              "B2": 0.14,
+              "PP": 2.25
+            },
+            "energy_value": 233
+          }
+        ]
+      },
+      {
+        "category": "Мясные хлебы",
+        "items": [
+          {
+            "name": "Ветчинный",
+            "water": 60.2,
+            "proteins": 12.9,
+            "fats": 21.8,
+            "carbohydrates": {
+              "total": 2
+            },
+            "ash": {
+              "total": 3.1,
+              "nacl": 2.5
+            },
+            "minerals": {
+              "Na": 1001,
+              "K": 284,
+              "Ca": 28,
+              "Mg": 24,
+              "P": 169,
+              "Fe": 2.4
+            },
+            "vitamins": {
+              "B1": 0.18,
+              "B2": 0.11,
+              "PP": 2.75
+            },
+            "energy_value": 256
+          },
+          {
+            "name": "Говяжий",
+            "water": 61.3,
+            "proteins": 10.5,
+            "fats": 23.5,
+            "carbohydrates": {
+              "total": 1.8
+            },
+            "ash": {
+              "total": 2.9,
+              "nacl": 2.5
+            },
+            "minerals": {
+              "Na": 877,
+              "K": 182,
+              "Ca": 26,
+              "Mg": 12,
+              "P": 118,
+              "Fe": 1.7
+            },
+            "energy_value": 261
+          },
+          {
+            "name": "Заказной",
+            "water": 55.4,
+            "proteins": 9.5,
+            "fats": 32.3,
+            "ash": {
+              "total": 2.8,
+              "nacl": 2.5
+            },
+            "minerals": {
+              "Na": 979,
+              "K": 210,
+              "Ca": 18,
+              "Mg": 18,
+              "P": 113,
+              "Fe": 1.9
+            },
+            "energy_value": 329
+          },
+          {
+            "name": "Любительский",
+            "water": 55.9,
+            "proteins": 12,
+            "fats": 29,
+            "ash": {
+              "total": 3.1,
+              "nacl": 2.5
+            },
+            "minerals": {
+              "Na": 981,
+              "K": 221,
+              "Ca": 19,
+              "Mg": 18,
+              "P": 132,
+              "Fe": 1.9
+            },
+            "energy_value": 309
+          },
+          {
+            "name": "Отдельный",
+            "water": 61.7,
+            "proteins": 12,
+            "fats": 21,
+            "carbohydrates": {
+              "total": 2.3
+            },
+            "ash": {
+              "total": 3,
+              "nacl": 2.5
+            },
+            "minerals": {
+              "Na": 905,
+              "K": 244,
+              "Ca": 17,
+              "Mg": 23,
+              "P": 158,
+              "Fe": 1.6
+            },
+            "vitamins": {
+              "B1": 0.09,
+              "B2": 0.1,
+              "PP": 2.7
+            },
+            "energy_value": 246
+          },
+          {
+            "name": "Чайный",
+            "water": 63.3,
+            "proteins": 10.3,
+            "fats": 20.7,
+            "carbohydrates": {
+              "total": 2.8
+            },
+            "ash": {
+              "total": 2.9,
+              "nacl": 2.5
+            },
+            "minerals": {
+              "Na": 865,
+              "K": 237,
+              "Ca": 18,
+              "Mg": 20,
+              "P": 152,
+              "Fe": 2.2
+            },
+            "vitamins": {
+              "B1": 0.08,
+              "B2": 0.1,
+              "PP": 2.1
+            },
+            "energy_value": 239
+          }
+        ]
+      },
+      {
+        "category": "Варено-копченые колбасы",
+        "items": [
+          {
+            "name": "Любительская",
+            "water": 39.1,
+            "proteins": 17.3,
+            "fats": 39,
+            "ash": {
+              "total": 4.6,
+              "nacl": 4
+            },
+            "minerals": {
+              "Na": 1544,
+              "K": 324,
+              "Ca": 30,
+              "Mg": 22,
+              "P": 214,
+              "Fe": 3
+            },
+            "vitamins": {
+              "B1": 0.16,
+              "B2": 0.16,
+              "PP": 4.63
+            },
+            "energy_value": 420
+          },
+          {
+            "name": "Московская",
+            "water": 39.9,
+            "proteins": 19.1,
+            "fats": 36.6,
+            "ash": {
+              "total": 4.4,
+              "nacl": 3.8
+            },
+            "minerals": {
+              "Na": 1743,
+              "K": 399,
+              "Ca": 26,
+              "Mg": 23,
+              "P": 182,
+              "Fe": 2.4
+            },
+            "vitamins": {
+              "B1": 0.13,
+              "B2": 0.16,
+              "PP": 5
+            },
+            "energy_value": 406
+          },
+          {
+            "name": "Сервелат",
+            "water": 39,
+            "proteins": 16.1,
+            "fats": 40.1,
+            "ash": {
+              "total": 4.8,
+              "nacl": 4.3
+            },
+            "minerals": {
+              "Na": 1764,
+              "K": 366,
+              "Ca": 33,
+              "Mg": 33,
+              "P": 228,
+              "Fe": 3.1
+            },
+            "energy_value": 425
+          }
+        ]
+      },
+      {
+        "category": "Полукопченые колбасы",
+        "items": [
+          {
+            "name": "Армавирская",
+            "water": 39.8,
+            "proteins": 15.2,
+            "fats": 40.2,
+            "ash": {
+              "total": 4.8,
+              "nacl": 4
+            },
+            "minerals": {
+              "Na": 1622,
+              "K": 302,
+              "Ca": 26,
+              "Mg": 25,
+              "P": 202,
+              "Fe": 2.2
+            },
+            "vitamins": {
+              "B1": 0.3,
+              "B2": 0.13,
+              "PP": 2.57
+            },
+            "energy_value": 423
+          },
+          {
+            "name": "Закусочная",
+            "water": 45.1,
+            "proteins": 15,
+            "fats": 33,
+            "carbohydrates": {
+              "total": 2.3
+            },
+            "ash": {
+              "total": 4.6,
+              "nacl": 3.9
+            },
+            "minerals": {
+              "Na": 1465,
+              "K": 276,
+              "Ca": 28,
+              "Mg": 18,
+              "P": 185,
+              "Fe": 2.4
+            },
+            "energy_value": 366
+          },
+          {
+            "name": "Краковская",
+            "water": 34.6,
+            "proteins": 16.2,
+            "fats": 44.6,
+            "ash": {
+              "total": 4.6,
+              "nacl": 3.6
+            },
+            "minerals": {
+              "Na": 1467,
+              "K": 309,
+              "Ca": 26,
+              "Mg": 25,
+              "P": 204,
+              "Fe": 2.3
+            },
+            "energy_value": 466
+          },
+          {
+            "name": "Кубанская",
+            "water": 40.6,
+            "proteins": 9.5,
+            "fats": 45.6,
+            "ash": {
+              "total": 4.3,
+              "nacl": 3.8
+            },
+            "minerals": {
+              "Na": 1603,
+              "K": 328,
+              "Ca": 30,
+              "Mg": 30,
+              "P": 215,
+              "Fe": 2.9
+            },
+            "energy_value": 448
+          },
+          {
+            "name": "Минская",
+            "water": 52,
+            "proteins": 17.4,
+            "fats": 23,
+            "carbohydrates": {
+              "total": 2.7
+            },
+            "ash": {
+              "total": 4.9,
+              "nacl": 4
+            },
+            "minerals": {
+              "Na": 1636,
+              "K": 382,
+              "Ca": 31,
+              "Mg": 27,
+              "P": 250,
+              "Fe": 3.3
+            },
+            "energy_value": 287
+          },
+          {
+            "name": "Одесская",
+            "water": 42.3,
+            "proteins": 14.8,
+            "fats": 38.1,
+            "ash": {
+              "total": 4.8,
+              "nacl": 4.2
+            },
+            "minerals": {
+              "Na": 1505,
+              "K": 298,
+              "Ca": 27,
+              "Mg": 24,
+              "P": 188,
+              "Fe": 2.8
+            },
+            "vitamins": {
+              "B1": 0.08,
+              "B2": 0.13,
+              "PP": 3.3
+            },
+            "energy_value": 402
+          },
+          {
+            "name": "Охотничьи колбаски",
+            "water": 30,
+            "proteins": 25.7,
+            "fats": 40,
+            "ash": {
+              "total": 4.3,
+              "nacl": 3.6
+            },
+            "minerals": {
+              "Na": 1468,
+              "K": 316,
+              "Ca": 27,
+              "Mg": 25,
+              "P": 217,
+              "Fe": 2.6
+            },
+            "vitamins": {
+              "B1": 0.23,
+              "B2": 0.13,
+              "PP": 3.15
+            },
+            "energy_value": 463
+          },
+          {
+            "name": "Полтавская",
+            "water": 39.8,
+            "proteins": 16.4,
+            "fats": 39,
+            "ash": {
+              "total": 4.8,
+              "nacl": 4
+            },
+            "minerals": {
+              "Na": 1622,
+              "K": 329,
+              "Ca": 28,
+              "Mg": 24,
+              "P": 200,
+              "Fe": 2.2
+            },
+            "vitamins": {
+              "B1": 0.27,
+              "B2": 0.13,
+              "PP": 2.68
+            },
+            "energy_value": 417
+          },
+          {
+            "name": "Таллинская",
+            "water": 44.8,
+            "proteins": 17.1,
+            "fats": 33.8,
+            "ash": {
+              "total": 4.3,
+              "nacl": 3.6
+            },
+            "minerals": {
+              "Na": 1458,
+              "K": 273,
+              "Ca": 26,
+              "Mg": 20,
+              "P": 142,
+              "Fe": 1.9
+            },
+            "vitamins": {
+              "B1": 0.1,
+              "B2": 0.11,
+              "PP": 3.1
+            },
+            "energy_value": 373
+          },
+          {
+            "name": "Украинская",
+            "water": 44.4,
+            "proteins": 16.5,
+            "fats": 34.4,
+            "ash": {
+              "total": 4.7,
+              "nacl": 4
+            },
+            "minerals": {
+              "Na": 1630,
+              "K": 334,
+              "Ca": 29,
+              "Mg": 27,
+              "P": 226,
+              "Fe": 2.7
+            },
+            "vitamins": {
+              "B1": 0.19,
+              "B2": 0.2,
+              "PP": 2.25
+            },
+            "energy_value": 376
+          }
+        ]
+      },
+      {
+        "category": "Сырокопченые колбасы",
+        "items": [
+          {
+            "name": "Брауншвейгская",
+            "water": 23.3,
+            "proteins": 27.7,
+            "fats": 42.4,
+            "ash": {
+              "total": 6.6,
+              "nacl": 5.5
+            },
+            "minerals": {
+              "Na": 2217,
+              "K": 364,
+              "Ca": 37,
+              "Mg": 27,
+              "P": 243,
+              "Fe": 3.7
+            },
+            "vitamins": {
+              "B1": 0.51,
+              "B2": 0.22,
+              "PP": 4.45
+            },
+            "energy_value": 492
+          },
+          {
+            "name": "Дорожная",
+            "water": 30.1,
+            "proteins": 17,
+            "fats": 47.9,
+            "ash": {
+              "total": 5,
+              "nacl": 4.2
+            },
+            "minerals": {
+              "Na": 1748,
+              "K": 290,
+              "Ca": 24,
+              "Mg": 24,
+              "P": 202,
+              "Fe": 2.2
+            },
+            "vitamins": {
+              "B1": 0.64,
+              "B2": 0.22,
+              "PP": 3
+            },
+            "energy_value": 499
+          },
+          {
+            "name": "Зернистая",
+            "water": 22.5,
+            "proteins": 9.9,
+            "fats": 63.2,
+            "ash": {
+              "total": 4.4,
+              "nacl": 4
+            },
+            "minerals": {
+              "Na": 1800,
+              "K": 220,
+              "Ca": 26,
+              "Mg": 27,
+              "P": 170,
+              "Fe": 2.1
+            },
+            "vitamins": {
+              "B1": 0.06,
+              "B2": 0.12,
+              "PP": 3.33
+            },
+            "energy_value": 608
+          },
+          {
+            "name": "Любительская",
+            "water": 25.2,
+            "proteins": 20.9,
+            "fats": 47.8,
+            "ash": {
+              "total": 6.1,
+              "nacl": 5
+            },
+            "minerals": {
+              "Na": 2050,
+              "K": 406,
+              "Ca": 39,
+              "Mg": 34,
+              "P": 323,
+              "Fe": 4.1
+            },
+            "vitamins": {
+              "B1": 0.26,
+              "B2": 0.25,
+              "PP": 5.2
+            },
+            "energy_value": 514
+          },
+          {
+            "name": "Майкопская",
+            "water": 29,
+            "proteins": 23.6,
+            "fats": 41.4,
+            "ash": {
+              "total": 6,
+              "nacl": 5
+            },
+            "minerals": {
+              "Na": 2429,
+              "K": 433,
+              "Ca": 43,
+              "Mg": 45,
+              "P": 293,
+              "Fe": 3.5
+            },
+            "energy_value": 467
+          },
+          {
+            "name": "Московская",
+            "water": 27.6,
+            "proteins": 24.8,
+            "fats": 41.5,
+            "ash": {
+              "total": 6.1,
+              "nacl": 5
+            },
+            "minerals": {
+              "Na": 2036,
+              "K": 439,
+              "Ca": 38,
+              "Mg": 30,
+              "P": 284,
+              "Fe": 3.9
+            },
+            "energy_value": 473
+          },
+          {
+            "name": "Невская",
+            "water": 23.5,
+            "proteins": 20.8,
+            "fats": 50.1,
+            "ash": {
+              "total": 5.6,
+              "nacl": 4.9
+            },
+            "minerals": {
+              "Na": 2203,
+              "K": 277,
+              "Ca": 36,
+              "Mg": 28,
+              "P": 225,
+              "Fe": 2.1
+            },
+            "vitamins": {
+              "B1": 0.5,
+              "B2": 0.17,
+              "PP": 3.4
+            },
+            "energy_value": 534
+          },
+          {
+            "name": "Олимпийская",
+            "water": 34.5,
+            "proteins": 21.1,
+            "fats": 39.1,
+            "ash": {
+              "total": 5.3,
+              "nacl": 4
+            },
+            "minerals": {
+              "Na": 1856,
+              "K": 331,
+              "Ca": 31,
+              "Mg": 24,
+              "P": 235,
+              "Fe": 2.6
+            },
+            "vitamins": {
+              "B1": 0.59,
+              "B2": 0.22,
+              "PP": 4.5
+            },
+            "energy_value": 436
+          },
+          {
+            "name": "Свиная",
+            "water": 23.7,
+            "proteins": 13,
+            "fats": 57.3,
+            "ash": {
+              "total": 6,
+              "nacl": 5.5
+            },
+            "minerals": {
+              "Na": 1900,
+              "K": 139,
+              "Ca": 28,
+              "Mg": 17,
+              "P": 167,
+              "Fe": 1.4
+            },
+            "vitamins": {
+              "B1": 0.51,
+              "B2": 0.17,
+              "PP": 2.8
+            },
+            "energy_value": 568
+          },
+          {
+            "name": "Сервелат",
+            "water": 29.3,
+            "proteins": 24,
+            "fats": 40.5,
+            "ash": {
+              "total": 6.2,
+              "nacl": 5
+            },
+            "minerals": {
+              "Na": 2226,
+              "K": 400,
+              "Ca": 38,
+              "Mg": 30,
+              "P": 271,
+              "Fe": 2.1
+            },
+            "vitamins": {
+              "B1": 0.52,
+              "B2": 0.2,
+              "PP": 4
+            },
+            "energy_value": 461
+          },
+          {
+            "name": "Советская",
+            "water": 24.2,
+            "proteins": 23,
+            "fats": 47,
+            "ash": {
+              "total": 5.8,
+              "nacl": 5
+            },
+            "minerals": {
+              "Na": 2324,
+              "K": 333,
+              "Ca": 37,
+              "Mg": 27,
+              "P": 236,
+              "Fe": 2.5
+            },
+            "vitamins": {
+              "B1": 0.56,
+              "B2": 0.21,
+              "PP": 4.55
+            },
+            "energy_value": 515
+          },
+          {
+            "name": "Столичная",
+            "water": 26,
+            "proteins": 24,
+            "fats": 43.4,
+            "ash": {
+              "total": 6.6,
+              "nacl": 5.5
+            },
+            "minerals": {
+              "Na": 2215,
+              "K": 344,
+              "Ca": 38,
+              "Mg": 27,
+              "P": 235,
+              "Fe": 2.9
+            },
+            "vitamins": {
+              "B1": 0.35,
+              "B2": 0.25,
+              "PP": 4.15
+            },
+            "energy_value": 487
+          }
+        ]
+      },
+      {
+        "category": "Продукты из свинины",
+        "items": [
+          {
+            "name": "Ветчина в форме",
+            "water": 53.5,
+            "proteins": 22.6,
+            "fats": 20.9,
+            "ash": {
+              "total": 3,
+              "nacl": 2.1
+            },
+            "minerals": {
+              "Na": 903,
+              "K": 400,
+              "Ca": 22,
+              "Mg": 35,
+              "P": 268,
+              "Fe": 2.6
+            },
+            "energy_value": 279
+          },
+          {
+            "name": "Грудинка копчено-запеченная",
+            "water": 33.8,
+            "proteins": 10,
+            "fats": 52.7,
+            "ash": {
+              "total": 3.5,
+              "nacl": 2.4
+            },
+            "minerals": {
+              "Na": 1087,
+              "K": 159,
+              "Ca": 18,
+              "Mg": 13,
+              "P": 100,
+              "Fe": 1.6
+            },
+            "vitamins": {
+              "B1": 0.31,
+              "B2": 0.08,
+              "PP": 1.65
+            },
+            "energy_value": 514
+          },
+          {
+            "name": "Грудинка сырокопченая",
+            "water": 23,
+            "proteins": 8.9,
+            "fats": 63.3,
+            "ash": {
+              "total": 4.8,
+              "nacl": 4
+            },
+            "minerals": {
+              "Na": 1608,
+              "K": 208,
+              "Ca": 26,
+              "Mg": 19,
+              "P": 143,
+              "Fe": 1.4
+            },
+            "energy_value": 605
+          },
+          {
+            "name": "Корейка копчено-запеченная",
+            "water": 37.7,
+            "proteins": 10.2,
+            "fats": 48.2,
+            "ash": {
+              "total": 3.9,
+              "nacl": 2.5
+            },
+            "minerals": {
+              "Na": 1134,
+              "K": 255,
+              "Ca": 23,
+              "Mg": 308,
+              "P": 176,
+              "Fe": 2.1
+            },
+            "vitamins": {
+              "B1": 0.32,
+              "B2": 0.06,
+              "PP": 2.25
+            },
+            "energy_value": 475
+          },
+          {
+            "name": "Корейка сырокопченая",
+            "water": 37.4,
+            "proteins": 10.5,
+            "fats": 47.4,
+            "ash": {
+              "total": 4.7,
+              "nacl": 4
+            },
+            "minerals": {
+              "Na": 1617,
+              "K": 268,
+              "Ca": 27,
+              "Mg": 23,
+              "P": 182,
+              "Fe": 1.8
+            },
+            "vitamins": {
+              "B1": 0.61,
+              "B2": 0.07,
+              "PP": 2.3
+            },
+            "energy_value": 469
+          },
+          {
+            "name": "Окорок тамбовский вареный",
+            "water": 57,
+            "proteins": 14.3,
+            "fats": 25.6,
+            "ash": {
+              "total": 3.1,
+              "nacl": 2.3
+            },
+            "minerals": {
+              "Na": 967,
+              "K": 336,
+              "Ca": 21,
+              "Mg": 30,
+              "P": 225,
+              "Fe": 2.2
+            },
+            "vitamins": {
+              "B1": 0.52,
+              "B2": 0.13,
+              "PP": 2
+            },
+            "energy_value": 288
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Консервы мясные",
+    "items": [
+      {
+        "name": "Баранина тушеная",
+        "water": 64,
+        "proteins": 17.3,
+        "fats": 17,
+        "ash": {
+          "total": 1.7,
+          "nacl": 1
+        },
+        "minerals": {
+          "Na": 449,
+          "K": 232,
+          "Ca": 14,
+          "Mg": 17,
+          "P": 139,
+          "Fe": 1.8
+        },
+        "vitamins": {
+          "B1": 0.03,
+          "B2": 0.13,
+          "PP": 3.3
+        },
+        "energy_value": 222
+      },
+      {
+        "name": "Ветчина любительская",
+        "water": 68.2,
+        "proteins": 14.9,
+        "fats": 13.7,
+        "ash": {
+          "total": 3.2,
+          "nacl": 2.5
+        },
+        "minerals": {
+          "Na": 943,
+          "K": 272,
+          "Ca": 25,
+          "Mg": 22,
+          "P": 147,
+          "Fe": 1.6
+        },
+        "energy_value": 183
+      },
+      {
+        "name": "Ветчина особая",
+        "water": 72.8,
+        "proteins": 17.6,
+        "fats": 6.2,
+        "ash": {
+          "total": 3.4,
+          "nacl": 2.5
+        },
+        "minerals": {
+          "Na": 955,
+          "K": 277,
+          "Ca": 26,
+          "Mg": 26,
+          "P": 201,
+          "Fe": 1.3
+        },
+        "vitamins": {
+          "B1": 0.34,
+          "B2": 0.16,
+          "PP": 2.14
+        },
+        "energy_value": 126
+      },
+      {
+        "name": "Говядина отварная в собственном соку",
+        "water": 56.6,
+        "proteins": 24.5,
+        "fats": 16.6,
+        "ash": {
+          "total": 2.3,
+          "nacl": 1.2
+        },
+        "minerals": {
+          "Na": 548,
+          "K": 319,
+          "Ca": 13,
+          "Mg": 28,
+          "P": 202
+        },
+        "energy_value": 247
+      },
+      {
+        "name": "Говядина тушеная",
+        "water": 64.3,
+        "proteins": 16.8,
+        "fats": 17,
+        "ash": {
+          "total": 1.9,
+          "nacl": 1
+        },
+        "minerals": {
+          "Na": 444,
+          "K": 284,
+          "Ca": 14,
+          "Mg": 19,
+          "P": 178,
+          "Fe": 2.4
+        },
+        "vitamins": {
+          "B1": 0.02,
+          "B2": 0.15,
+          "PP": 4
+        },
+        "energy_value": 220
+      },
+      {
+        "name": "Гуляш бараний",
+        "water": 64.4,
+        "proteins": 14.9,
+        "fats": 14.6,
+        "carbohydrates": {
+          "total": 4
+        },
+        "ash": {
+          "total": 2.1,
+          "nacl": 1.3
+        },
+        "minerals": {
+          "Na": 598,
+          "K": 203,
+          "Ca": 19,
+          "Mg": 16,
+          "P": 122,
+          "Fe": 1.6
+        },
+        "energy_value": 207
+      },
+      {
+        "name": "Гуляш говяжий",
+        "water": 64.6,
+        "proteins": 17.1,
+        "fats": 12,
+        "carbohydrates": {
+          "total": 4
+        },
+        "ash": {
+          "total": 2.3,
+          "nacl": 1.3
+        },
+        "minerals": {
+          "Na": 598,
+          "K": 274,
+          "Ca": 19,
+          "Mg": 18,
+          "P": 172,
+          "Fe": 2.3
+        },
+        "energy_value": 192
+      },
+      {
+        "name": "Гуляш свиной",
+        "water": 56,
+        "proteins": 15,
+        "fats": 22.8,
+        "carbohydrates": {
+          "total": 4
+        },
+        "ash": {
+          "total": 2.2,
+          "nacl": 1.3
+        },
+        "minerals": {
+          "Na": 590,
+          "K": 211,
+          "Ca": 18,
+          "Mg": 18,
+          "P": 143,
+          "Fe": 1.4
+        },
+        "energy_value": 281
+      },
+      {
+        "name": "Завтрак туриста (баранина)",
+        "water": 66.1,
+        "proteins": 18,
+        "fats": 13.8,
+        "ash": {
+          "total": 2.1,
+          "nacl": 1.4
+        },
+        "minerals": {
+          "Na": 579,
+          "K": 206,
+          "Ca": 15,
+          "Mg": 16,
+          "P": 124,
+          "Fe": 1.6
+        },
+        "vitamins": {
+          "B1": 0.03,
+          "B2": 0.12,
+          "PP": 3.15
+        },
+        "energy_value": 196
+      },
+      {
+        "name": "Завтрак туриста (говядина)",
+        "water": 66.9,
+        "proteins": 20.5,
+        "fats": 10.4,
+        "ash": {
+          "total": 2.2,
+          "nacl": 1.4
+        },
+        "minerals": {
+          "Na": 579,
+          "K": 206,
+          "Ca": 15,
+          "Mg": 19,
+          "P": 175,
+          "Fe": 2.3
+        },
+        "vitamins": {
+          "B1": 0.02,
+          "B2": 0.16,
+          "PP": 4.1
+        },
+        "energy_value": 176
+      },
+      {
+        "name": "Завтрак туриста (свинина)",
+        "water": 65.6,
+        "proteins": 16.9,
+        "fats": 15.4,
+        "ash": {
+          "total": 2.1,
+          "nacl": 1.4
+        },
+        "minerals": {
+          "Na": 571,
+          "K": 213,
+          "Ca": 14,
+          "Mg": 19,
+          "P": 145,
+          "Fe": 1.4
+        },
+        "vitamins": {
+          "B1": 0.26,
+          "B2": 0.13,
+          "PP": 2.3
+        },
+        "energy_value": 206
+      },
+      {
+        "name": "Каша «особая» пшеничная с говядиной",
+        "water": 60.6,
+        "proteins": 6.5,
+        "fats": 12.9,
+        "carbohydrates": {
+          "total": 17.8
+        },
+        "ash": {
+          "total": 2.2,
+          "nacl": 1.5
+        },
+        "minerals": {
+          "Na": 583,
+          "K": 114,
+          "Ca": 17,
+          "Mg": 31,
+          "P": 96,
+          "Fe": 2.5
+        },
+        "energy_value": 213
+      },
+      {
+        "name": "Каша «особая» пшеничная со свининой",
+        "water": 58,
+        "proteins": 5.9,
+        "fats": 16.2,
+        "carbohydrates": {
+          "total": 17.8
+        },
+        "ash": {
+          "total": 2.1,
+          "nacl": 1.5
+        },
+        "minerals": {
+          "Na": 581,
+          "K": 103,
+          "Ca": 16,
+          "Mg": 31,
+          "P": 91,
+          "Fe": 2.3
+        },
+        "energy_value": 241
+      },
+      {
+        "name": "Колбасный фарш ветчинно-рубленый",
+        "water": 62,
+        "proteins": 13.2,
+        "fats": 18.9,
+        "carbohydrates": {
+          "total": 2.8
+        },
+        "ash": {
+          "total": 3.1,
+          "nacl": 2.2
+        },
+        "minerals": {
+          "Na": 892,
+          "K": 269,
+          "Ca": 17,
+          "Mg": 21,
+          "P": 176,
+          "Fe": 2.1
+        },
+        "energy_value": 234
+      },
+      {
+        "name": "Колбасный фарш любительский",
+        "water": 55,
+        "proteins": 11,
+        "fats": 28.5,
+        "carbohydrates": {
+          "total": 3
+        },
+        "ash": {
+          "total": 2.5,
+          "nacl": 1.8
+        },
+        "minerals": {
+          "Na": 740,
+          "K": 188,
+          "Ca": 15,
+          "Mg": 15,
+          "P": 133,
+          "Fe": 1.4
+        },
+        "vitamins": {
+          "B1": 0.08,
+          "B2": 0.1,
+          "PP": 2.7
+        },
+        "energy_value": 313
+      },
+      {
+        "name": "Колбасный фарш отдельный",
+        "water": 57.2,
+        "proteins": 13.6,
+        "fats": 23.7,
+        "carbohydrates": {
+          "total": 2.9
+        },
+        "ash": {
+          "total": 2.6,
+          "nacl": 1.8
+        },
+        "minerals": {
+          "Na": 751,
+          "K": 249,
+          "Ca": 16,
+          "Mg": 18,
+          "P": 160,
+          "Fe": 2
+        },
+        "energy_value": 279
+      },
+      {
+        "name": "Конина тушеная",
+        "water": 70.6,
+        "proteins": 18.7,
+        "fats": 8.4,
+        "ash": {
+          "total": 2.3,
+          "nacl": 1.3
+        },
+        "minerals": {
+          "Na": 532,
+          "K": 363,
+          "Ca": 20,
+          "Mg": 24,
+          "P": 181,
+          "Fe": 3.1
+        },
+        "vitamins": {
+          "B1": 0.02,
+          "B2": 0.1,
+          "PP": 2.7
+        },
+        "energy_value": 150
+      },
+      {
+        "name": "Мясо в белом соусе",
+        "water": 63.1,
+        "proteins": 18,
+        "fats": 12.8,
+        "carbohydrates": {
+          "total": 3.8
+        },
+        "ash": {
+          "total": 2.3,
+          "nacl": 1.3
+        },
+        "minerals": {
+          "Na": 550,
+          "K": 284,
+          "Ca": 18,
+          "Mg": 19,
+          "P": 178,
+          "Fe": 2.3
+        },
+        "energy_value": 202
+      },
+      {
+        "name": "Оленина тушеная",
+        "water": 68.3,
+        "proteins": 19.3,
+        "fats": 10.4,
+        "ash": {
+          "total": 2,
+          "nacl": 1
+        },
+        "minerals": {
+          "Na": 460,
+          "K": 275,
+          "Ca": 18,
+          "Mg": 20,
+          "P": 193,
+          "Fe": 2.6
+        },
+        "energy_value": 171
+      },
+      {
+        "name": "Паштет мясной",
+        "water": 58.1,
+        "proteins": 16.4,
+        "fats": 23.3,
+        "carbohydrates": {
+          "total": 0.4
+        },
+        "ash": {
+          "total": 1.8,
+          "nacl": 1
+        },
+        "minerals": {
+          "Na": 446,
+          "K": 307,
+          "Ca": 14,
+          "Mg": 20,
+          "P": 188,
+          "Fe": 2.5
+        },
+        "energy_value": 277
+      },
+      {
+        "name": "Паштет печеночный",
+        "water": 54.7,
+        "proteins": 11.6,
+        "fats": 28.9,
+        "carbohydrates": {
+          "total": 2.5
+        },
+        "ash": {
+          "total": 2.3,
+          "nacl": 1.2
+        },
+        "minerals": {
+          "Na": 539,
+          "K": 170,
+          "Ca": 11,
+          "Mg": 14,
+          "P": 244,
+          "Fe": 6.3
+        },
+        "energy_value": 317
+      },
+      {
+        "name": "Свинина жирная",
+        "water": 28.9,
+        "proteins": 8,
+        "fats": 61.3,
+        "ash": {
+          "total": 1.8,
+          "nacl": 1.3
+        },
+        "minerals": {
+          "Na": 487,
+          "K": 107,
+          "Ca": 12,
+          "Mg": 10,
+          "P": 70,
+          "Fe": 0.8
+        },
+        "vitamins": {
+          "B1": 0.12,
+          "B2": 0.09,
+          "PP": 2.12
+        },
+        "energy_value": 584
+      },
+      {
+        "name": "Свинина тушеная",
+        "water": 51.1,
+        "proteins": 14.9,
+        "fats": 32.2,
+        "ash": {
+          "total": 1.8,
+          "nacl": 1
+        },
+        "minerals": {
+          "Na": 440,
+          "K": 410,
+          "Ca": 12,
+          "Mg": 20,
+          "P": 160,
+          "Fe": 1.6
+        },
+        "vitamins": {
+          "B1": 0.14,
+          "B2": 0.14,
+          "PP": 2.45
+        },
+        "energy_value": 349
+      },
+      {
+        "name": "Субпродукты измельченные",
+        "water": 75.1,
+        "proteins": 14.1,
+        "fats": 9,
+        "ash": {
+          "total": 1.8,
+          "nacl": 1.1
+        },
+        "minerals": {
+          "Na": 460,
+          "K": 61,
+          "Ca": 17,
+          "Mg": 12,
+          "P": 75,
+          "Fe": 2
+        },
+        "vitamins": {
+          "B1": 0.04,
+          "B2": 0.21,
+          "PP": 2
+        },
+        "energy_value": 137
+      },
+      {
+        "name": "Фарш свиной сосисочный",
+        "water": 62.2,
+        "proteins": 10.6,
+        "fats": 20.4,
+        "carbohydrates": {
+          "total": 4.4
+        },
+        "ash": {
+          "total": 2.4,
+          "nacl": 1.7
+        },
+        "minerals": {
+          "Na": 716,
+          "K": 200,
+          "Ca": 17,
+          "Mg": 19,
+          "P": 139,
+          "Fe": 1.3
+        },
+        "vitamins": {
+          "B1": 0.12,
+          "B2": 0.11,
+          "PP": 2
+        },
+        "energy_value": 244
+      },
+      {
+        "name": "Язык говяжий в желе",
+        "water": 64.3,
+        "proteins": 71.8,
+        "fats": 15.1,
+        "carbohydrates": {
+          "total": 0.6
+        },
+        "ash": {
+          "total": 2.2,
+          "nacl": 1.7
+        },
+        "minerals": {
+          "Na": 693,
+          "K": 237,
+          "Ca": 20,
+          "Mg": 19,
+          "P": 191,
+          "Fe": 6
+        },
+        "vitamins": {
+          "B1": 0.02,
+          "B2": 0.19,
+          "PP": 1.82
+        },
+        "energy_value": 210
+      }
+    ]
+  },
+  {
+    "category": "Жиры животные топленые",
+    "items": [
+      {
+        "name": "Жир бараний",
+        "water": 0.3,
+        "proteins": 0,
+        "fats": 99.7,
+        "ash": {
+          "total": 0
+        },
+        "vitamins": {
+          "A": 0.06,
+          "beta_carotene": 0
+        },
+        "energy_value": 897
+      },
+      {
+        "name": "Жир говяжий",
+        "water": 0.3,
+        "proteins": 0,
+        "fats": 99.7,
+        "ash": {
+          "total": 0.07
+        },
+        "minerals": {
+          "Na": 10.5,
+          "K": 6,
+          "Ca": 0,
+          "P": 7
+        },
+        "vitamins": {
+          "A": 0.03,
+          "beta_carotene": 0.4
+        },
+        "energy_value": 897
+      },
+      {
+        "name": "Жир костный",
+        "water": 0.3,
+        "proteins": 0,
+        "fats": 99.7,
+        "ash": {
+          "total": 0
+        },
+        "vitamins": {
+          "beta_carotene": 0.3
+        },
+        "energy_value": 897
+      },
+      {
+        "name": "Жир свиной",
+        "water": 0.3,
+        "proteins": 0,
+        "fats": 99.7,
+        "ash": {
+          "total": 0.02
+        },
+        "minerals": {
+          "Na": 1,
+          "K": 1,
+          "Ca": 0.5,
+          "Mg": 0.8,
+          "P": 2,
+          "Fe": 0.05
+        },
+        "vitamins": {
+          "A": 0.01,
+          "beta_carotene": 0
+        },
+        "energy_value": 897
+      },
+      {
+        "name": "Шпик свиной",
+        "water": 5.7,
+        "proteins": 1.4,
+        "fats": 92.8,
+        "ash": {
+          "total": 0.1
+        },
+        "minerals": {
+          "Na": 21,
+          "K": 14,
+          "Ca": 2,
+          "P": 13
+        },
+        "vitamins": {
+          "A": 0.01,
+          "beta_carotene": 0
+        },
+        "energy_value": 841
+      },
+      {
+        "name": "Шпик свиной соленый (без шкурки)",
+        "water": 5.5,
+        "proteins": 1.4,
+        "fats": 90,
+        "ash": {
+          "total": 3.1
+        },
+        "vitamins": {
+          "A": 0.01,
+          "beta_carotene": 0
+        },
+        "energy_value": 816
+      }
+    ]
+  }
+]

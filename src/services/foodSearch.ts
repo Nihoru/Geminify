@@ -2,39 +2,28 @@ import Fuse from "fuse.js";
 import localFoodDB from "../assets/food_db.json";
 
 const PENALTY_WEIGHTS = [0.0, 0.15, 0.3];
-const FULL_THRESHOLD = 0.55; // Мягкий порог для длинных запросов
-const BASE_THRESHOLD = 0.45; // Строгий порог для базовых слов
+const BASE_THRESHOLD = 0.45; // Ослабленный порог, чтобы прощать мелкие опечатки и синонимы
 
 export class FoodSearchService {
-    private fuseFull: Fuse<any>;
-    private fuseBase: Fuse<any>;
+    private fuse: Fuse<any>;
 
     constructor() {
-        // Подготавливаем базу
+        // 1. Создаем виртуальное поле fullName для идеального поиска
         const searchableDB = localFoodDB.map((item: any) => ({
             ...item,
+            // Склеиваем: "пряник тульский со сгущенным молоком Ясная Поляна"
             fullName:
                 `${item.base_name || ""} ${item.specs || ""} ${item.brand || ""}`.trim(),
         }));
 
-        // 1. Поиск для сложных запросов (Уровни 0 и 1)
-        this.fuseFull = new Fuse(searchableDB, {
-            keys: ["fullName"],
-            includeScore: true,
-            threshold: FULL_THRESHOLD,
-            ignoreLocation: true,
-            useExtendedSearch: true,
-            ignoreFieldNorm: true, // ПРОЩАЕМ длинные specs!
-        });
-
-        // 2. Поиск ТОЛЬКО по базовому названию (Уровень 2)
-        this.fuseBase = new Fuse(searchableDB, {
-            keys: ["base_name"],
+        // 2. Инициализируем Fuse
+        this.fuse = new Fuse(searchableDB, {
+            keys: ["fullName"], // Ищем по нашей склеенной строке
             includeScore: true,
             threshold: BASE_THRESHOLD,
             ignoreLocation: true,
             useExtendedSearch: true,
-            ignoreFieldNorm: false, // ШТРАФУЕМ за лишние слова (защита от "рахат-лукума")
+            ignoreFieldNorm: false, // Отключаем штраф за длину строки
         });
     }
 
@@ -58,34 +47,45 @@ export class FoodSearchService {
             const cascadePenalty =
                 PENALTY_WEIGHTS[i] !== undefined ? PENALTY_WEIGHTS[i] : 0.4;
 
-            // Если это базовый уровень [2] — переключаемся на строгий поиск только по base_name
-            const isBaseLevel = i === 2;
-            const fuseInstance = isBaseLevel ? this.fuseBase : this.fuseFull;
-            const currentThreshold = isBaseLevel
-                ? BASE_THRESHOLD
-                : FULL_THRESHOLD;
+            // 1. Получаем сырые результаты от Fuse.js
+            const rawSearchResults = this.fuse.search(query);
 
-            const searchResults = fuseInstance.search(query);
+            // 2. УМНЫЙ ФИЛЬТР: защищаем только короткие базовые слова
+            const searchResults = rawSearchResults.filter((match) => {
+                const dbItemName = match.item.fullName.toLowerCase();
+                const queryWords = query.toLowerCase().trim().split(/\s+/);
+
+                // Срабатываем ТОЛЬКО если запрос состоит из одного короткого слова (<= 4 букв)
+                // Это спасет "лук" от "рахат-лукума", но не будет мешать сложным запросам
+                if (queryWords.length === 1 && queryWords[0].length <= 4) {
+                    const qw = queryWords[0];
+                    // [^a-zа-яё0-9] означает: границей слова является любой символ, КРОМЕ букв и цифр
+                    const regex = new RegExp(
+                        `(^|[^a-zа-яё0-9])${qw}([^a-zа-яё0-9]|$)`,
+                    );
+                    return regex.test(dbItemName);
+                }
+
+                // Во всех остальных случаях (длинные слова, цифры, много слов)
+                // мы полностью доверяем алгоритму Fuse.js
+                return true;
+            });
 
             if (searchResults.length > 0) {
                 const match = searchResults[0];
                 const rawScore = match.score!;
 
-                if (rawScore <= currentThreshold) {
+                if (rawScore <= BASE_THRESHOLD) {
                     const penalizedScore = rawScore + cascadePenalty;
 
                     console.log(
-                        `      🔍 Уровень [${i}] ("${query}"): найден "${match.item.fullName}" (Raw: ${rawScore.toFixed(3)}, Итог: ${penalizedScore.toFixed(3)})`,
+                        `      🔍 Уровень [${i}] ("${query}"): найден "${match.item.fullName}". Raw: ${rawScore.toFixed(3)}, Итог: ${penalizedScore.toFixed(3)}`,
                     );
 
                     if (penalizedScore < bestGlobalScore) {
                         bestGlobalScore = penalizedScore;
                         bestGlobalMatch = match.item;
                     }
-                } else {
-                    console.log(
-                        `      ❌ Уровень [${i}] ("${query}"): найдено "${match.item.base_name}", но score (${rawScore.toFixed(3)}) хуже порога.`,
-                    );
                 }
             } else {
                 console.log(

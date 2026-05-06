@@ -1,0 +1,1333 @@
+[
+  {
+    "category": "Птица",
+    "items": [
+      {
+        "name": "Бройлеры (цыплята)",
+        "details": "I",
+        "water": 63.8,
+        "proteins": 18.7,
+        "fats": 16.1,
+        "carbohydrates": {
+          "total": 0.5
+        },
+        "ash": {
+          "total": 0.9
+        },
+        "minerals": {
+          "Na": 70,
+          "K": 236,
+          "Ca": 14,
+          "Mg": 19,
+          "P": 160,
+          "Fe": 1.3
+        },
+        "vitamins": {
+          "A": 0.04,
+          "B1": 0.09,
+          "B2": 0.15,
+          "PP": 6.1
+        },
+        "energy_value": 183
+      },
+      {
+        "name": "Бройлеры (цыплята)",
+        "details": "II",
+        "water": 67.7,
+        "proteins": 19.7,
+        "fats": 11.2,
+        "carbohydrates": {
+          "total": 0.5
+        },
+        "ash": {
+          "total": 0.9
+        },
+        "minerals": {
+          "Na": 88,
+          "K": 242,
+          "Ca": 12,
+          "Mg": 22,
+          "P": 175,
+          "Fe": 1.7
+        },
+        "vitamins": {
+          "A": 0.03,
+          "B1": 0.11,
+          "B2": 0.16,
+          "PP": 6.4
+        },
+        "energy_value": 127
+      },
+      {
+        "name": "Гуси",
+        "details": "I",
+        "water": 45,
+        "proteins": 15.2,
+        "fats": 39,
+        "ash": {
+          "total": 0.8
+        },
+        "minerals": {
+          "Na": 91,
+          "K": 240,
+          "Ca": 12,
+          "Mg": 30,
+          "P": 165,
+          "Fe": 2.4
+        },
+        "vitamins": {
+          "A": 0.02,
+          "B1": 0.08,
+          "B2": 0.23,
+          "PP": 5.2
+        },
+        "energy_value": 412
+      },
+      {
+        "name": "Гуси",
+        "details": "II",
+        "water": 54.4,
+        "proteins": 17,
+        "fats": 27.7,
+        "ash": {
+          "total": 0.9
+        },
+        "minerals": {
+          "Na": 99,
+          "K": 274,
+          "Ca": 14,
+          "Mg": 34,
+          "P": 179,
+          "Fe": 2.4
+        },
+        "vitamins": {
+          "A": 0.02,
+          "B1": 0.09,
+          "B2": 0.26,
+          "PP": 5.6
+        },
+        "energy_value": 317
+      },
+      {
+        "name": "Гусята",
+        "details": "I",
+        "water": 53.4,
+        "proteins": 16.6,
+        "fats": 28.8,
+        "ash": {
+          "total": 0.8
+        },
+        "minerals": {
+          "Na": 102,
+          "K": 260,
+          "Ca": 10,
+          "Mg": 27,
+          "P": 160,
+          "Fe": 2.4
+        },
+        "vitamins": {
+          "A": 0.02,
+          "B1": 0.08,
+          "B2": 0.23,
+          "PP": 5.2
+        },
+        "energy_value": 326
+      },
+      {
+        "name": "Гусята",
+        "details": "II",
+        "water": 65.1,
+        "proteins": 19.1,
+        "fats": 14.6,
+        "ash": {
+          "total": 1
+        },
+        "minerals": {
+          "Na": 112,
+          "K": 285,
+          "Ca": 13,
+          "Mg": 30,
+          "P": 180,
+          "Fe": 2.4
+        },
+        "vitamins": {
+          "A": 0.02,
+          "B1": 0.08,
+          "B2": 0.23,
+          "PP": 5.2
+        },
+        "energy_value": 326
+      },
+      {
+        "name": "Индейки",
+        "details": "I",
+        "water": 57.3,
+        "proteins": 19.5,
+        "fats": 22,
+        "ash": {
+          "total": 0.9
+        },
+        "minerals": {
+          "Na": 90,
+          "K": 210,
+          "Ca": 12,
+          "Mg": 19,
+          "P": 200,
+          "Fe": 1.4
+        },
+        "vitamins": {
+          "A": 0.01,
+          "B1": 0.05,
+          "B2": 0.22,
+          "PP": 7.8
+        },
+        "energy_value": 276
+      },
+      {
+        "name": "Индейки",
+        "details": "II",
+        "water": 64.5,
+        "proteins": 21.6,
+        "fats": 12,
+        "carbohydrates": {
+          "total": 0.8
+        },
+        "ash": {
+          "total": 1.1
+        },
+        "minerals": {
+          "Na": 100,
+          "K": 257,
+          "Ca": 18,
+          "Mg": 25,
+          "P": 227,
+          "Fe": 1.8
+        },
+        "vitamins": {
+          "A": 0.01,
+          "B1": 0.07,
+          "B2": 0.19,
+          "PP": 8
+        },
+        "energy_value": 197
+      },
+      {
+        "name": "Индюшата",
+        "details": "I",
+        "water": 68,
+        "proteins": 18.5,
+        "fats": 11.7,
+        "carbohydrates": {
+          "total": 0.6
+        },
+        "ash": {
+          "total": 0.9
+        },
+        "minerals": {
+          "Na": 80,
+          "K": 210,
+          "Ca": 11,
+          "Mg": 15,
+          "P": 195,
+          "Fe": 2
+        },
+        "vitamins": {
+          "A": 0.03,
+          "B1": 0.07,
+          "B2": 0.18,
+          "PP": 7.6
+        },
+        "energy_value": 182
+      },
+      {
+        "name": "Индюшата",
+        "details": "II",
+        "water": 71.2,
+        "proteins": 21.7,
+        "fats": 5,
+        "carbohydrates": {
+          "total": 0.6
+        },
+        "ash": {
+          "total": 1
+        },
+        "minerals": {
+          "Na": 90,
+          "K": 250,
+          "Ca": 15,
+          "Mg": 22,
+          "P": 210,
+          "Fe": 2.2
+        },
+        "vitamins": {
+          "A": 0.03,
+          "B1": 0.07,
+          "B2": 0.18,
+          "PP": 7.6
+        },
+        "energy_value": 134
+      },
+      {
+        "name": "Куры",
+        "details": "I",
+        "water": 61.9,
+        "proteins": 18.2,
+        "fats": 18.4,
+        "carbohydrates": {
+          "total": 0.7
+        },
+        "ash": {
+          "total": 0.8
+        },
+        "minerals": {
+          "Na": 70,
+          "K": 194,
+          "Ca": 16,
+          "Mg": 18,
+          "P": 165,
+          "Fe": 1.6
+        },
+        "vitamins": {
+          "A": 0.07,
+          "B1": 0.07,
+          "B2": 0.15,
+          "PP": 7.7
+        },
+        "energy_value": 241
+      },
+      {
+        "name": "Куры",
+        "details": "II",
+        "water": 69.1,
+        "proteins": 21.2,
+        "fats": 8.2,
+        "carbohydrates": {
+          "total": 0.6
+        },
+        "ash": {
+          "total": 0.9
+        },
+        "minerals": {
+          "Na": 79,
+          "K": 240,
+          "Ca": 18,
+          "Mg": 21,
+          "P": 190,
+          "Fe": 1.6
+        },
+        "vitamins": {
+          "A": 0.07,
+          "B1": 0.07,
+          "B2": 0.14,
+          "PP": 7.8
+        },
+        "energy_value": 161
+      },
+      {
+        "name": "Перепелки",
+        "details": "I",
+        "water": 63.1,
+        "proteins": 18.2,
+        "fats": 17.3,
+        "carbohydrates": {
+          "total": 0.4
+        },
+        "ash": {
+          "total": 1
+        },
+        "minerals": {
+          "Na": 35,
+          "K": 257,
+          "Ca": 21,
+          "Mg": 25,
+          "P": 190,
+          "Fe": 3.2
+        },
+        "vitamins": {
+          "A": 0.07,
+          "B1": 0.1,
+          "B2": 0.26,
+          "PP": 8.3
+        },
+        "energy_value": 230
+      },
+      {
+        "name": "Утки",
+        "details": "I",
+        "water": 45.6,
+        "proteins": 15.8,
+        "fats": 38,
+        "ash": {
+          "total": 0.6
+        },
+        "minerals": {
+          "Na": 58,
+          "K": 156,
+          "Ca": 10,
+          "Mg": 15,
+          "P": 136,
+          "Fe": 1.9
+        },
+        "vitamins": {
+          "A": 0.05,
+          "B1": 0.12,
+          "B2": 0.17,
+          "PP": 5.8
+        },
+        "energy_value": 405
+      },
+      {
+        "name": "Утки",
+        "details": "II",
+        "water": 56.7,
+        "proteins": 17.2,
+        "fats": 24.2,
+        "ash": {
+          "total": 0.9
+        },
+        "minerals": {
+          "Na": 90,
+          "K": 160,
+          "Ca": 12,
+          "Mg": 13,
+          "P": 156,
+          "Fe": 1.9
+        },
+        "vitamins": {
+          "A": 0.05,
+          "B1": 0.18,
+          "B2": 0.19,
+          "PP": 6
+        },
+        "energy_value": 287
+      },
+      {
+        "name": "Утята",
+        "details": "I",
+        "water": 56,
+        "proteins": 16,
+        "fats": 27.2,
+        "ash": {
+          "total": 0.8
+        },
+        "minerals": {
+          "Na": 60,
+          "K": 132,
+          "Ca": 10,
+          "Mg": 15,
+          "P": 156,
+          "Fe": 1.9
+        },
+        "vitamins": {
+          "A": 0.06,
+          "B1": 0.22,
+          "B2": 0.24,
+          "PP": 5.7
+        },
+        "energy_value": 309
+      },
+      {
+        "name": "Утята",
+        "details": "II",
+        "water": 60.3,
+        "proteins": 18,
+        "fats": 20.7,
+        "ash": {
+          "total": 1
+        },
+        "minerals": {
+          "Na": 83,
+          "K": 158,
+          "Ca": 11,
+          "Mg": 12,
+          "P": 156,
+          "Fe": 1.9
+        },
+        "vitamins": {
+          "A": 0.05,
+          "B1": 0.27,
+          "B2": 0.24,
+          "PP": 5.7
+        },
+        "energy_value": 258
+      }
+    ]
+  },
+  {
+    "category": "Яйцепродукты",
+    "items": [
+      {
+        "name": "Яйца куриные",
+        "details": "I",
+        "water": 74,
+        "proteins": 12.7,
+        "fats": 11.5,
+        "carbohydrates": {
+          "total": 0.7
+        },
+        "ash": {
+          "total": 1
+        },
+        "minerals": {
+          "Na": 134,
+          "K": 140,
+          "Ca": 55,
+          "Mg": 12,
+          "P": 192,
+          "Fe": 2.5
+        },
+        "vitamins": {
+          "A": 0.25,
+          "B1": 0.07,
+          "B2": 0.44,
+          "PP": 0.19
+        },
+        "energy_value": 157
+      },
+      {
+        "name": "Яйца перепелиные",
+        "details": "I",
+        "water": 73.3,
+        "proteins": 11.9,
+        "fats": 13.1,
+        "carbohydrates": {
+          "total": 0.6
+        },
+        "ash": {
+          "total": 1.2
+        },
+        "minerals": {
+          "Na": 115,
+          "K": 144,
+          "Ca": 54,
+          "Mg": 32,
+          "P": 218,
+          "Fe": 3.2
+        },
+        "vitamins": {
+          "A": 0.47,
+          "B1": 0.11,
+          "B2": 0.65,
+          "PP": 0.26
+        },
+        "energy_value": 168
+      },
+      {
+        "name": "Меланж",
+        "water": 74,
+        "proteins": 12.7,
+        "fats": 11.5,
+        "carbohydrates": {
+          "total": 0.7
+        },
+        "ash": {
+          "total": 1
+        },
+        "minerals": {
+          "Na": 134,
+          "K": 140,
+          "Ca": 55,
+          "Mg": 12,
+          "P": 192,
+          "Fe": 2.5
+        },
+        "vitamins": {
+          "A": 0.25,
+          "B1": 0.07,
+          "B2": 0.44,
+          "PP": 0.19
+        },
+        "energy_value": 157
+      },
+      {
+        "name": "Яичный порошок",
+        "water": 7.3,
+        "proteins": 46,
+        "fats": 37.3,
+        "carbohydrates": {
+          "total": 4.5
+        },
+        "ash": {
+          "total": 4.9
+        },
+        "minerals": {
+          "Na": 436,
+          "K": 448,
+          "Ca": 193,
+          "Mg": 42,
+          "P": 725,
+          "Fe": 8.9
+        },
+        "vitamins": {
+          "A": 0.9,
+          "B1": 0.25,
+          "B2": 1.64,
+          "PP": 1.18
+        },
+        "energy_value": 542
+      },
+      {
+        "name": "Сухой белок",
+        "water": 9,
+        "proteins": 82.4,
+        "fats": 1.8,
+        "carbohydrates": {
+          "total": 7.2
+        },
+        "ash": {
+          "total": 5.6
+        },
+        "minerals": {
+          "Na": 1297,
+          "K": 1067,
+          "Ca": 75,
+          "Mg": 71,
+          "P": 194,
+          "Fe": 1.8
+        },
+        "vitamins": {
+          "B1": 0,
+          "B2": 2
+        },
+        "energy_value": 375
+      },
+      {
+        "name": "Сухой желток",
+        "water": 3.4,
+        "proteins": 31.1,
+        "fats": 52.2,
+        "carbohydrates": {
+          "total": 4.7
+        },
+        "ash": {
+          "total": 3.5
+        },
+        "minerals": {
+          "Na": 99,
+          "K": 249,
+          "Ca": 262,
+          "Mg": 29,
+          "P": 1047,
+          "Fe": 23
+        },
+        "vitamins": {
+          "A": 2.16,
+          "B1": 0.35,
+          "B2": 0.47
+        },
+        "energy_value": 613
+      }
+    ]
+  },
+  {
+    "category": "Полуфабрикаты из птицы",
+    "items": [
+      {
+        "name": "Грудка цыпленка-бройлера",
+        "water": 75,
+        "proteins": 19.6,
+        "fats": 4.1,
+        "carbohydrates": {
+          "total": 0.3
+        },
+        "ash": {
+          "total": 1
+        },
+        "minerals": {
+          "Na": 66,
+          "K": 266,
+          "Ca": 9,
+          "Mg": 24,
+          "P": 181,
+          "Fe": 1.4
+        },
+        "vitamins": {
+          "A": 0,
+          "B1": 0.09,
+          "B2": 0.08,
+          "PP": 7.69
+        },
+        "energy_value": 116
+      },
+      {
+        "name": "Четвертина цыпленка-бройлера",
+        "water": 69.6,
+        "proteins": 16.5,
+        "fats": 12.6,
+        "carbohydrates": {
+          "total": 0.5
+        },
+        "ash": {
+          "total": 0.8
+        },
+        "minerals": {
+          "Na": 96,
+          "K": 242,
+          "Ca": 15,
+          "Mg": 21,
+          "P": 140,
+          "Fe": 1.6
+        },
+        "vitamins": {
+          "A": 0.02,
+          "B1": 0.12,
+          "B2": 0.14,
+          "PP": 3.3
+        },
+        "energy_value": 181
+      },
+      {
+        "name": "Филе куриное",
+        "water": 73,
+        "proteins": 23.6,
+        "fats": 1.9,
+        "carbohydrates": {
+          "total": 0.4
+        },
+        "ash": {
+          "total": 1.1
+        },
+        "minerals": {
+          "Na": 60,
+          "K": 292,
+          "Ca": 8,
+          "Mg": 26,
+          "P": 171,
+          "Fe": 1.4
+        },
+        "vitamins": {
+          "A": 0,
+          "B1": 0.07,
+          "B2": 0.07,
+          "PP": 10.9
+        },
+        "energy_value": 113
+      },
+      {
+        "name": "Окорочок куриный",
+        "water": 66.6,
+        "proteins": 21.3,
+        "fats": 11,
+        "carbohydrates": {
+          "total": 0.1
+        },
+        "ash": {
+          "total": 1
+        },
+        "minerals": {
+          "Na": 85,
+          "K": 260,
+          "Ca": 16,
+          "Mg": 20,
+          "P": 140,
+          "Fe": 2
+        },
+        "vitamins": {
+          "A": 0.04,
+          "B1": 0.1,
+          "B2": 0.2,
+          "PP": 4.3
+        },
+        "energy_value": 185
+      }
+    ]
+  },
+  {
+    "category": "Субпродукты птицы",
+    "items": [
+      {
+        "name": "Печень цыплят-бройлеров",
+        "water": 72.9,
+        "proteins": 20.6,
+        "fats": 3.7,
+        "carbohydrates": {
+          "total": 1.5
+        },
+        "ash": {
+          "total": 1.3
+        },
+        "minerals": {
+          "Na": 92,
+          "K": 313,
+          "Ca": 11,
+          "Mg": 23,
+          "P": 251,
+          "Fe": 13
+        },
+        "vitamins": {
+          "A": 10,
+          "B1": 0.45,
+          "B2": 1.86,
+          "PP": 8.5
+        },
+        "energy_value": 122
+      },
+      {
+        "name": "Сердце цыплят-бройлеров",
+        "water": 72.4,
+        "proteins": 17.3,
+        "fats": 8.3,
+        "carbohydrates": {
+          "total": 0.9
+        },
+        "ash": {
+          "total": 1.1
+        },
+        "minerals": {
+          "Na": 115,
+          "K": 264,
+          "Ca": 10,
+          "Mg": 19,
+          "P": 137,
+          "Fe": 5.2
+        },
+        "vitamins": {
+          "A": 0.04,
+          "B1": 0.3,
+          "B2": 0.9,
+          "PP": 4.47
+        },
+        "energy_value": 148
+      },
+      {
+        "name": "Мышечный желудок цыплят-бройлеров",
+        "water": 73.3,
+        "proteins": 20.7,
+        "fats": 4,
+        "carbohydrates": {
+          "total": 0.8
+        },
+        "ash": {
+          "total": 1.2
+        },
+        "minerals": {
+          "Na": 97,
+          "K": 329,
+          "Ca": 12,
+          "Mg": 18,
+          "P": 131,
+          "Fe": 3.7
+        },
+        "vitamins": {
+          "A": 0.03,
+          "B1": 0.19,
+          "B2": 0.15,
+          "PP": 2.3
+        },
+        "energy_value": 122
+      },
+      {
+        "name": "Печень кур",
+        "water": 70.9,
+        "proteins": 20.4,
+        "fats": 5.9,
+        "carbohydrates": {
+          "total": 1.4
+        },
+        "ash": {
+          "total": 1.4
+        },
+        "minerals": {
+          "Na": 90,
+          "K": 289,
+          "Ca": 15,
+          "Mg": 24,
+          "P": 268,
+          "Fe": 17.5
+        },
+        "vitamins": {
+          "A": 12,
+          "B1": 0.5,
+          "B2": 2.1,
+          "PP": 10
+        },
+        "energy_value": 140
+      },
+      {
+        "name": "Сердце кур",
+        "water": 72,
+        "proteins": 15.8,
+        "fats": 10.3,
+        "carbohydrates": {
+          "total": 0.8
+        },
+        "ash": {
+          "total": 1.1
+        },
+        "minerals": {
+          "Na": 94,
+          "K": 260,
+          "Ca": 10,
+          "Mg": 19,
+          "P": 178,
+          "Fe": 5.6
+        },
+        "vitamins": {
+          "A": 0.06,
+          "B1": 0.26,
+          "B2": 1.07,
+          "PP": 4.3
+        },
+        "energy_value": 159
+      },
+      {
+        "name": "Мышечный желудок кур",
+        "water": 70.9,
+        "proteins": 21,
+        "fats": 6.4,
+        "carbohydrates": {
+          "total": 0.6
+        },
+        "ash": {
+          "total": 1.1
+        },
+        "minerals": {
+          "Na": 83,
+          "K": 299,
+          "Ca": 13,
+          "Mg": 17,
+          "P": 106,
+          "Fe": 6.4
+        },
+        "vitamins": {
+          "A": 0.04,
+          "B1": 0.14,
+          "B2": 0.25,
+          "PP": 3.21
+        },
+        "energy_value": 130
+      }
+    ]
+  },
+  {
+    "category": "Колбасы вареные",
+    "items": [
+      {
+        "name": "Подмосковная",
+        "water": 65.6,
+        "proteins": 17.2,
+        "fats": 11.6,
+        "carbohydrates": {
+          "total": 1.8
+        },
+        "ash": {
+          "total": 3.8,
+          "nacl": 2.3
+        },
+        "minerals": {
+          "Na": 980,
+          "K": 234,
+          "Ca": 38,
+          "Mg": 17,
+          "P": 206,
+          "Fe": 3.2
+        },
+        "vitamins": {
+          "A": 0.02,
+          "beta_carotene": 0,
+          "B1": 0.23,
+          "B2": 0.16,
+          "PP": 3.6
+        },
+        "energy_value": 180
+      },
+      {
+        "name": "Зеленоградская",
+        "water": 64.9,
+        "proteins": 17.2,
+        "fats": 12.1,
+        "carbohydrates": {
+          "total": 2.5
+        },
+        "ash": {
+          "total": 3.3,
+          "nacl": 2.3
+        },
+        "minerals": {
+          "Na": 950,
+          "K": 222,
+          "Ca": 36,
+          "Mg": 18,
+          "P": 186,
+          "Fe": 2.4
+        },
+        "vitamins": {
+          "A": 0.02,
+          "beta_carotene": 0,
+          "B1": 0.18,
+          "B2": 0.14,
+          "PP": 3.9
+        },
+        "energy_value": 188
+      }
+    ]
+  },
+  {
+    "category": "Готовые быстрозамороженные блюда",
+    "items": [
+      {
+        "name": "Мясо цыплят паровое",
+        "water": 62.1,
+        "proteins": 23.3,
+        "fats": 13.3,
+        "carbohydrates": {
+          "total": 0.3
+        },
+        "ash": {
+          "total": 1,
+          "nacl": 0.2
+        },
+        "minerals": {
+          "Na": 128,
+          "K": 136,
+          "Ca": 20,
+          "Mg": 16,
+          "P": 131,
+          "Fe": 1.4
+        },
+        "vitamins": {
+          "A": 0.02,
+          "beta_carotene": 0,
+          "B1": 0.08,
+          "B2": 0.16,
+          "PP": 5.6
+        },
+        "energy_value": 214
+      },
+      {
+        "name": "Мясо цыплят жареное",
+        "water": 56.1,
+        "proteins": 26.2,
+        "fats": 16,
+        "carbohydrates": {
+          "total": 0.3
+        },
+        "ash": {
+          "total": 1.4,
+          "nacl": 0.6
+        },
+        "minerals": {
+          "Na": 176,
+          "K": 221,
+          "Ca": 20,
+          "Mg": 22,
+          "P": 201,
+          "Fe": 1.7
+        },
+        "vitamins": {
+          "A": 0.03,
+          "beta_carotene": 0,
+          "B1": 0.1,
+          "B2": 0.16,
+          "PP": 7.72
+        },
+        "energy_value": 250
+      }
+    ]
+  },
+  {
+    "category": "Консервы",
+    "items": [
+      {
+        "name": "Курица в собственном соку",
+        "water": 64.4,
+        "proteins": 23.2,
+        "fats": 9.9,
+        "carbohydrates": {
+          "total": 0.4
+        },
+        "ash": {
+          "total": 2.1,
+          "nacl": 1.2
+        },
+        "minerals": {
+          "Na": 620,
+          "K": 262,
+          "Ca": 15,
+          "Mg": 30,
+          "P": 130,
+          "Fe": 1.2
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0.05,
+          "B1": 0.03,
+          "B2": 0.11,
+          "PP": 6.1
+        },
+        "energy_value": 184
+      },
+      {
+        "name": "Утка в собственном соку",
+        "water": 64,
+        "proteins": 16,
+        "fats": 17.5,
+        "carbohydrates": {
+          "total": 0.3
+        },
+        "ash": {
+          "total": 2.2,
+          "nacl": 1.2
+        },
+        "minerals": {
+          "Na": 560,
+          "K": 165,
+          "Ca": 21,
+          "Mg": 40,
+          "P": 117,
+          "Fe": 1.2
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0.09,
+          "B1": 0.04,
+          "B2": 0.14,
+          "PP": 3.94
+        },
+        "energy_value": 223
+      },
+      {
+        "name": "Фарш колбасный куриный",
+        "water": 66.9,
+        "proteins": 13.9,
+        "fats": 14.9,
+        "carbohydrates": {
+          "total": 1.4
+        },
+        "ash": {
+          "total": 2.9,
+          "nacl": 1.2
+        },
+        "minerals": {
+          "Na": 644,
+          "K": 172,
+          "Ca": 37,
+          "Mg": 21,
+          "P": 150,
+          "Fe": 2.4
+        },
+        "vitamins": {
+          "A": 0.01,
+          "beta_carotene": 0,
+          "B1": 0.03,
+          "B2": 0.1,
+          "PP": 4
+        },
+        "energy_value": 193
+      },
+      {
+        "name": "Фарш колбасный ставропольский",
+        "water": 61.9,
+        "proteins": 12.2,
+        "fats": 21.8,
+        "carbohydrates": {
+          "total": 1.9
+        },
+        "ash": {
+          "total": 2.7,
+          "nacl": 1.2
+        },
+        "minerals": {
+          "Na": 603,
+          "K": 164,
+          "Ca": 29,
+          "Mg": 18,
+          "P": 137,
+          "Fe": 1.8
+        },
+        "vitamins": {
+          "A": 0.01,
+          "beta_carotene": 0,
+          "B1": 0.06,
+          "B2": 0.12,
+          "PP": 3.5
+        },
+        "energy_value": 251
+      }
+    ]
+  },
+  {
+    "category": "Консервы для детского и диетического питания",
+    "items": [
+      {
+        "name": "«Крошка», «Птенчик», «Бутуз»",
+        "water": 80,
+        "proteins": 10.2,
+        "fats": 7,
+        "carbohydrates": {
+          "total": 2.2
+        },
+        "ash": {
+          "total": 0.6,
+          "nacl": 0.2
+        },
+        "minerals": {
+          "Na": 105,
+          "K": 114,
+          "Ca": 12,
+          "Mg": 12,
+          "P": 79,
+          "Fe": 1.8
+        },
+        "vitamins": {
+          "A": 0.01,
+          "beta_carotene": 0,
+          "B1": 0.02,
+          "B2": 0.07,
+          "PP": 2
+        },
+        "energy_value": 113
+      },
+      {
+        "name": "«Суп-пюре куриный»",
+        "water": 81.2,
+        "proteins": 6.2,
+        "fats": 6.1,
+        "carbohydrates": {
+          "total": 5.3
+        },
+        "ash": {
+          "total": 1.2,
+          "nacl": 0.7
+        },
+        "minerals": {
+          "Na": 341,
+          "K": 116,
+          "Ca": 34,
+          "Mg": 16,
+          "P": 61,
+          "Fe": 0.5
+        },
+        "vitamins": {
+          "A": 0.02,
+          "beta_carotene": 0.18,
+          "B1": 0.01,
+          "B2": 0.11,
+          "PP": 1.72
+        },
+        "energy_value": 101
+      },
+      {
+        "name": "Паштет «Богатырь»",
+        "water": 66.7,
+        "proteins": 15.7,
+        "fats": 15.4,
+        "carbohydrates": {
+          "total": 0.9
+        },
+        "ash": {
+          "total": 1.3,
+          "nacl": 0.9
+        },
+        "minerals": {
+          "Na": 380,
+          "K": 158,
+          "Ca": 17,
+          "Mg": 20,
+          "P": 82,
+          "Fe": 7
+        },
+        "vitamins": {
+          "A": 1.35,
+          "beta_carotene": 0.06,
+          "B1": 0.01,
+          "B2": 0.5,
+          "PP": 3.56
+        },
+        "energy_value": 203
+      },
+      {
+        "name": "Паштет «Школьный»",
+        "water": 66.6,
+        "proteins": 15.1,
+        "fats": 15.7,
+        "carbohydrates": {
+          "total": 1
+        },
+        "ash": {
+          "total": 1.6,
+          "nacl": 0.5
+        },
+        "minerals": {
+          "Na": 257,
+          "K": 157,
+          "Ca": 17,
+          "Mg": 16,
+          "P": 91,
+          "Fe": 1.4
+        },
+        "vitamins": {
+          "A": 0.06,
+          "beta_carotene": 0.42,
+          "B1": 0.02,
+          "B2": 0.16,
+          "PP": 2.08
+        },
+        "energy_value": 212
+      }
+    ]
+  },
+  {
+    "category": "Полуфабрикаты для детского питания",
+    "items": [
+      {
+        "name": "Котлеты куриные «Школьные»",
+        "water": 68.5,
+        "proteins": 13.8,
+        "fats": 5.7,
+        "carbohydrates": {
+          "total": 10
+        },
+        "ash": {
+          "total": 2,
+          "nacl": 0.8
+        },
+        "minerals": {
+          "Na": 380,
+          "K": 162,
+          "Ca": 16,
+          "Mg": 17,
+          "P": 96,
+          "Fe": 3.1
+        },
+        "vitamins": {
+          "A": 0.02,
+          "beta_carotene": 0.01,
+          "B1": 0.15,
+          "B2": 0.24,
+          "PP": 3.62
+        },
+        "energy_value": 148
+      },
+      {
+        "name": "Биточки куриные «Детские»",
+        "water": 71.9,
+        "proteins": 12.3,
+        "fats": 5.5,
+        "carbohydrates": {
+          "total": 8.5
+        },
+        "ash": {
+          "total": 1.8,
+          "nacl": 1
+        },
+        "minerals": {
+          "Na": 420,
+          "K": 200,
+          "Ca": 13,
+          "Mg": 16,
+          "P": 79,
+          "Fe": 2.8
+        },
+        "vitamins": {
+          "A": 0.03,
+          "beta_carotene": 0.01,
+          "B1": 0.13,
+          "B2": 0.23,
+          "PP": 3.24
+        },
+        "energy_value": 139
+      }
+    ]
+  }
+]

@@ -1,0 +1,1545 @@
+[
+  {
+    "category": "Масличное сырье",
+    "items": [
+      {
+        "name": "Абрикос (семя костянки)",
+        "water": 5.4,
+        "proteins": 25,
+        "fats": 45.4,
+        "carbohydrates": {
+          "mono_and_disaccharides": 2.8
+        },
+        "ash": {
+          "total": 2.6
+        },
+        "minerals": {
+          "Na": 90,
+          "K": 802,
+          "Ca": 93,
+          "Mg": 196,
+          "P": 461,
+          "Fe": 7
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0
+        }
+      },
+      {
+        "name": "Арахис (семена)",
+        "water": 10,
+        "proteins": 26.3,
+        "fats": 45.2,
+        "carbohydrates": {
+          "mono_and_disaccharides": 4.2,
+          "starch": 5.7
+        },
+        "ash": {
+          "total": 2.6
+        },
+        "minerals": {
+          "Na": 23,
+          "K": 658,
+          "Ca": 76,
+          "Mg": 182,
+          "P": 350,
+          "Fe": 5
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0,
+          "B1": 0.74,
+          "B2": 0.11,
+          "PP": 13.2,
+          "C": 5.34
+        },
+        "energy_value": 551
+      },
+      {
+        "name": "Ядро арахиса (сушеное)",
+        "water": 0,
+        "proteins": 29.2,
+        "fats": 50.2,
+        "carbohydrates": {
+          "mono_and_disaccharides": 4.5,
+          "starch": 6.3
+        },
+        "ash": {
+          "total": 2.9
+        },
+        "minerals": {
+          "Na": 26,
+          "K": 732,
+          "Ca": 85,
+          "Mg": 202,
+          "P": 390,
+          "Fe": 6
+        },
+        "vitamins": {
+          "A": 0,
+          "B1": 0.84,
+          "B2": 0.13,
+          "PP": 14.74,
+          "C": 0
+        },
+        "energy_value": 611
+      },
+      {
+        "name": "Вишня (семя костянки)",
+        "water": 9.7,
+        "proteins": 21.9,
+        "fats": 30.5,
+        "ash": {
+          "total": 1.8
+        },
+        "minerals": {
+          "Na": 16,
+          "K": 563,
+          "Ca": 690,
+          "Mg": 309,
+          "P": 598,
+          "Fe": 11
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0
+        }
+      },
+      {
+        "name": "Горчица (семена)",
+        "water": 6.4,
+        "proteins": 25.8,
+        "fats": 30.8,
+        "carbohydrates": {
+          "mono_and_disaccharides": 3.6,
+          "starch": 1.9
+        },
+        "ash": {
+          "total": 4.8
+        },
+        "minerals": {
+          "Na": 37,
+          "K": 608,
+          "Ca": 254,
+          "Mg": 238,
+          "P": 650,
+          "Fe": 25
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0
+        },
+        "energy_value": 461
+      },
+      {
+        "name": "Какао (бобы)",
+        "water": 6,
+        "proteins": 12.8,
+        "fats": 53.2,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1.4,
+          "starch": 8
+        },
+        "ash": {
+          "total": 2.7
+        },
+        "minerals": {
+          "Na": 5,
+          "K": 750,
+          "Ca": 25,
+          "Mg": 80,
+          "P": 500,
+          "Fe": 4
+        },
+        "vitamins": {
+          "A": 0
+        },
+        "energy_value": 530
+      },
+      {
+        "name": "Конопля (семена)",
+        "water": 11.5,
+        "proteins": 20.1,
+        "fats": 32.5,
+        "ash": {
+          "total": 4.5
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0
+        }
+      },
+      {
+        "name": "Копра",
+        "water": 6,
+        "proteins": 7.7,
+        "fats": 62.7,
+        "ash": {
+          "total": 2.5
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0
+        }
+      },
+      {
+        "name": "Кукурузный зародыш",
+        "water": 6.3,
+        "proteins": 16.3,
+        "fats": 30.5,
+        "ash": {
+          "total": 3.4
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0
+        }
+      },
+      {
+        "name": "Кунжут (семена)",
+        "water": 9,
+        "proteins": 19.4,
+        "fats": 48.7,
+        "carbohydrates": {
+          "mono_and_disaccharides": 2,
+          "starch": 10.2
+        },
+        "ash": {
+          "total": 5.1
+        },
+        "minerals": {
+          "Na": 75,
+          "K": 497,
+          "Ca": 1474,
+          "Mg": 540,
+          "P": 720,
+          "Fe": 61
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0,
+          "B1": 1.27,
+          "B2": 0.36,
+          "PP": 4
+        },
+        "energy_value": 605
+      },
+      {
+        "name": "Мак (семена)",
+        "water": 7.8,
+        "proteins": 17.5,
+        "fats": 47.5,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1.1,
+          "starch": 0.9
+        },
+        "ash": {
+          "total": 6.7
+        },
+        "minerals": {
+          "Na": 19,
+          "K": 587,
+          "Ca": 1667,
+          "Mg": 442,
+          "P": 903,
+          "Fe": 10
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0
+        },
+        "energy_value": 506
+      },
+      {
+        "name": "Оливки (мякоть)",
+        "water": 50,
+        "proteins": 1.6,
+        "fats": 23,
+        "ash": {
+          "total": 1.5
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0
+        }
+      },
+      {
+        "name": "Пальмовое ядро",
+        "water": 7.5,
+        "proteins": 8.4,
+        "fats": 49.6,
+        "ash": {
+          "total": 1.7
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0
+        }
+      },
+      {
+        "name": "Подсолнечник (семена)",
+        "water": 8,
+        "proteins": 20.7,
+        "fats": 52.9,
+        "carbohydrates": {
+          "mono_and_disaccharides": 3.4
+        },
+        "ash": {
+          "total": 2.9
+        },
+        "minerals": {
+          "Na": 160,
+          "K": 647,
+          "Ca": 367,
+          "Mg": 317,
+          "P": 530,
+          "Fe": 61
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0,
+          "B1": 1.84,
+          "B2": 0.18,
+          "PP": 10.12
+        }
+      },
+      {
+        "name": "Подсолнечник высокоолеиновый сорта «Первенец» (семена)",
+        "water": 8,
+        "proteins": 21.2,
+        "fats": 60.8,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1.1,
+          "starch": 1.7
+        },
+        "ash": {
+          "total": 3.8
+        },
+        "minerals": {
+          "Na": 17,
+          "K": 644,
+          "Ca": 246,
+          "Mg": 398,
+          "P": 547,
+          "Fe": 6
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0
+        },
+        "energy_value": 598
+      },
+      {
+        "name": "Рапс высокоэруковый (семена)",
+        "water": 12,
+        "proteins": 25.3,
+        "fats": 37.6,
+        "carbohydrates": {
+          "mono_and_disaccharides": 2.9,
+          "starch": 1.1
+        },
+        "ash": {
+          "total": 4.6
+        },
+        "minerals": {
+          "Na": 139,
+          "K": 979,
+          "Ca": 454,
+          "Mg": 311,
+          "P": 840,
+          "Fe": 63
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0,
+          "B1": 0.11,
+          "B2": 0.25,
+          "PP": 10
+        },
+        "energy_value": 511
+      },
+      {
+        "name": "Рапс низкоэруковый (семена)",
+        "water": 8.1,
+        "proteins": 30.8,
+        "fats": 43.6,
+        "carbohydrates": {
+          "mono_and_disaccharides": 3.5,
+          "starch": 1.6
+        },
+        "ash": {
+          "total": 4.5
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0
+        },
+        "energy_value": 536
+      },
+      {
+        "name": "Слива (семя костянки)",
+        "water": 12,
+        "proteins": 28.5,
+        "fats": 40.2,
+        "ash": {
+          "total": 3
+        },
+        "minerals": {
+          "Na": 15,
+          "K": 354,
+          "Ca": 600,
+          "Mg": 210,
+          "P": 456,
+          "Fe": 9
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0
+        }
+      },
+      {
+        "name": "Соя (семена)",
+        "water": 12,
+        "proteins": 34.9,
+        "fats": 17.8,
+        "carbohydrates": {
+          "mono_and_disaccharides": 8.4,
+          "starch": 2.3
+        },
+        "ash": {
+          "total": 5
+        },
+        "minerals": {
+          "Na": 44,
+          "K": 1607,
+          "Ca": 348,
+          "Mg": 191,
+          "P": 510,
+          "Fe": 12
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0.07,
+          "B1": 0.94,
+          "B2": 0.22,
+          "PP": 2.2
+        },
+        "energy_value": 337
+      },
+      {
+        "name": "Хлопчатник (семена)",
+        "water": 10,
+        "proteins": 34.5,
+        "fats": 36.5,
+        "carbohydrates": {
+          "mono_and_disaccharides": 8.1
+        },
+        "ash": {
+          "total": 4.6
+        },
+        "minerals": {
+          "Na": 160,
+          "K": 1100,
+          "Ca": 171,
+          "Mg": 342,
+          "P": 1100,
+          "Fe": 10
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0,
+          "B1": 1.43,
+          "B2": 0.39,
+          "PP": 2.72
+        }
+      }
+    ]
+  },
+  {
+    "category": "Продукты переработки масличного сырья",
+    "items": [
+      {
+        "name": "Порошок горчичный",
+        "water": 7.3,
+        "proteins": 37.1,
+        "fats": 11.1,
+        "carbohydrates": {
+          "mono_and_disaccharides": 3.9,
+          "starch": 2
+        },
+        "ash": {
+          "total": 6
+        },
+        "minerals": {
+          "Na": 67,
+          "K": 828,
+          "Ca": 365,
+          "Mg": 453,
+          "P": 797,
+          "Fe": 40
+        },
+        "vitamins": {
+          "A": 0
+        },
+        "energy_value": 271
+      },
+      {
+        "name": "Шрот подсолнечный пищевой",
+        "water": 8,
+        "proteins": 46.5,
+        "fats": 1,
+        "carbohydrates": {
+          "mono_and_disaccharides": 7.8
+        },
+        "ash": {
+          "total": 6.7
+        },
+        "minerals": {
+          "Na": 370,
+          "K": 1495,
+          "Ca": 848,
+          "Mg": 732,
+          "P": 1224,
+          "Fe": 141
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0,
+          "B1": 2,
+          "B2": 0.21
+        }
+      },
+      {
+        "name": "Белок растительный пищевой подсолнечный",
+        "water": 8.1,
+        "proteins": 85,
+        "fats": 1.5,
+        "carbohydrates": {
+          "mono_and_disaccharides": 0.3,
+          "starch": 0.8
+        },
+        "ash": {
+          "total": 8
+        },
+        "minerals": {
+          "Na": 3111,
+          "K": 199,
+          "Ca": 151,
+          "Mg": 57,
+          "P": 300,
+          "Fe": 135
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0
+        },
+        "energy_value": 358
+      },
+      {
+        "name": "Крупка подсолнечная пищевая",
+        "water": 5.6,
+        "proteins": 45,
+        "fats": 15,
+        "carbohydrates": {
+          "mono_and_disaccharides": 5.9
+        },
+        "ash": {
+          "total": 5.3
+        },
+        "minerals": {
+          "Na": 291,
+          "K": 1176,
+          "Ca": 667,
+          "Mg": 576,
+          "P": 964,
+          "Fe": 111
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0,
+          "B1": 2,
+          "B2": 0.2,
+          "C": 0
+        }
+      },
+      {
+        "name": "Концентрат фосфатидный пищевой подсолнечный",
+        "water": 1,
+        "proteins": 0,
+        "fats": 96.5,
+        "carbohydrates": {
+          "mono_and_disaccharides": 0
+        },
+        "minerals": {
+          "Ca": 50,
+          "Mg": 310,
+          "P": 2400,
+          "Fe": 52
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0,
+          "B1": 0,
+          "B2": 0,
+          "PP": 0,
+          "C": 0
+        }
+      },
+      {
+        "name": "Шрот соевый пищевой",
+        "water": 10,
+        "proteins": 43.5,
+        "fats": 1.4,
+        "carbohydrates": {
+          "mono_and_disaccharides": 10,
+          "starch": 2.9
+        },
+        "ash": {
+          "total": 5.6
+        },
+        "minerals": {
+          "Na": 42,
+          "K": 1750,
+          "Ca": 360,
+          "Mg": 280,
+          "P": 770,
+          "Fe": 14
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0,
+          "B1": 0.85,
+          "B2": 0.2,
+          "PP": 1.98,
+          "C": 0
+        },
+        "energy_value": 237
+      },
+      {
+        "name": "Белок растительный пищевой соевый",
+        "water": 7,
+        "proteins": 82,
+        "fats": 0.2,
+        "carbohydrates": {
+          "mono_and_disaccharides": 4.3,
+          "starch": 1.3
+        },
+        "ash": {
+          "total": 6.5
+        },
+        "minerals": {
+          "Na": 1500,
+          "K": 490,
+          "Ca": 250,
+          "Mg": 150,
+          "P": 780,
+          "Fe": 20
+        },
+        "energy_value": 351
+      },
+      {
+        "name": "Концентрат фосфатидный пищевой соевый",
+        "water": 1,
+        "proteins": 0,
+        "fats": 96.5,
+        "carbohydrates": {
+          "mono_and_disaccharides": 0
+        },
+        "ash": {
+          "total": 5.3
+        },
+        "minerals": {
+          "Na": 5,
+          "K": 600,
+          "Ca": 120,
+          "Mg": 98,
+          "P": 2400,
+          "Fe": 10
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0,
+          "B1": 0,
+          "B2": 0,
+          "PP": 0,
+          "C": 0
+        }
+      }
+    ]
+  },
+  {
+    "category": "Маргариновая продукция",
+    "items": [
+      {
+        "name": "Маргарин столовый молочный",
+        "water": 15.9,
+        "proteins": 0.3,
+        "fats": 82,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1,
+          "starch": 0
+        },
+        "ash": {
+          "total": 0.5
+        },
+        "minerals": {
+          "Na": 171,
+          "K": 10,
+          "Ca": 11,
+          "Mg": 1,
+          "P": 7,
+          "Fe": 0
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0,
+          "B1": 0,
+          "B2": 0.02,
+          "PP": 0.02,
+          "C": 0
+        },
+        "energy_value": 743
+      },
+      {
+        "name": "Маргарин столовый молочный витаминизированный",
+        "water": 15.9,
+        "proteins": 0.3,
+        "fats": 82,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1,
+          "starch": 0
+        },
+        "ash": {
+          "total": 0.5
+        },
+        "minerals": {
+          "Na": 171,
+          "K": 10,
+          "Ca": 11,
+          "Mg": 1,
+          "P": 7,
+          "Fe": 0
+        },
+        "vitamins": {
+          "A": 1.5,
+          "beta_carotene": 0,
+          "B1": 0,
+          "B2": 0.02,
+          "PP": 0.02,
+          "C": 0
+        },
+        "energy_value": 743
+      },
+      {
+        "name": "Маргарин «Эра»",
+        "water": 16.2,
+        "proteins": 0.3,
+        "fats": 82,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1,
+          "starch": 1
+        },
+        "ash": {
+          "total": 0.45
+        },
+        "minerals": {
+          "Na": 172,
+          "K": 10,
+          "Ca": 11,
+          "Mg": 1,
+          "P": 7,
+          "Fe": 0
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0,
+          "B1": 0,
+          "B2": 0.02,
+          "PP": 0.02,
+          "C": 0
+        },
+        "energy_value": 743
+      },
+      {
+        "name": "Маргарин «Эра» витаминизированный",
+        "water": 16.2,
+        "proteins": 0.3,
+        "fats": 82,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1,
+          "starch": 1
+        },
+        "ash": {
+          "total": 0.45
+        },
+        "minerals": {
+          "Na": 172,
+          "K": 10,
+          "Ca": 11,
+          "Mg": 1,
+          "P": 7,
+          "Fe": 0
+        },
+        "vitamins": {
+          "A": 1.5,
+          "beta_carotene": 0,
+          "B1": 0,
+          "B2": 0.02,
+          "PP": 0.02,
+          "C": 0
+        },
+        "energy_value": 743
+      },
+      {
+        "name": "Маргарин сливочный",
+        "water": 15.9,
+        "proteins": 0.3,
+        "fats": 82,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1,
+          "starch": 0
+        },
+        "ash": {
+          "total": 0.5
+        },
+        "minerals": {
+          "Na": 154,
+          "K": 15,
+          "Ca": 14,
+          "Mg": 2,
+          "P": 9,
+          "Fe": 0
+        },
+        "vitamins": {
+          "A": 0.02,
+          "beta_carotene": 0,
+          "B1": 0,
+          "B2": 0.02,
+          "PP": 0.02,
+          "C": 0
+        },
+        "energy_value": 743
+      },
+      {
+        "name": "Маргарин «Экстра»",
+        "water": 15.8,
+        "proteins": 0.5,
+        "fats": 82,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1,
+          "starch": 0
+        },
+        "ash": {
+          "total": 0.45
+        },
+        "minerals": {
+          "Na": 138,
+          "K": 22,
+          "Ca": 20,
+          "Mg": 2,
+          "P": 14,
+          "Fe": 0
+        },
+        "vitamins": {
+          "A": 1.5,
+          "beta_carotene": 0,
+          "B1": 0.01,
+          "B2": 0.02,
+          "PP": 0.02,
+          "C": 0
+        },
+        "energy_value": 744
+      },
+      {
+        "name": "Маргарин «Солнечный»",
+        "water": 26.8,
+        "proteins": 0.3,
+        "fats": 72,
+        "carbohydrates": {
+          "mono_and_disaccharides": 0.9,
+          "starch": 0
+        },
+        "ash": {
+          "total": 0.5
+        },
+        "minerals": {
+          "Na": 154,
+          "K": 15,
+          "Ca": 14,
+          "Mg": 2,
+          "P": 9,
+          "Fe": 0
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0,
+          "B1": 0,
+          "B2": 0.01,
+          "PP": 0.01,
+          "C": 0
+        },
+        "energy_value": 653
+      },
+      {
+        "name": "Маргарин «Солнечный» витаминизированный",
+        "water": 26.8,
+        "proteins": 0.3,
+        "fats": 72,
+        "carbohydrates": {
+          "mono_and_disaccharides": 0.9,
+          "starch": 0
+        },
+        "ash": {
+          "total": 0.5
+        },
+        "minerals": {
+          "Na": 154,
+          "K": 15,
+          "Ca": 14,
+          "Mg": 2,
+          "P": 9,
+          "Fe": 0
+        },
+        "vitamins": {
+          "A": 1.5,
+          "beta_carotene": 0,
+          "B1": 0,
+          "B2": 0.01,
+          "PP": 0.01,
+          "C": 0
+        },
+        "energy_value": 653
+      },
+      {
+        "name": "Маргарин «Радуга»",
+        "water": 23,
+        "proteins": 0.3,
+        "fats": 75,
+        "carbohydrates": {
+          "mono_and_disaccharides": 0.9,
+          "starch": 0
+        },
+        "ash": {
+          "total": 0.6
+        },
+        "minerals": {
+          "Na": 211,
+          "K": 15,
+          "Ca": 15,
+          "Mg": 2,
+          "P": 9,
+          "Fe": 0
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0,
+          "B1": 0.01,
+          "B2": 0.03,
+          "PP": 0.03,
+          "C": 0
+        },
+        "energy_value": 680
+      },
+      {
+        "name": "Маргарин шоколадный сливочный",
+        "water": 17,
+        "proteins": 1.1,
+        "fats": 62.2,
+        "carbohydrates": {
+          "mono_and_disaccharides": 20.1,
+          "starch": 0
+        },
+        "ash": {
+          "total": 0.24
+        },
+        "minerals": {
+          "Na": 8,
+          "K": 84,
+          "Ca": 20,
+          "Mg": 4,
+          "P": 34,
+          "Fe": 0.3
+        },
+        "vitamins": {
+          "A": 0.02,
+          "beta_carotene": 0,
+          "B1": 0.01,
+          "B2": 0.02,
+          "PP": 0.03,
+          "C": 0
+        },
+        "energy_value": 641
+      },
+      {
+        "name": "Маргарин «Славянский»",
+        "water": 15.6,
+        "proteins": 0.5,
+        "fats": 82,
+        "carbohydrates": {
+          "mono_and_disaccharides": 1.2,
+          "starch": 0
+        },
+        "ash": {
+          "total": 0.55
+        },
+        "minerals": {
+          "Na": 176,
+          "K": 22,
+          "Ca": 21,
+          "Mg": 2,
+          "P": 14,
+          "Fe": 0
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0,
+          "B1": 0,
+          "B2": 0.02,
+          "PP": 0.02,
+          "C": 0
+        },
+        "energy_value": 745
+      },
+      {
+        "name": "Жир кулинарный «Украинский»",
+        "water": 0.3,
+        "proteins": 0,
+        "fats": 99.7,
+        "carbohydrates": {
+          "mono_and_disaccharides": 0,
+          "starch": 0
+        },
+        "ash": {
+          "total": 0
+        },
+        "minerals": {
+          "Na": 0,
+          "K": 0,
+          "Ca": 0,
+          "Mg": 0,
+          "P": 0,
+          "Fe": 0
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0,
+          "B1": 0,
+          "B2": 0,
+          "PP": 0,
+          "C": 0
+        },
+        "energy_value": 897
+      },
+      {
+        "name": "Жир кулинарный «Белорусский»",
+        "water": 0.3,
+        "proteins": 0,
+        "fats": 99.7,
+        "carbohydrates": {
+          "mono_and_disaccharides": 0,
+          "starch": 0
+        },
+        "ash": {
+          "total": 0
+        },
+        "minerals": {
+          "Na": 0,
+          "K": 0,
+          "Ca": 0,
+          "Mg": 0,
+          "P": 0,
+          "Fe": 0
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0,
+          "B1": 0,
+          "B2": 0,
+          "PP": 0,
+          "C": 0
+        },
+        "energy_value": 897
+      },
+      {
+        "name": "Жир кулинарный «Восточный»",
+        "water": 0.3,
+        "proteins": 0,
+        "fats": 99.7,
+        "carbohydrates": {
+          "mono_and_disaccharides": 0,
+          "starch": 0
+        },
+        "ash": {
+          "total": 0
+        },
+        "minerals": {
+          "Na": 0,
+          "K": 0,
+          "Ca": 0,
+          "Mg": 0,
+          "P": 0,
+          "Fe": 0
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0,
+          "B1": 0,
+          "B2": 0,
+          "PP": 0,
+          "C": 0
+        },
+        "energy_value": 897
+      },
+      {
+        "name": "Жир кулинарный «Новинка»",
+        "water": 0.3,
+        "proteins": 0,
+        "fats": 99.7,
+        "carbohydrates": {
+          "mono_and_disaccharides": 0,
+          "starch": 0
+        },
+        "ash": {
+          "total": 0
+        },
+        "minerals": {
+          "Na": 0,
+          "K": 0,
+          "Ca": 0,
+          "Mg": 0,
+          "P": 0,
+          "Fe": 0
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0,
+          "B1": 0,
+          "B2": 0,
+          "PP": 0,
+          "C": 0
+        },
+        "energy_value": 897
+      },
+      {
+        "name": "Жир кулинарный «Прима»",
+        "water": 0.3,
+        "proteins": 0,
+        "fats": 99.7,
+        "carbohydrates": {
+          "mono_and_disaccharides": 0,
+          "starch": 0
+        },
+        "ash": {
+          "total": 0
+        },
+        "minerals": {
+          "Na": 0,
+          "K": 0,
+          "Ca": 0,
+          "Mg": 0,
+          "P": 0,
+          "Fe": 0
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0,
+          "B1": 0,
+          "B2": 0,
+          "PP": 0,
+          "C": 0
+        },
+        "energy_value": 897
+      },
+      {
+        "name": "Жир кулинарный «Сало растительное»",
+        "water": 0.3,
+        "proteins": 0,
+        "fats": 99.7,
+        "carbohydrates": {
+          "mono_and_disaccharides": 0,
+          "starch": 0
+        },
+        "ash": {
+          "total": 0
+        },
+        "minerals": {
+          "Na": 0,
+          "K": 0,
+          "Ca": 0,
+          "Mg": 0,
+          "P": 0,
+          "Fe": 0
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0,
+          "B1": 0,
+          "B2": 0,
+          "PP": 0,
+          "C": 0
+        },
+        "energy_value": 897
+      },
+      {
+        "name": "Жир кондитерский для шоколадных изделий, конфет и пищевых концентратов",
+        "water": 0.3,
+        "proteins": 0,
+        "fats": 99.7,
+        "carbohydrates": {
+          "mono_and_disaccharides": 0,
+          "starch": 0
+        },
+        "ash": {
+          "total": 0
+        },
+        "minerals": {
+          "Na": 0,
+          "K": 0,
+          "Ca": 0,
+          "Mg": 0,
+          "P": 0,
+          "Fe": 0
+        },
+        "vitamins": {
+          "A": 0,
+          "beta_carotene": 0,
+          "B1": 0,
+          "B2": 0,
+          "PP": 0,
+          "C": 0
+        },
+        "energy_value": 897
+      },
+      {
+        "name": "Майонез столовый «Провансаль»",
+        "water": 25,
+        "proteins": 2.8,
+        "fats": 67,
+        "carbohydrates": {
+          "mono_and_disaccharides": 2.6,
+          "starch": 0
+        },
+        "ash": {
+          "total": 1
+        },
+        "minerals": {
+          "Na": 508,
+          "K": 38,
+          "Ca": 33,
+          "Mg": 13,
+          "P": 54,
+          "Fe": 1
+        },
+        "vitamins": {
+          "A": 0.02,
+          "beta_carotene": 0,
+          "B1": 0.01,
+          "B2": 0.05,
+          "PP": 0.03,
+          "C": 0
+        },
+        "energy_value": 624
+      },
+      {
+        "name": "Майонез столовый молочный",
+        "water": 25,
+        "proteins": 2.4,
+        "fats": 67,
+        "carbohydrates": {
+          "mono_and_disaccharides": 3.9,
+          "starch": 0
+        },
+        "ash": {
+          "total": 1.7
+        },
+        "minerals": {
+          "Na": 513,
+          "K": 63,
+          "Ca": 57,
+          "Mg": 11,
+          "P": 56,
+          "Fe": 0.4
+        },
+        "vitamins": {
+          "A": 0.01,
+          "beta_carotene": 0,
+          "B1": 0.01,
+          "B2": 0.08,
+          "PP": 0.03,
+          "C": 0
+        },
+        "energy_value": 627
+      }
+    ]
+  },
+  {
+    "category": "Детские и диетические продукты",
+    "items": [
+      {
+        "name": "Маргарин «Здоровье»",
+        "water": 17,
+        "proteins": 0.5,
+        "fats": 82,
+        "carbohydrates": {
+          "mono_and_disaccharides": 0.9,
+          "starch": 0
+        },
+        "ash": {
+          "total": 0.3
+        },
+        "minerals": {
+          "Na": 82,
+          "K": 22,
+          "Ca": 19,
+          "Mg": 2,
+          "P": 23,
+          "Fe": 0
+        },
+        "vitamins": {
+          "A": 3,
+          "beta_carotene": 0,
+          "B1": 0,
+          "B2": 0.02,
+          "PP": 0.01,
+          "C": 0
+        },
+        "energy_value": 743
+      },
+      {
+        "name": "Маргарин низкокалорийный (60% жира)",
+        "water": 39,
+        "proteins": 0.5,
+        "fats": 60,
+        "carbohydrates": {
+          "mono_and_disaccharides": 0.7,
+          "starch": 0
+        },
+        "ash": {
+          "total": 0.4
+        },
+        "minerals": {
+          "Na": 1129,
+          "K": 20,
+          "Ca": 151,
+          "Mg": 5,
+          "P": 15,
+          "Fe": 0
+        },
+        "vitamins": {
+          "A": 0.6,
+          "beta_carotene": 0,
+          "B1": 0.01,
+          "B2": 0.02,
+          "PP": 0.01,
+          "C": 0
+        },
+        "energy_value": 545
+      },
+      {
+        "name": "Майонез «Диабетический»",
+        "water": 25,
+        "proteins": 2.9,
+        "fats": 67,
+        "carbohydrates": {
+          "mono_and_disaccharides": 2.6,
+          "starch": 0
+        },
+        "ash": {
+          "total": 1.6
+        },
+        "minerals": {
+          "Na": 505,
+          "K": 38,
+          "Ca": 33,
+          "Mg": 13,
+          "P": 54,
+          "Fe": 1
+        },
+        "vitamins": {
+          "A": 0.02,
+          "beta_carotene": 0,
+          "B1": 0.01,
+          "B2": 0.05,
+          "PP": 0.03,
+          "C": 0
+        },
+        "energy_value": 624
+      }
+    ]
+  },
+  {
+    "category": "Растительные масла",
+    "items": [
+      {
+        "name": "Масло подсолнечное рафинированное",
+        "water": 0.1,
+        "proteins": 0,
+        "fats": 99.9,
+        "carbohydrates": {
+          "total": 0
+        },
+        "ash": {
+          "total": 0
+        },
+        "energy_value": 899
+      },
+      {
+        "name": "Масло арахисовое рафинированное",
+        "water": 0.1,
+        "proteins": 0,
+        "fats": 99.9,
+        "carbohydrates": {
+          "total": 0
+        },
+        "ash": {
+          "total": 0
+        },
+        "energy_value": 899
+      },
+      {
+        "name": "Масло кунжутное рафинированное",
+        "water": 0.1,
+        "proteins": 0,
+        "fats": 99.9,
+        "carbohydrates": {
+          "total": 0
+        },
+        "ash": {
+          "total": 0
+        },
+        "energy_value": 899
+      },
+      {
+        "name": "Масло соевое рафинированное",
+        "water": 0.1,
+        "proteins": 0,
+        "fats": 99.9,
+        "carbohydrates": {
+          "total": 0
+        },
+        "ash": {
+          "total": 0
+        },
+        "energy_value": 899
+      },
+      {
+        "name": "Масло оливковое рафинированное",
+        "water": 0.2,
+        "proteins": 0,
+        "fats": 99.8,
+        "carbohydrates": {
+          "total": 0
+        },
+        "ash": {
+          "total": 0
+        },
+        "energy_value": 898
+      },
+      {
+        "name": "Масло кукурузное рафинированное",
+        "water": 0.1,
+        "proteins": 0,
+        "fats": 99.9,
+        "carbohydrates": {
+          "total": 0
+        },
+        "ash": {
+          "total": 0
+        },
+        "energy_value": 899
+      },
+      {
+        "name": "Масло хлопковое рафинированное",
+        "water": 0.1,
+        "proteins": 0,
+        "fats": 99.9,
+        "carbohydrates": {
+          "total": 0
+        },
+        "ash": {
+          "total": 0
+        },
+        "energy_value": 899
+      },
+      {
+        "name": "Масло какао рафинированное",
+        "water": 0.1,
+        "proteins": 0,
+        "fats": 99.9,
+        "carbohydrates": {
+          "total": 0
+        },
+        "ash": {
+          "total": 0
+        },
+        "energy_value": 899
+      },
+      {
+        "name": "Масло кокосовое нерафинированное",
+        "water": 0.1,
+        "proteins": 0,
+        "fats": 99.9,
+        "carbohydrates": {
+          "total": 0
+        },
+        "ash": {
+          "total": 0
+        },
+        "energy_value": 899
+      },
+      {
+        "name": "Масло конопляное рафинированное",
+        "water": 0.15,
+        "proteins": 0,
+        "fats": 99.85,
+        "carbohydrates": {
+          "total": 0
+        },
+        "ash": {
+          "total": 0
+        },
+        "energy_value": 899
+      },
+      {
+        "name": "Масло рапсовое рафинированное",
+        "water": 0.15,
+        "proteins": 0,
+        "fats": 99.85,
+        "carbohydrates": {
+          "total": 0
+        },
+        "ash": {
+          "total": 0
+        },
+        "energy_value": 899
+      },
+      {
+        "name": "Масло пальмоядровое нерафинированное",
+        "water": 0.3,
+        "proteins": 0,
+        "fats": 99.7,
+        "carbohydrates": {
+          "total": 0
+        },
+        "ash": {
+          "total": 0
+        },
+        "energy_value": 897
+      },
+      {
+        "name": "Масло горчичное нерафинированное",
+        "water": 0.2,
+        "proteins": 0,
+        "fats": 99.8,
+        "carbohydrates": {
+          "total": 0
+        },
+        "ash": {
+          "total": 0
+        },
+        "energy_value": 898
+      }
+    ]
+  }
+]

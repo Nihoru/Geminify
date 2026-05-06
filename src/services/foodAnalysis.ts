@@ -4,13 +4,14 @@ import {
 } from "../utils/nutritionMath";
 import { foodSearchService } from "./foodSearch";
 import { llmService } from "./llmService";
-import { getSkurikhinCoefficients, searchSimilarFood } from "./vectorSearch";
+import {
+    getSkurikhinCoefficients,
+    getSkurikhinEnergyMacros,
+    searchEnergy,
+    searchLosses,
+} from "./vectorSearch";
 
-// Импортируем тяжелую базу для извлечения коэффициентов
-import skurikhinDBRaw from "../assets/skurihin_db.json";
-const skurikhinDB = skurikhinDBRaw as any[];
-
-const VECTOR_MATCH_THRESHOLD_DISH = 0.85; // Порог для целого блюда
+const VECTOR_MATCH_THRESHOLD_DISH = 0.85; // Порог для целого блюда (потери)
 const VECTOR_MATCH_THRESHOLD_ING = 0.8; // Порог для отдельного ингредиента
 
 export class FoodAnalysisService {
@@ -47,7 +48,7 @@ export class FoodAnalysisService {
                 ingredients: [] as any[],
             };
 
-            // 2. Глобальный векторный поиск (Блюдо целиком)
+            // 2. Глобальный векторный поиск ПОТЕРЬ (Блюдо целиком)
             let appliedDishLosses: SkurikhinCoefficients | null = null;
 
             if (
@@ -57,14 +58,14 @@ export class FoodAnalysisService {
                 const dishQuery = `Категория: ${dishData.dishCategory}; Блюдо: ${dishData.dishName}, ${dishData.preparationMethod}`;
                 const dishVector =
                     await llmService.generateEmbedding(dishQuery);
-                const dishMatch = searchSimilarFood(dishVector);
+                const dishMatch = searchLosses(dishVector);
 
                 if (
                     dishMatch &&
                     dishMatch.score >= VECTOR_MATCH_THRESHOLD_DISH
                 ) {
                     console.log(
-                        `[Orchestrator] ✅ Найдено целое блюдо у Скурихина: "${dishMatch.item.name}" (score: ${dishMatch.score.toFixed(2)})`,
+                        `[Orchestrator] ✅ Найдены потери для целого блюда (Скурихин): "${dishMatch.item.name}" (score: ${dishMatch.score.toFixed(2)})`,
                     );
                     appliedDishLosses = getSkurikhinCoefficients(
                         dishMatch.item.category,
@@ -72,7 +73,7 @@ export class FoodAnalysisService {
                     );
                 } else {
                     console.log(
-                        `[Orchestrator] ⚠️ Целое блюдо не найдено (лучший score: ${dishMatch?.score?.toFixed(2)}). Переход к ингредиентам.`,
+                        `[Orchestrator] ⚠️ Потери для целого блюда не найдены (лучший score: ${dishMatch?.score?.toFixed(2)}). Переход к ингредиентам.`,
                     );
                 }
             }
@@ -80,37 +81,68 @@ export class FoodAnalysisService {
             // 3. Обработка ингредиентов
             for (const item of dishData.ingredients) {
                 console.log(
-                    `  - Ингредиент: "${item.name}" (${item.weight}г готового, метод: ${item.preparationMethod})`,
+                    `  - Ингредиент: "${item.name}" (${item.weight}г готового, метод: ${item.preparationMethod}, Target: ${item.searchTarget})`,
                 );
 
-                // А. Поиск сырья в OpenFood (Fuse.js)
-                const { match: rawProduct } = foodSearchService.findBestMatch(
-                    item.name,
-                    item.searchQueries,
-                );
+                let rawMacros = null;
 
-                const rawMacros = rawProduct
-                    ? {
-                          calories: rawProduct.calories,
-                          protein: rawProduct.protein,
-                          fat: rawProduct.fat,
-                          carbs: rawProduct.carbs,
-                      }
-                    : {
-                          calories: item.calories_per_100g,
-                          protein: item.protein_per_100g,
-                          fat: item.fat_per_100g,
-                          carbs: item.carbs_per_100g,
-                      };
+                // А. МАРШРУТИЗАЦИЯ ПОИСКА СЫРЬЯ
+                if (item.searchTarget === "openfood") {
+                    // ПУТЬ 1: Готовая коммерческая еда (Fuse.js)
+                    const { match: rawProduct } =
+                        foodSearchService.findBestMatch(
+                            item.name,
+                            item.searchQueries,
+                        );
 
-                if (rawProduct) {
-                    console.log(
-                        `    🔍 Найдено сырье: ${rawProduct.base_name}`,
-                    );
+                    if (rawProduct) {
+                        console.log(
+                            `    🔍 Найдено в OpenFood: ${rawProduct.base_name}`,
+                        );
+                        rawMacros = {
+                            calories: rawProduct.calories,
+                            protein: rawProduct.protein,
+                            fat: rawProduct.fat,
+                            carbs: rawProduct.carbs,
+                        };
+                    }
                 } else {
+                    // ПУТЬ 2: Монопродукты и сырье (Скурихин Векторный Поиск)
+                    // Используем категорию ингредиента, если есть, иначе категорию блюда
+                    const categoryContext =
+                        item.category || dishData.dishCategory;
+                    const energyQuery = `Категория: ${categoryContext}; Продукт: ${item.name}`;
+
+                    const energyVector =
+                        await llmService.generateEmbedding(energyQuery);
+                    const energyMatch = searchEnergy(energyVector);
+
+                    if (
+                        energyMatch &&
+                        energyMatch.score >= VECTOR_MATCH_THRESHOLD_ING
+                    ) {
+                        console.log(
+                            `    ✅ Найдено сырье в Скурихине: "${energyMatch.item.name}" (score: ${energyMatch.score.toFixed(2)})`,
+                        );
+                        rawMacros = getSkurikhinEnergyMacros(energyMatch.item);
+                    } else {
+                        console.log(
+                            `    ⚠️ Сырье в Скурихине не найдено (лучший score: ${energyMatch?.score?.toFixed(2)}).`,
+                        );
+                    }
+                }
+
+                // Fallback: Если нигде не нашли, используем предсказания ИИ
+                if (!rawMacros) {
                     console.log(
-                        `    ⚠️ Сырье не найдено, используем ИИ-макросы.`,
+                        `    🤖 Продукт не найден в базах, используем ИИ-макросы.`,
                     );
+                    rawMacros = {
+                        calories: item.calories_per_100g,
+                        protein: item.protein_per_100g,
+                        fat: item.fat_per_100g,
+                        carbs: item.carbs_per_100g,
+                    };
                 }
 
                 // B. Каскад коэффициентов (Блюдо -> Ингредиент -> Fallback ИИ)
@@ -123,17 +155,19 @@ export class FoodAnalysisService {
                     item.preparationMethod.toLowerCase() !== "без обработки" &&
                     item.preparationMethod.toLowerCase() !== "сырой"
                 ) {
-                    const ingQuery = `Категория: ${dishData.category}; Блюдо: ${item.name}, ${item.preparationMethod}`;
+                    const categoryContext =
+                        item.category || dishData.dishCategory;
+                    const ingQuery = `Категория: ${categoryContext}; Блюдо: ${item.name}, ${item.preparationMethod}`;
                     const ingVector =
                         await llmService.generateEmbedding(ingQuery);
-                    const ingMatch = searchSimilarFood(ingVector);
+                    const ingMatch = searchLosses(ingVector);
 
                     if (
                         ingMatch &&
                         ingMatch.score >= VECTOR_MATCH_THRESHOLD_ING
                     ) {
                         console.log(
-                            `    ✅ Найден метод у Скурихина для ингредиента: "${ingMatch.item.name}"`,
+                            `    ✅ Найден метод потерь у Скурихина для ингредиента: "${ingMatch.item.name}"`,
                         );
                         currentLosses = getSkurikhinCoefficients(
                             ingMatch.item.category,
@@ -145,7 +179,7 @@ export class FoodAnalysisService {
                 // Если и ингредиент не нашли, используем то, что предсказал ИИ для блюда в целом
                 if (!currentLosses) {
                     console.log(
-                        `    🤖 Используем Fallback коэффициенты от ИИ`,
+                        `    🤖 Используем Fallback коэффициенты потерь от ИИ`,
                     );
                     currentLosses = {
                         mass_loss_percent:
