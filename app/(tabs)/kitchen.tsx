@@ -1,4 +1,3 @@
-import Fuse from "fuse.js";
 import React, { useMemo, useState } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import {
@@ -10,11 +9,11 @@ import {
 } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-// Импортируем нашу объединенную базу
+// Импортируем компоненты и контекст базы данных
 import { EditIngredientSheet } from "@/components/EditIngredientSheet";
 import { MaterialSymbol } from "@/components/MaterialSymbol";
 import { LAYOUT } from "@/src/constants/layout";
-import localFoodDB from "../../src/assets/food_db.json";
+import { FoodProduct, MealRealmContext } from "../../src/shared/store/models";
 
 // Утилита для заглавной буквы
 const capitalize = (str: string) => {
@@ -22,7 +21,7 @@ const capitalize = (str: string) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
-// Вспомогательный компонент для мини-макросов (как в MealDetailSheet)
+// Вспомогательный компонент для мини-макросов
 const renderMiniMacro = (
     bg: string,
     fg: string,
@@ -40,8 +39,14 @@ export default function KitchenScreen() {
     const theme = useTheme();
     const insets = useSafeAreaInsets();
 
-    const [searchQuery, setSearchQuery] = useState("");
+    // ПОДКЛЮЧАЕМ REALM
+    const { useRealm, useQuery } = MealRealmContext;
+    const realm = useRealm();
 
+    // Получаем все продукты из базы
+    const allProducts = useQuery<FoodProduct>("FoodProduct");
+
+    const [searchQuery, setSearchQuery] = useState("");
     const [isExtended, setIsExtended] = useState(true);
 
     const [selectedIngredient, setSelectedIngredient] = useState<any>(null);
@@ -52,129 +57,142 @@ export default function KitchenScreen() {
         setIsExtended(y <= 20);
     };
 
-    // Инициализируем Fuse.js для поиска
-    const fuse = useMemo(
-        () =>
-            new Fuse(localFoodDB, {
-                keys: ["base_name"],
-                threshold: 0.3,
-                distance: 100,
-            }),
-        [],
-    );
-
+    // ВСТРОЕННЫЙ МЕХАНИЗМ ПОИСКА REALM (вместо Fuse.js)
+    // ВСТРОЕННЫЙ УМНЫЙ ПОИСК REALM
     const displayData = useMemo(() => {
-        if (searchQuery.trim() === "") {
-            return localFoodDB;
-        }
-        return fuse.search(searchQuery).map((result) => result.item);
-    }, [searchQuery, fuse]);
+        const query = searchQuery.trim().toLowerCase();
 
-    const renderItem = ({ item }: { item: any }) => (
-        <View
-            style={[
-                styles.itemCard,
-                { backgroundColor: theme.colors.elevation.level1 },
-            ]}
-        >
-            {/* Левая часть: Компактный бейдж с калориями (48x48) */}
+        if (query === "") {
+            return allProducts;
+        }
+
+        // 1. Разбиваем запрос на слова (по пробелам)
+        const words = query.split(/\s+/);
+
+        // 2. Для каждого слова создаем условие: "искать это слово хоть в одном из трех полей"
+        const queryConditions = words.map(
+            (_, index) =>
+                `(brand CONTAINS[c] $${index} OR baseName CONTAINS[c] $${index} OR specs CONTAINS[c] $${index})`,
+        );
+
+        // 3. Склеиваем условия через AND.
+        // Если юзер ввел "йогурт клубника", Realm найдет продукт, где есть ОБА слова (неважно в каких полях и в каком порядке)
+        const finalQueryString = queryConditions.join(" AND ");
+
+        // 4. Передаем саму строку запроса и развернутый массив слов как аргументы
+        return allProducts.filtered(finalQueryString, ...words);
+    }, [searchQuery, allProducts]);
+
+    const renderItem = ({ item }: { item: any }) => {
+        // ОБРАТИ ВНИМАНИЕ: используем item.baseName (camelCase), так как это схема Realm
+        const fullName = [item.brand, item.baseName, item.specs]
+            .filter(Boolean)
+            .join(" ");
+
+        return (
             <View
                 style={[
-                    styles.ingLeadingBadge,
-                    { backgroundColor: theme.colors.primaryContainer },
+                    styles.itemCard,
+                    { backgroundColor: theme.colors.elevation.level1 },
                 ]}
             >
-                <Text
-                    variant="titleMedium" // Уменьшили с titleLarge
-                    style={{
-                        color: theme.colors.onPrimaryContainer,
-                        fontWeight: "800",
-                        lineHeight: 20, // Поджали высоту строки для компактности
-                    }}
+                <View
+                    style={[
+                        styles.ingLeadingBadge,
+                        { backgroundColor: theme.colors.primaryContainer },
+                    ]}
                 >
-                    {item.calories}
-                </Text>
-                <Text
-                    variant="labelSmall"
-                    style={{
-                        color: theme.colors.onPrimaryContainer,
-                        opacity: 0.8,
-                        fontSize: 9, // Слегка уменьшили базовый labelSmall для гармонии в маленьком квадрате
-                        lineHeight: 12,
-                    }}
-                >
-                    ккал
-                </Text>
-            </View>
-
-            {/* Центральная часть: Название и компактные БЖУ + "/ 100г" */}
-            <View style={styles.ingMainContent}>
-                <Text
-                    variant="titleSmall" // Уменьшили с titleMedium, как в MealFeedItem
-                    style={{
-                        color: theme.colors.onSurface,
-                        fontWeight: "700",
-                        marginBottom: 4, // Немного уменьшили отступ
-                    }}
-                    numberOfLines={1}
-                >
-                    {capitalize(item.name)}
-                </Text>
-                <View style={[styles.ingMacrosRow, { alignItems: "center" }]}>
-                    {renderMiniMacro(
-                        theme.colors.secondaryContainer,
-                        theme.colors.onSecondaryContainer,
-                        "Б",
-                        item.protein,
-                    )}
-                    {renderMiniMacro(
-                        theme.colors.tertiaryContainer,
-                        theme.colors.onTertiaryContainer,
-                        "Ж",
-                        item.fat,
-                    )}
-                    {renderMiniMacro(
-                        theme.colors.primaryContainer,
-                        theme.colors.onPrimaryContainer,
-                        "У",
-                        item.carbs,
-                    )}
+                    <Text
+                        variant="titleMedium"
+                        style={{
+                            color: theme.colors.onPrimaryContainer,
+                            fontWeight: "800",
+                            lineHeight: 20,
+                        }}
+                    >
+                        {item.calories}
+                    </Text>
                     <Text
                         variant="labelSmall"
                         style={{
-                            color: theme.colors.onSurfaceVariant,
-                            marginLeft: 4,
+                            color: theme.colors.onPrimaryContainer,
+                            opacity: 0.8,
+                            fontSize: 9,
+                            lineHeight: 12,
                         }}
                     >
-                        / 100г
+                        ккал
                     </Text>
                 </View>
-            </View>
 
-            {/* Правая часть: Компактная кнопка (высота 48) */}
-            <View style={styles.ingTrailing}>
-                <TouchableRipple
-                    onPress={() => {
-                        setSelectedIngredient(item);
-                        setEditVisible(true);
-                    }}
-                    style={[
-                        styles.editButtonFull,
-                        { backgroundColor: theme.colors.surfaceVariant },
-                    ]}
-                    borderless
-                >
-                    <MaterialSymbol
-                        name="edit"
-                        size={20} // Чуть уменьшили иконку
-                        color={theme.colors.onSurfaceVariant}
-                    />
-                </TouchableRipple>
-            </View>
-        </View>
-    );
+                <View style={styles.ingMainContent}>
+                    <Text
+                        variant="titleSmall"
+                        style={{
+                            color: theme.colors.onSurface,
+                            fontWeight: "700",
+                            marginBottom: 4,
+                        }}
+                        numberOfLines={1}
+                    >
+                        {capitalize(fullName)}
+                    </Text>
+                    <View
+                        style={[styles.ingMacrosRow, { alignItems: "center" }]}
+                    >
+                        {renderMiniMacro(
+                            theme.colors.secondaryContainer,
+                            theme.colors.onSecondaryContainer,
+                            "Б",
+                            item.protein,
+                        )}
+                        {renderMiniMacro(
+                            theme.colors.tertiaryContainer,
+                            theme.colors.onTertiaryContainer,
+                            "Ж",
+                            item.fat,
+                        )}
+                        {renderMiniMacro(
+                            theme.colors.primaryContainer,
+                            theme.colors.onPrimaryContainer,
+                            "У",
+                            item.carbs,
+                        )}
+                        <Text
+                            variant="labelSmall"
+                            style={{
+                                color: theme.colors.onSurfaceVariant,
+                                marginLeft: 4,
+                            }}
+                        >
+                            / 100г
+                        </Text>
+                    </View>
+                </View>
 
-    // Высчитываем отступ для FlatList, так как шапка у нас absolute
+                <View style={styles.ingTrailing}>
+                    <TouchableRipple
+                        onPress={() => {
+                            setSelectedIngredient(item);
+                            setEditVisible(true);
+                        }}
+                        style={[
+                            styles.editButtonFull,
+                            { backgroundColor: theme.colors.surfaceVariant },
+                        ]}
+                        borderless
+                    >
+                        <MaterialSymbol
+                            name="edit"
+                            size={20}
+                            color={theme.colors.onSurfaceVariant}
+                        />
+                    </TouchableRipple>
+                </View>
+            </View>
+        );
+    };
+
     const paddingTop = insets.top + 64 + 60 + 20 + 16;
 
     return (
@@ -184,7 +202,6 @@ export default function KitchenScreen() {
                 { backgroundColor: theme.colors.surface },
             ]}
         >
-            {/* Единый Хедер (как UnifiedHeader) */}
             <View
                 style={[
                     styles.unifiedHeader,
@@ -223,7 +240,7 @@ export default function KitchenScreen() {
                             { color: theme.colors.onSecondaryContainer },
                         ]}
                         iconColor={theme.colors.onSecondaryContainer}
-                        elevation={0} // Строгое соблюдение M3: убираем тень
+                        elevation={0}
                     />
                 </View>
             </View>
@@ -232,12 +249,13 @@ export default function KitchenScreen() {
                 onScroll={onScroll}
                 scrollEventThrottle={16}
                 data={displayData}
-                keyExtractor={(item, index) => item.base_name + index}
+                // Используем _id как уникальный ключ
+                keyExtractor={(item) => item._id.toHexString()}
                 renderItem={renderItem}
-                initialNumToRender={15} // Сколько элементов рендерить при первой загрузке экрана
-                maxToRenderPerBatch={20} // Сколько элементов дорендеривать за один кадр при скролле
-                windowSize={5} // Сколько "экранов" держать в памяти (по умолчанию 21, для 6000 лучше уменьшить, чтобы не забивать ОЗУ)
-                removeClippedSubviews={true} // Выгружает из памяти элементы, которые ушли далеко за экран
+                initialNumToRender={15}
+                maxToRenderPerBatch={20}
+                windowSize={5}
+                removeClippedSubviews={true}
                 contentContainerStyle={[
                     styles.listContent,
                     {
@@ -262,7 +280,7 @@ export default function KitchenScreen() {
                 icon={(props: any) => <MaterialSymbol name="add" {...props} />}
                 label="Продукт"
                 extended={isExtended}
-                elevation={0} // Убираем тень FAB по правилам нашего дизайна
+                elevation={0}
                 style={[
                     styles.fabStyle,
                     { backgroundColor: theme.colors.primary },
@@ -271,6 +289,7 @@ export default function KitchenScreen() {
                 color={theme.colors.onPrimary}
                 onPress={() => console.log("Add new product")}
             />
+
             <EditIngredientSheet
                 visible={isEditVisible}
                 ingredient={selectedIngredient}
@@ -279,8 +298,32 @@ export default function KitchenScreen() {
                     setSelectedIngredient(null);
                 }}
                 onSave={(data) => {
-                    console.log("Сохраняем в БД:", data);
-                    // Тут твоя логика обновления Realm или JSON
+                    try {
+                        realm.write(() => {
+                            // Находим продукт в базе по его ID
+                            const productToUpdate =
+                                realm.objectForPrimaryKey<any>(
+                                    "FoodProduct",
+                                    data._id,
+                                );
+
+                            if (productToUpdate) {
+                                // Обновляем поля напрямую
+                                productToUpdate.brand = data.brand;
+                                // В data из формы лежит base_name (snake_case),
+                                // перекладываем его в baseName (camelCase) для базы
+                                productToUpdate.baseName = data.base_name;
+                                productToUpdate.specs = data.specs;
+                                productToUpdate.calories = data.calories;
+                                productToUpdate.protein = data.protein;
+                                productToUpdate.fat = data.fat;
+                                productToUpdate.carbs = data.carbs;
+                            }
+                        });
+                        console.log("Успешно сохранено в базу Realm!");
+                    } catch (error) {
+                        console.error("Ошибка при сохранении:", error);
+                    }
                 }}
             />
         </View>
@@ -291,7 +334,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    // --- Стили Хедера ---
     unifiedHeader: {
         position: "absolute",
         top: 0,
@@ -319,24 +361,23 @@ const styles = StyleSheet.create({
     searchInput: {
         fontSize: 16,
     },
-    // --- Стили Списка и Карточек ---
     listContent: {
         paddingHorizontal: 16,
     },
     itemCard: {
         flexDirection: "row",
         alignItems: "center",
-        borderRadius: 24, // Как в MealFeedItem
-        padding: 12, // Как в MealFeedItem
-        marginBottom: 12, // Соответствует gap: 12 из индекса
+        borderRadius: 24,
+        padding: 12,
+        marginBottom: 12,
     },
     ingLeadingBadge: {
         width: 48,
         height: 48,
-        borderRadius: 16, // Как у smallTag в MealFeedItem
+        borderRadius: 16,
         justifyContent: "center",
         alignItems: "center",
-        marginRight: 12, // Как у compactCardLeft в MealFeedItem
+        marginRight: 12,
     },
     ingMainContent: {
         flex: 1,
@@ -352,18 +393,17 @@ const styles = StyleSheet.create({
         borderRadius: 6,
     },
     ingTrailing: {
-        marginLeft: 8, // Как у compactCardRight в MealFeedItem
+        marginLeft: 8,
         justifyContent: "center",
     },
     editButtonFull: {
         width: 40,
-        height: 48, // Высота совпадает с левым бейджем
-        borderRadius: 16, // Оставляем 16 для гармонии с левым квадратом
+        height: 48,
+        borderRadius: 16,
         justifyContent: "center",
         alignItems: "center",
         overflow: "hidden",
     },
-    // --- Остальное ---
     fabStyle: { position: "absolute", right: 16, zIndex: 20 },
     emptyState: {
         alignItems: "center",

@@ -1,7 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Alert, ScrollView, StyleSheet, View } from "react-native";
 import { AnimatedFAB, Text, useTheme } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+// НОВЫЕ ИМПОРТЫ ДЛЯ СВАЙПОВ
+import {
+    Directions,
+    FlingGestureHandler,
+    State,
+} from "react-native-gesture-handler";
 
 import { LAYOUT } from "@/src/constants/layout";
 import { AddMealModal } from "../../components/AddMealModal";
@@ -12,10 +18,7 @@ import { MealDetailSheet } from "../../components/MealDetailSheet";
 import { MealFeedItem } from "../../components/MealFeedItem";
 import { UnifiedHeader } from "../../components/UnifiedHeader";
 
-// НОВЫЕ ИМПОРТЫ
 import { foodAnalysisService } from "../../src/services/foodAnalysis";
-import { initVectorDB } from "../../src/services/vectorSearch";
-
 import { MealRealmContext } from "../../src/shared/store/models";
 import { getMealTypeFromDate } from "../../src/utils/mealHelpers";
 
@@ -25,7 +28,22 @@ export default function HomeScreen() {
 
     const { useRealm, useQuery } = MealRealmContext;
     const realm = useRealm();
-    const meals = useQuery("Meal").sorted("createdAt", true);
+
+    const [selectedDate, setSelectedDate] = useState(new Date());
+
+    const { startOfDay, endOfDay } = useMemo(() => {
+        const start = new Date(selectedDate);
+        start.setHours(0, 0, 0, 0);
+
+        const end = new Date(selectedDate);
+        end.setHours(23, 59, 59, 999);
+
+        return { startOfDay: start, endOfDay: end };
+    }, [selectedDate]);
+
+    const meals = useQuery("Meal")
+        .filtered("createdAt >= $0 AND createdAt <= $1", startOfDay, endOfDay)
+        .sorted("createdAt", true);
 
     const [isExtended, setIsExtended] = useState(true);
     const [period, setPeriod] = useState("day");
@@ -34,25 +52,18 @@ export default function HomeScreen() {
     const [isModalVisible, setModalVisible] = useState(false);
     const [isAnalyzing, setIsAnalyzing] = useState(false);
 
-    // ИНИЦИАЛИЗАЦИЯ ВЕКТОРНОЙ БАЗЫ ПРИ ЗАПУСКЕ ЭКРАНА
-    useEffect(() => {
-        const setupDatabase = async () => {
-            try {
-                console.log("[App] Инициализация векторной базы Скурихина...");
-                await initVectorDB();
-                console.log(
-                    "[App] ✅ Векторная база успешно загружена в память!",
-                );
-            } catch (error) {
-                console.error(
-                    "[App] ❌ Ошибка инициализации векторной базы:",
-                    error,
-                );
-            }
-        };
-
-        setupDatabase();
-    }, []);
+    const dailyStats = useMemo(() => {
+        return meals.reduce(
+            (acc, meal: any) => {
+                acc.calories += meal.totalCalories || 0;
+                acc.protein += meal.totalProtein || 0;
+                acc.fat += meal.totalFat || 0;
+                acc.carbs += meal.totalCarbs || 0;
+                return acc;
+            },
+            { calories: 0, protein: 0, fat: 0, carbs: 0 },
+        );
+    }, [meals]);
 
     const onScroll = ({ nativeEvent }: any) => {
         const y = Math.floor(nativeEvent?.contentOffset?.y) ?? 0;
@@ -61,14 +72,35 @@ export default function HomeScreen() {
 
     const paddingTop = insets.top + 64 + 56 + 20 + 24;
 
+    const isToday = useMemo(() => {
+        return new Date().toDateString() === selectedDate.toDateString();
+    }, [selectedDate]);
+
+    // Обработчики свайпов
+    const handlePrevDay = () => {
+        setSelectedDate((prev) => {
+            const newDate = new Date(prev);
+            newDate.setDate(prev.getDate() - 1);
+            return newDate;
+        });
+    };
+
+    const handleNextDay = () => {
+        if (isToday) return; // Блокируем свайп в будущее, если мы уже в "сегодня"
+        setSelectedDate((prev) => {
+            const newDate = new Date(prev);
+            newDate.setDate(prev.getDate() + 1);
+            return newDate;
+        });
+    };
+
     const handleSaveMeal = async (textPrompt: string) => {
         setIsAnalyzing(true);
-
         try {
-            // ИСПОЛЬЗУЕМ НОВЫЙ СЕРВИС-ОРКЕСТРАТОР
-            const analysisResult =
-                await foodAnalysisService.analyzeText(textPrompt);
-
+            const analysisResult = await foodAnalysisService.analyzeText(
+                textPrompt,
+                realm,
+            );
             realm.write(() => {
                 realm.create("Meal", {
                     mealName: analysisResult.mealName || textPrompt,
@@ -76,12 +108,9 @@ export default function HomeScreen() {
                     totalProtein: analysisResult.totalProtein,
                     totalFat: analysisResult.totalFat,
                     totalCarbs: analysisResult.totalCarbs,
-                    // Если вы добавили totalWeight в схему Realm, раскомментируйте строку ниже:
-                    // totalWeight: analysisResult.totalWeight,
                     dishes: analysisResult.dishes,
                 });
             });
-
             setModalVisible(false);
         } catch (error: any) {
             console.error("Ошибка при сохранении:", error);
@@ -101,77 +130,108 @@ export default function HomeScreen() {
                 { backgroundColor: theme.colors.surface },
             ]}
         >
-            <ScrollView
-                onScroll={onScroll}
-                scrollEventThrottle={16}
-                showsVerticalScrollIndicator={false}
-                contentContainerStyle={{
-                    flexGrow: 1,
-                    paddingTop: paddingTop,
-                    paddingBottom: LAYOUT.BOTTOM_NAV_THRESHOLD + 12,
+            {/* Оборачиваем ScrollView в обработчики свайпов влево/вправо */}
+            <FlingGestureHandler
+                direction={Directions.LEFT}
+                onHandlerStateChange={({ nativeEvent }) => {
+                    if (nativeEvent.state === State.ACTIVE) handleNextDay();
                 }}
             >
-                <DailyMacrosCard />
+                <FlingGestureHandler
+                    direction={Directions.RIGHT}
+                    onHandlerStateChange={({ nativeEvent }) => {
+                        if (nativeEvent.state === State.ACTIVE) handlePrevDay();
+                    }}
+                >
+                    <ScrollView
+                        onScroll={onScroll}
+                        scrollEventThrottle={16}
+                        showsVerticalScrollIndicator={false}
+                        contentContainerStyle={{
+                            flexGrow: 1,
+                            paddingTop: paddingTop,
+                            paddingBottom: LAYOUT.BOTTOM_NAV_THRESHOLD + 12,
+                        }}
+                    >
+                        {/* Старый блок с кнопками <View style={styles.dateNavigator}> удалён */}
 
-                <AiAdviceCard adviceText="Белок и жиры уже набраны! До конца дня старайся налегать на сложные углеводы: добавь к ужину порцию гречки или цельнозерновой хлеб." />
+                        <DailyMacrosCard
+                            currentCalories={dailyStats.calories}
+                            currentProtein={dailyStats.protein}
+                            currentFat={dailyStats.fat}
+                            currentCarbs={dailyStats.carbs}
+                        />
 
-                <View style={styles.feed}>
-                    {meals.length === 0 && (
-                        <Text style={styles.emptyText}>
-                            Список приёмов пищи пуст. Добавьте первую запись!
-                        </Text>
-                    )}
+                        <AiAdviceCard adviceText="Белок и жиры уже набраны! До конца дня старайся налегать на сложные углеводы: добавь к ужину порцию гречки или цельнозерновой хлеб." />
 
-                    {meals.map((meal: any) => {
-                        const mappedMeal = {
-                            id: meal._id.toHexString(),
-                            typeCode: getMealTypeFromDate(meal.createdAt),
-                            time: meal.createdAt.toLocaleTimeString([], {
-                                hour: "2-digit",
-                                minute: "2-digit",
-                            }),
-                            title: meal.mealName,
-                            calories: meal.totalCalories,
-                            macros: {
-                                p: meal.totalProtein,
-                                f: meal.totalFat,
-                                c: meal.totalCarbs,
-                            },
-                            dishes: meal.dishes.map((dish: any) => ({
-                                name: dish.name,
-                                totalWeight: dish.totalWeight,
-                                totalCalories: dish.totalCalories,
-                                totalProtein: dish.totalProtein,
-                                totalFat: dish.totalFat,
-                                totalCarbs: dish.totalCarbs,
-                                ingredients: dish.ingredients.map(
-                                    (ing: any) => ({
-                                        name: ing.name,
-                                        // ИЗМЕНЕНИЕ: используем cooked_weight, так как мы переименовали поле
-                                        weight: ing.cooked_weight || ing.weight,
-                                        calories: ing.calories,
-                                        protein: ing.protein,
-                                        fat: ing.fat,
-                                        carbs: ing.carbs,
-                                    }),
-                                ),
-                            })),
-                        };
-                        return (
-                            <MealFeedItem
-                                key={mappedMeal.id}
-                                meal={mappedMeal}
-                                onPress={() => setSelectedMeal(mappedMeal)}
-                            />
-                        );
-                    })}
-                </View>
-            </ScrollView>
+                        <View style={styles.feed}>
+                            {meals.length === 0 && (
+                                <Text style={styles.emptyText}>
+                                    Список приёмов пищи пуст. Добавьте первую
+                                    запись!
+                                </Text>
+                            )}
+
+                            {meals.map((meal: any) => {
+                                const mappedMeal = {
+                                    id: meal._id.toHexString(),
+                                    typeCode: getMealTypeFromDate(
+                                        meal.createdAt,
+                                    ),
+                                    time: meal.createdAt.toLocaleTimeString(
+                                        [],
+                                        {
+                                            hour: "2-digit",
+                                            minute: "2-digit",
+                                        },
+                                    ),
+                                    title: meal.mealName,
+                                    calories: meal.totalCalories,
+                                    macros: {
+                                        p: meal.totalProtein,
+                                        f: meal.totalFat,
+                                        c: meal.totalCarbs,
+                                    },
+                                    dishes: meal.dishes.map((dish: any) => ({
+                                        name: dish.name,
+                                        totalWeight: dish.totalWeight,
+                                        totalCalories: dish.totalCalories,
+                                        totalProtein: dish.totalProtein,
+                                        totalFat: dish.totalFat,
+                                        totalCarbs: dish.totalCarbs,
+                                        ingredients: dish.ingredients.map(
+                                            (ing: any) => ({
+                                                name: ing.name,
+                                                cookedWeight: ing.cookedWeight,
+                                                calories: ing.calories,
+                                                protein: ing.protein,
+                                                fat: ing.fat,
+                                                carbs: ing.carbs,
+                                            }),
+                                        ),
+                                    })),
+                                };
+                                return (
+                                    <MealFeedItem
+                                        key={mappedMeal.id}
+                                        meal={mappedMeal}
+                                        onPress={() =>
+                                            setSelectedMeal(mappedMeal)
+                                        }
+                                    />
+                                );
+                            })}
+                        </View>
+                    </ScrollView>
+                </FlingGestureHandler>
+            </FlingGestureHandler>
 
             <UnifiedHeader
                 period={period}
                 onPeriodChange={setPeriod}
                 insets={insets}
+                selectedDate={selectedDate} // <-- Передаем состояние
+                onDateChange={setSelectedDate} // <-- Передаем функцию изменения
             />
 
             <AnimatedFAB

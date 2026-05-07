@@ -32,7 +32,9 @@ export const EditIngredientSheet = ({
     const bottomSheetRef = useRef<BottomSheetModal>(null);
 
     // Локальный стейт для формы
-    const [name, setName] = useState("");
+    const [brand, setBrand] = useState("");
+    const [baseName, setBaseName] = useState("");
+    const [specs, setSpecs] = useState("");
     const [calories, setCalories] = useState("");
     const [protein, setProtein] = useState("");
     const [fat, setFat] = useState("");
@@ -40,27 +42,40 @@ export const EditIngredientSheet = ({
 
     const snapPoints = useMemo(() => ["85%"], []);
 
+    // 1. Управление видимостью шторки
     useEffect(() => {
-        if (visible && ingredient) {
-            setName(ingredient.name || "");
-            setCalories(String(ingredient.calories || ""));
-            setProtein(String(ingredient.protein || ""));
-            setFat(String(ingredient.fat || ""));
-            setCarbs(String(ingredient.carbs || ""));
+        if (visible) {
             bottomSheetRef.current?.present();
         } else {
             bottomSheetRef.current?.dismiss();
         }
+    }, [visible]);
+
+    // 2. Загрузка данных при открытии
+    useEffect(() => {
+        if (visible && ingredient) {
+            setBrand(ingredient.brand || "");
+            setBaseName(ingredient.base_name || "");
+            setSpecs(ingredient.specs || "");
+            setCalories(String(ingredient.calories || "0"));
+            setProtein(String(ingredient.protein || "0"));
+            setFat(String(ingredient.fat || "0"));
+            setCarbs(String(ingredient.carbs || "0"));
+        }
     }, [visible, ingredient]);
 
+    // 3. Сохранение данных
     const handleSave = () => {
         onSave({
             ...ingredient,
-            name,
-            calories: Number(calories),
-            protein: Number(protein),
-            fat: Number(fat),
-            carbs: Number(carbs),
+            brand,
+            base_name: baseName,
+            specs,
+            // Переводим строки обратно в числа
+            calories: Number(calories.replace(",", ".")),
+            protein: Number(protein.replace(",", ".")),
+            fat: Number(fat.replace(",", ".")),
+            carbs: Number(carbs.replace(",", ".")),
         });
         onDismiss();
     };
@@ -100,7 +115,6 @@ export const EditIngredientSheet = ({
                 backgroundColor: theme.colors.onSurfaceVariant,
                 width: 32,
             }}
-            // Важно для работы клавиатуры
             keyboardBehavior="interactive"
             keyboardBlurBehavior="restore"
         >
@@ -123,10 +137,33 @@ export const EditIngredientSheet = ({
                 </View>
 
                 <View style={styles.form}>
+                    {/* РАЗДЕЛИЛИ ОДИН ИНПУТ НА ТРИ */}
                     <TextInput
-                        label="Название"
-                        value={name}
-                        onChangeText={setName}
+                        label="Бренд (опционально)"
+                        value={brand}
+                        onChangeText={setBrand}
+                        mode="flat"
+                        underlineColor="transparent"
+                        activeUnderlineColor={theme.colors.primary}
+                        style={styles.input}
+                        theme={inputTheme}
+                    />
+
+                    <TextInput
+                        label="Базовое название (яблоко, йогурт)"
+                        value={baseName}
+                        onChangeText={setBaseName}
+                        mode="flat"
+                        underlineColor="transparent"
+                        activeUnderlineColor={theme.colors.primary}
+                        style={styles.input}
+                        theme={inputTheme}
+                    />
+
+                    <TextInput
+                        label="Спецификация (зеленое, 5%)"
+                        value={specs}
+                        onChangeText={setSpecs}
                         mode="flat"
                         underlineColor="transparent"
                         activeUnderlineColor={theme.colors.primary}
@@ -201,7 +238,7 @@ export const EditIngredientSheet = ({
                         textColor={theme.colors.error}
                         style={styles.secondaryButton}
                     >
-                        Удалить из базы
+                        Отмена
                     </Button>
                 </View>
             </BottomSheetScrollView>
@@ -236,7 +273,7 @@ const styles = StyleSheet.create({
         gap: 12,
     },
     gridItem: {
-        width: "48%", // Почти половина с учетом gap
+        width: "48%",
     },
     actions: {
         marginTop: 32,

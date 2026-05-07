@@ -17,20 +17,44 @@ import {
     PaperProvider,
     adaptNavigationTheme,
 } from "react-native-paper";
+import { registerTranslation, ru } from "react-native-paper-dates";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { initVectorDB } from "../src/services/vectorSearch";
 import { MealRealmContext } from "../src/shared/store/models";
+registerTranslation("ru", ru);
 
-// 1. ДОБАВЛЯЕМ ИМПОРТЫ ДЛЯ ЖЕСТОВ И ШТОРОК
+// 1. ИМПОРТЫ ДЛЯ ЖЕСТОВ И ШТОРОК
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
+// 2. НОВЫЕ ИМПОРТЫ ДЛЯ ИНИЦИАЛИЗАЦИИ БАЗ ДАННЫХ
+import { seedFoodDatabase } from "../src/utils/seedDatabase";
+// Раскомментируй эту строку, если перенесешь инициализацию векторов из index.tsx:
+// import { initVectorDB } from "../src/services/vectorSearch";
+
 SplashScreen.preventAutoHideAsync();
+
+// Вытаскиваем useRealm для нашего невидимого компонента
+const { RealmProvider, useRealm } = MealRealmContext;
+
+// 3. НОВЫЙ КОМПОНЕНТ-ИНИЦИАЛИЗАТОР
+function AppInitializer() {
+    const realm = useRealm();
+
+    useEffect(() => {
+        // Загружаем продукты в Realm (произойдет только один раз, если база пустая)
+        seedFoodDatabase(realm);
+
+        // Инициализируем векторные базы (здесь им самое место — на уровне всего приложения)
+        initVectorDB().catch(console.error);
+    }, [realm]);
+
+    return null; // Компонент ничего не рисует на экране, только выполняет логику
+}
 
 export default function RootLayout() {
     const colorScheme = useColorScheme();
     const isDark = colorScheme === "dark";
-
-    const { RealmProvider } = MealRealmContext;
 
     const [loaded, error] = useFonts({
         MaterialSymbolsRounded: require("../assets/fonts/MaterialSymbolsRounded-Regular.ttf"),
@@ -71,13 +95,13 @@ export default function RootLayout() {
     if (!loaded && !error) return null;
 
     return (
-        // 2. ОБЯЗАТЕЛЬНО оборачиваем всё в GestureHandlerRootView с flex: 1,
-        // иначе свайпы шторки просто не будут регистрироваться
         <GestureHandlerRootView style={{ flex: 1 }}>
             <SafeAreaProvider>
                 <RealmProvider>
+                    {/* 4. ВСТАВЛЯЕМ ИНИЦИАЛИЗАТОР ВНУТРЬ ПРОВАЙДЕРА REALM */}
+                    <AppInitializer />
+
                     <PaperProvider theme={paperTheme}>
-                        {/* 3. Добавляем провайдер для модальных шторок */}
                         <BottomSheetModalProvider>
                             <StatusBar
                                 style={isDark ? "light" : "dark"}

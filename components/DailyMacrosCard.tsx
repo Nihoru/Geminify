@@ -3,32 +3,52 @@ import { StyleSheet, View } from "react-native";
 import { Text, useTheme } from "react-native-paper";
 import { RoundedProgressBar } from "./RoundedProgressBar";
 
-export const DailyMacrosCard = () => {
+// Добавляем интерфейс для входящих данных
+interface DailyMacrosCardProps {
+    currentCalories: number;
+    targetCalories?: number;
+    currentProtein: number;
+    targetProtein?: number;
+    currentFat: number;
+    targetFat?: number;
+    currentCarbs: number;
+    targetCarbs?: number;
+}
+
+export const DailyMacrosCard = ({
+    currentCalories = 0,
+    targetCalories = 2500, // Цели пока оставим по умолчанию
+    currentProtein = 0,
+    targetProtein = 120,
+    currentFat = 0,
+    targetFat = 80,
+    currentCarbs = 0,
+    targetCarbs = 300,
+}: DailyMacrosCardProps) => {
     const theme = useTheme();
 
-    // В реальном приложении эти данные придут из пропсов или стейта (например, после ответа Gemini API)
     const macrosData = [
         {
             id: "protein",
             label: "Белки",
-            current: 140,
-            target: 120,
+            current: Math.round(currentProtein),
+            target: targetProtein,
             mainColor: theme.colors.primary,
             containerColor: theme.colors.primaryContainer,
         },
         {
             id: "fat",
             label: "Жиры",
-            current: 80,
-            target: 80,
+            current: Math.round(currentFat),
+            target: targetFat,
             mainColor: theme.colors.secondary,
             containerColor: theme.colors.secondaryContainer,
         },
         {
             id: "carbs",
             label: "Углев.",
-            current: 172,
-            target: 300,
+            current: Math.round(currentCarbs),
+            target: targetCarbs,
             mainColor: theme.colors.tertiary,
             containerColor: theme.colors.tertiaryContainer,
         },
@@ -44,7 +64,7 @@ export const DailyMacrosCard = () => {
                         fontWeight: "700",
                     }}
                 >
-                    1985
+                    {Math.round(currentCalories)}
                 </Text>
                 <Text
                     variant="titleLarge"
@@ -54,7 +74,7 @@ export const DailyMacrosCard = () => {
                         marginBottom: 4,
                     }}
                 >
-                    / 2500 ккал
+                    / {targetCalories} ккал
                 </Text>
             </View>
 
@@ -62,13 +82,10 @@ export const DailyMacrosCard = () => {
                 {macrosData.map((macro) => {
                     const isOver = macro.current > macro.target;
 
-                    // Если перебор, считаем процент переполнения (например, 20 лишних из 120 = 16%)
-                    // Если норма - просто текущий прогресс
                     const barProgress = isOver
                         ? (macro.current - macro.target) / macro.target
                         : macro.current / macro.target;
 
-                    // Инвертируем цвета при переборе
                     const activeColor = isOver
                         ? macro.containerColor
                         : macro.mainColor;

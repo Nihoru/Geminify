@@ -81,12 +81,41 @@ export class Meal extends Realm.Object<Meal> {
     };
 }
 
+export class FoodProduct extends Realm.Object<FoodProduct> {
+    _id!: Realm.BSON.ObjectId;
+    brand!: string;
+    baseName!: string;
+    specs!: string;
+    calories!: number;
+    protein!: number;
+    fat!: number;
+    carbs!: number;
+    barcode!: string;
+
+    static schema: Realm.ObjectSchema = {
+        name: "FoodProduct",
+        primaryKey: "_id",
+        properties: {
+            _id: { type: "objectId", default: () => new Realm.BSON.ObjectId() },
+            brand: { type: "string", default: "" },
+            baseName: { type: "string", default: "" }, // мапим base_name из JSON сюда
+            specs: { type: "string", default: "" },
+            calories: { type: "double", default: 0 },
+            protein: { type: "double", default: 0 },
+            fat: { type: "double", default: 0 },
+            carbs: { type: "double", default: 0 },
+            barcode: { type: "string", default: "" },
+        },
+    };
+}
+
 export const MealRealmContext = createRealmContext({
-    schema: [Meal, Dish, Ingredient],
-    schemaVersion: 3,
+    // Добавили FoodProduct в массив
+    schema: [Meal, Dish, Ingredient, FoodProduct],
+    schemaVersion: 4, // Подняли версию базы данных!
     onMigration: (oldRealm, newRealm) => {
+        // Твоя предыдущая миграция для версии 3 остается здесь
         if (oldRealm.schemaVersion < 3) {
-            // Итерируем по всем приемам пищи (они имеют Primary Key и их можно запрашивать)
             const oldMeals = oldRealm.objects("Meal");
             const newMeals = newRealm.objects<Meal>("Meal");
 
@@ -94,17 +123,14 @@ export const MealRealmContext = createRealmContext({
                 const oldMeal = oldMeals[i] as any;
                 const newMeal = newMeals[i];
 
-                // Перебираем блюда внутри приема пищи
                 for (let j = 0; j < oldMeal.dishes.length; j++) {
                     const oldDish = oldMeal.dishes[j];
                     const newDish = newMeal.dishes[j];
 
-                    // Перебираем ингредиенты внутри блюда
                     for (let k = 0; k < oldDish.ingredients.length; k++) {
                         const oldIng = oldDish.ingredients[k];
                         const newIng = newDish.ingredients[k];
 
-                        // Берем старый вес и записываем в оба новых поля
                         const oldWeight = oldIng.weight || 0;
                         newIng.cookedWeight = oldWeight;
                         newIng.rawWeightEstimated = oldWeight;
@@ -112,5 +138,6 @@ export const MealRealmContext = createRealmContext({
                 }
             }
         }
+        // Для версии 4 писать миграцию не нужно, так как мы просто создали новую пустую таблицу
     },
 });

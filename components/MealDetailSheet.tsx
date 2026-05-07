@@ -16,7 +16,7 @@ const capitalize = (str: string) => {
 
 interface IngredientInfo {
     name: string;
-    weight: number;
+    cookedWeight: number;
     calories: number;
     protein: number;
     fat: number;
@@ -342,7 +342,7 @@ export const MealDetailSheet = ({
                                                 fontWeight: "700",
                                             }}
                                         >
-                                            {ing.weight}г
+                                            {ing.cookedWeight}г
                                         </Text>
                                     </View>
                                     {/* --- ТУТ ЗАКАНЧИВАЕТСЯ ТВОЯ СТАРАЯ ВЕРСТКА КАРТОЧКИ --- */}

@@ -1,3 +1,4 @@
+import Realm from "realm";
 import {
     calculateCookedNutrients,
     SkurikhinCoefficients,
@@ -15,7 +16,7 @@ const VECTOR_MATCH_THRESHOLD_DISH = 0.85; // Порог для целого бл
 const VECTOR_MATCH_THRESHOLD_ING = 0.8; // Порог для отдельного ингредиента
 
 export class FoodAnalysisService {
-    public async analyzeText(textPrompt: string) {
+    public async analyzeText(textPrompt: string, realm: Realm) {
         console.log(`[Orchestrator] 🚀 Запуск анализа: "${textPrompt}"`);
 
         // 1. Экстракция данных через LLM
@@ -91,6 +92,7 @@ export class FoodAnalysisService {
                     // ПУТЬ 1: Готовая коммерческая еда (Fuse.js)
                     const { match: rawProduct } =
                         foodSearchService.findBestMatch(
+                            realm,
                             item.name,
                             item.searchQueries,
                         );

@@ -46,35 +46,44 @@ let vectorsEnergyFloat32: Float32Array | null = null;
 let energyVectorSize: number = 0;
 
 export async function initVectorDB(): Promise<void> {
-    console.log("[VectorDB] Инициализация баз данных...");
+    console.log("[VectorDB] ⏳ Начало загрузки векторных баз данных...");
 
-    // 1. Загрузка базы Потерь
-    const assetLosses = Asset.fromModule(
-        require("../assets/vectorsLosses.bin"),
-    );
-    await assetLosses.downloadAsync();
-    if (!assetLosses.localUri)
-        throw new Error("Не удалось загрузить vectorsLosses.bin");
-    const fileLosses = new File(assetLosses.localUri);
-    const uint8ArrayLosses = await fileLosses.bytes();
-    vectorsLossesFloat32 = new Float32Array(uint8ArrayLosses.buffer);
-    lossesVectorSize = vectorsLossesFloat32.length / metadataLosses.length;
+    try {
+        // 1. Загрузка базы Потерь
+        const assetLosses = Asset.fromModule(
+            require("../assets/vectorsLosses.bin"),
+        );
+        await assetLosses.downloadAsync();
+        if (!assetLosses.localUri)
+            throw new Error("Не удалось загрузить vectorsLosses.bin");
 
-    // 2. Загрузка базы Энергетической ценности (Сырье)
-    const assetEnergy = Asset.fromModule(
-        require("../assets/vectorsEnergy.bin"),
-    );
-    await assetEnergy.downloadAsync();
-    if (!assetEnergy.localUri)
-        throw new Error("Не удалось загрузить vectorsEnergy.bin");
-    const fileEnergy = new File(assetEnergy.localUri);
-    const uint8ArrayEnergy = await fileEnergy.bytes();
-    vectorsEnergyFloat32 = new Float32Array(uint8ArrayEnergy.buffer);
-    energyVectorSize = vectorsEnergyFloat32.length / metadataEnergy.length;
+        const fileLosses = new File(assetLosses.localUri);
+        const uint8ArrayLosses = await fileLosses.bytes();
+        vectorsLossesFloat32 = new Float32Array(uint8ArrayLosses.buffer);
+        lossesVectorSize = vectorsLossesFloat32.length / metadataLosses.length;
 
-    console.log(
-        `[VectorDB] ✅ Загружено. Losses Size: ${lossesVectorSize}, Energy Size: ${energyVectorSize}`,
-    );
+        // 2. Загрузка базы Энергетической ценности (Сырье)
+        const assetEnergy = Asset.fromModule(
+            require("../assets/vectorsEnergy.bin"),
+        );
+        await assetEnergy.downloadAsync();
+        if (!assetEnergy.localUri)
+            throw new Error("Не удалось загрузить vectorsEnergy.bin");
+
+        const fileEnergy = new File(assetEnergy.localUri);
+        const uint8ArrayEnergy = await fileEnergy.bytes();
+        vectorsEnergyFloat32 = new Float32Array(uint8ArrayEnergy.buffer);
+        energyVectorSize = vectorsEnergyFloat32.length / metadataEnergy.length;
+
+        // ИТОГОВЫЙ ЛОГ
+        console.log(`[VectorDB] ✅ Векторные базы успешно загружены! `);
+    } catch (error) {
+        console.error(
+            "[VectorDB] ❌ Ошибка при инициализации векторных баз:",
+            error,
+        );
+        throw error; // Пробрасываем ошибку дальше, чтобы знать, что инициализация не удалась
+    }
 }
 
 // Универсальная функция косинусного сходства
