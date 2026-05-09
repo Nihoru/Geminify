@@ -132,7 +132,7 @@ export default function TabLayout() {
                 }}
             />
             <Tabs.Screen
-                name="goals"
+                name="goal"
                 options={{
                     tabBarLabel: "Цели",
                     tabBarIcon: ({ focused, color }) => (

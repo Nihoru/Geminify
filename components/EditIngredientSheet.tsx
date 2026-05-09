@@ -53,14 +53,25 @@ export const EditIngredientSheet = ({
 
     // 2. Загрузка данных при открытии
     useEffect(() => {
-        if (visible && ingredient) {
-            setBrand(ingredient.brand || "");
-            setBaseName(ingredient.baseName || "");
-            setSpecs(ingredient.specs || "");
-            setCalories(String(ingredient.calories || "0"));
-            setProtein(String(ingredient.protein || "0"));
-            setFat(String(ingredient.fat || "0"));
-            setCarbs(String(ingredient.carbs || "0"));
+        if (visible) {
+            if (ingredient) {
+                setBrand(ingredient.brand || "");
+                setBaseName(ingredient.baseName || "");
+                setSpecs(ingredient.specs || "");
+                setCalories(String(ingredient.calories ?? "0"));
+                setProtein(String(ingredient.protein ?? "0"));
+                setFat(String(ingredient.fat ?? "0"));
+                setCarbs(String(ingredient.carbs ?? "0"));
+            } else {
+                // Если ingredient null, значит это режим добавления — очищаем форму
+                setBrand("");
+                setBaseName("");
+                setSpecs("");
+                setCalories("");
+                setProtein("");
+                setFat("");
+                setCarbs("");
+            }
         }
     }, [visible, ingredient]);
 
@@ -126,7 +137,7 @@ export const EditIngredientSheet = ({
             >
                 <View style={styles.header}>
                     <Text variant="headlineSmall" style={styles.boldText}>
-                        Изменить продукт
+                        {ingredient ? "Изменить продукт" : "Добавить продукт"}
                     </Text>
                     <Text
                         variant="bodyMedium"

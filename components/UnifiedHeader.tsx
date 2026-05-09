@@ -1,5 +1,5 @@
 import { useRouter } from "expo-router";
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { Animated, StyleSheet, View } from "react-native";
 import {
     IconButton,
@@ -23,6 +23,71 @@ interface UnifiedHeaderProps {
 const TOP_ROW_HEIGHT = 64;
 const DATE_ITEM_WIDTH = 100;
 
+const DateItem = React.memo(({ date, isToday, theme, onPress }: any) => {
+    const dayNum = date.getDate().toString().padStart(2, "0");
+    const monthName = date
+        .toLocaleDateString("ru-RU", { month: "short" })
+        .replace(".", "");
+    const weekdayName = date.toLocaleDateString("ru-RU", { weekday: "short" });
+
+    return (
+        <View
+            style={[
+                styles.dateItemContainer,
+                // Добавляем заливку контейнера для сегодняшнего дня
+                isToday && {
+                    backgroundColor: theme.colors.primaryContainer,
+                    borderRadius: 26,
+                },
+            ]}
+        >
+            <TouchableRipple onPress={onPress} style={styles.titleTouchable}>
+                <View style={styles.dateContentRow}>
+                    <Text
+                        style={[
+                            styles.tapeDayNum,
+                            {
+                                // Используем onPrimaryContainer для идеального контраста M3
+                                color: isToday
+                                    ? theme.colors.onPrimaryContainer
+                                    : theme.colors.onSurfaceVariant,
+                            },
+                        ]}
+                    >
+                        {dayNum}
+                    </Text>
+                    <View style={styles.tapeMonthWeekColumn}>
+                        <Text
+                            style={[
+                                styles.tapeMonth,
+                                {
+                                    color: isToday
+                                        ? theme.colors.onPrimaryContainer
+                                        : theme.colors.onSurfaceVariant,
+                                },
+                            ]}
+                        >
+                            {monthName}
+                        </Text>
+                        <Text
+                            style={[
+                                styles.tapeWeekday,
+                                {
+                                    color: isToday
+                                        ? theme.colors.onPrimaryContainer
+                                        : theme.colors.outline,
+                                },
+                            ]}
+                        >
+                            {weekdayName}
+                        </Text>
+                    </View>
+                </View>
+            </TouchableRipple>
+        </View>
+    );
+});
+
 export const UnifiedHeader = ({
     insets,
     selectedDate,
@@ -33,32 +98,36 @@ export const UnifiedHeader = ({
 }: UnifiedHeaderProps) => {
     const theme = useTheme();
     const router = useRouter();
-    const [isDatePickerVisible, setDatePickerVisible] = useState(false);
-
-    const { inputRange, outputRange } = useMemo(() => {
-        return {
-            inputRange: dates.map((_, i) => i * pagingWidth),
-            outputRange: dates.map((_, i) => -i * DATE_ITEM_WIDTH),
-        };
-    }, [dates, pagingWidth]);
+    const [isDatePickerVisible, setDatePickerVisible] = React.useState(false);
 
     const translateX = scrollX.interpolate({
-        inputRange,
-        outputRange,
-        extrapolate: "clamp",
+        inputRange: [0, pagingWidth],
+        outputRange: [0, -DATE_ITEM_WIDTH],
     });
 
-    const onConfirmDate = (params: any) => {
-        setDatePickerVisible(false);
-        if (params.date) {
-            onDateChange(params.date);
-        }
-    };
+    // --- МАГИЯ СКОЛЬЗЯЩЕГО ОКНА ---
+    // 1. Находим, где мы сейчас находимся в большом массиве
+    const currentIndex = useMemo(() => {
+        const idx = dates.findIndex(
+            (d) => d.getTime() === selectedDate.getTime(),
+        );
+        return idx !== -1 ? idx : Math.floor(dates.length / 2);
+    }, [dates, selectedDate]);
 
-    // Возврат на сегодняшний день при клике на окошко
-    const handleGoToToday = () => {
-        onDateChange(new Date());
-    };
+    // 2. Вырезаем только 30 дат (15 до и 15 после текущей)
+    const RENDER_WINDOW = 15;
+
+    const windowData = useMemo(() => {
+        const start = Math.max(0, currentIndex - RENDER_WINDOW);
+        const end = Math.min(dates.length - 1, currentIndex + RENDER_WINDOW);
+        return {
+            // Чтобы вырезанный кусок встал на свое законное место в ленте,
+            // добавляем ему отступ слева, равный количеству "невидимых" дат
+            paddingLeft: start * DATE_ITEM_WIDTH,
+            slicedDates: dates.slice(start, end + 1),
+            startIndex: start,
+        };
+    }, [dates, currentIndex]);
 
     return (
         <View
@@ -66,129 +135,55 @@ export const UnifiedHeader = ({
                 styles.unifiedHeader,
                 {
                     paddingTop: insets.top,
-                    // Хедер выступает как "верхний" слой
                     backgroundColor: theme.colors.elevation.level2,
                     paddingBottom: 16,
                 },
             ]}
         >
             <View style={[styles.headerTopRow, { height: TOP_ROW_HEIGHT }]}>
-                {/* МАСКА (ОКНО) */}
                 <View
                     style={[
                         styles.dateWindow,
-                        {
-                            // Для создания эффекта "выреза" (дыры) используем более глубокий/тёмный цвет
-                            // Если surfaceVariant кажется недостаточно глубоким, можно попробовать theme.colors.background
-                            backgroundColor: theme.colors.surfaceVariant,
-                        },
+                        { backgroundColor: theme.colors.surfaceVariant },
                     ]}
                 >
                     <Animated.View
                         style={[
                             styles.dateTape,
-                            { transform: [{ translateX }] },
+                            {
+                                transform: [{ translateX }],
+                                paddingLeft: windowData.paddingLeft, // Сдвигаем рендер-окно
+                            },
                         ]}
                     >
-                        {dates.map((date, index) => {
-                            const isToday =
-                                new Date().toDateString() ===
-                                date.toDateString();
-
-                            const dayNum = date
-                                .getDate()
-                                .toString()
-                                .padStart(2, "0");
-                            const monthName = date
-                                .toLocaleDateString("ru-RU", { month: "short" })
-                                .replace(".", "");
-                            const weekdayName = date.toLocaleDateString(
-                                "ru-RU",
-                                {
-                                    weekday: "short",
-                                },
-                            );
-
-                            return (
-                                <View
-                                    key={index}
-                                    style={styles.dateItemContainer}
-                                >
-                                    <TouchableRipple
-                                        // Теперь при клике перебрасывает на "Сегодня"
-                                        onPress={handleGoToToday}
-                                        style={styles.titleTouchable}
-                                    >
-                                        <View style={styles.dateContentRow}>
-                                            <Text
-                                                style={[
-                                                    styles.tapeDayNum,
-                                                    {
-                                                        color: isToday
-                                                            ? theme.colors
-                                                                  .primary
-                                                            : theme.colors
-                                                                  .onSurfaceVariant,
-                                                    },
-                                                ]}
-                                            >
-                                                {dayNum}
-                                            </Text>
-                                            <View
-                                                style={
-                                                    styles.tapeMonthWeekColumn
-                                                }
-                                            >
-                                                <Text
-                                                    style={[
-                                                        styles.tapeMonth,
-                                                        {
-                                                            color: isToday
-                                                                ? theme.colors
-                                                                      .primary
-                                                                : theme.colors
-                                                                      .onSurfaceVariant,
-                                                        },
-                                                    ]}
-                                                >
-                                                    {monthName}
-                                                </Text>
-                                                <Text
-                                                    style={[
-                                                        styles.tapeWeekday,
-                                                        {
-                                                            color: isToday
-                                                                ? theme.colors
-                                                                      .primary
-                                                                : theme.colors
-                                                                      .outline,
-                                                        },
-                                                    ]}
-                                                >
-                                                    {weekdayName}
-                                                </Text>
-                                            </View>
-                                        </View>
-                                    </TouchableRipple>
-                                </View>
-                            );
-                        })}
+                        {/* Рендерим всего 31 элемент вместо 730! */}
+                        {windowData.slicedDates.map((date, idx) => (
+                            <DateItem
+                                key={(windowData.startIndex + idx).toString()}
+                                date={date}
+                                theme={theme}
+                                isToday={
+                                    new Date().toDateString() ===
+                                    date.toDateString()
+                                }
+                                onPress={() => onDateChange(new Date())}
+                            />
+                        ))}
                     </Animated.View>
                 </View>
 
-                {/* БЛОК КНОПОК */}
                 <View style={styles.actionButtonsGroup}>
                     <IconButton
-                        icon={(props: any) => (
+                        icon={(props) => (
                             <MaterialSymbol name="calendar_month" {...props} />
                         )}
                         iconColor={theme.colors.onSurfaceVariant}
                         containerColor={theme.colors.surfaceVariant}
-                        size={24} // Немного уменьшили иконки для аккуратности
+                        size={24}
                         onPress={() => setDatePickerVisible(true)}
                     />
                     <IconButton
-                        icon={(props: any) => (
+                        icon={(props) => (
                             <MaterialSymbol name="settings" {...props} />
                         )}
                         iconColor={theme.colors.onSurfaceVariant}
@@ -205,8 +200,11 @@ export const UnifiedHeader = ({
                 visible={isDatePickerVisible}
                 onDismiss={() => setDatePickerVisible(false)}
                 date={selectedDate}
-                onConfirm={onConfirmDate}
-                validRange={{ endDate: new Date() }} // Запрет выбора дат из будущего, если требуется
+                onConfirm={(params) => {
+                    setDatePickerVisible(false);
+                    if (params.date) onDateChange(params.date);
+                }}
+                validRange={{ endDate: new Date() }}
             />
         </View>
     );
@@ -233,13 +231,8 @@ const styles = StyleSheet.create({
         height: 52,
         borderRadius: 26,
         overflow: "hidden",
-        justifyContent: "center",
     },
-    dateTape: {
-        flexDirection: "row",
-        alignItems: "center",
-        height: "100%",
-    },
+    dateTape: { flexDirection: "row", alignItems: "center", height: "100%" },
     dateItemContainer: {
         width: DATE_ITEM_WIDTH,
         height: "100%",
@@ -252,34 +245,20 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
     },
-    dateContentRow: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-    },
+    dateContentRow: { flexDirection: "row", alignItems: "center" },
     tapeDayNum: {
         fontSize: 28,
         fontWeight: "900",
         marginRight: 6,
         lineHeight: 28,
     },
-    tapeMonthWeekColumn: {
-        justifyContent: "center",
-    },
+    tapeMonthWeekColumn: { justifyContent: "center" },
     tapeMonth: {
         fontSize: 12,
         fontWeight: "800",
         textTransform: "uppercase",
         marginBottom: -2,
     },
-    tapeWeekday: {
-        fontSize: 10,
-        fontWeight: "500",
-    },
-    // Новый класс для группировки кнопок
-    actionButtonsGroup: {
-        flexDirection: "row",
-        alignItems: "center",
-        gap: 4, // Отступ между кнопками
-    },
+    tapeWeekday: { fontSize: 10, fontWeight: "500" },
+    actionButtonsGroup: { flexDirection: "row", alignItems: "center", gap: 4 },
 });

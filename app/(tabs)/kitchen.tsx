@@ -287,7 +287,11 @@ export default function KitchenScreen() {
                     { bottom: LAYOUT.BOTTOM_NAV_THRESHOLD + 16 },
                 ]}
                 color={theme.colors.onPrimary}
-                onPress={() => console.log("Add new product")}
+                onPress={() => {
+                    // Очищаем выбранный ингредиент и открываем шторку
+                    setSelectedIngredient(null);
+                    setEditVisible(true);
+                }}
             />
 
             <EditIngredientSheet
@@ -300,24 +304,35 @@ export default function KitchenScreen() {
                 onSave={(data) => {
                     try {
                         realm.write(() => {
-                            // Находим продукт в базе по его ID
-                            const productToUpdate =
-                                realm.objectForPrimaryKey<any>(
-                                    "FoodProduct",
-                                    data._id,
-                                );
+                            if (data._id) {
+                                // РЕЖИМ РЕДАКТИРОВАНИЯ
+                                const productToUpdate =
+                                    realm.objectForPrimaryKey<any>(
+                                        "FoodProduct",
+                                        data._id,
+                                    );
 
-                            if (productToUpdate) {
-                                // Обновляем поля напрямую
-                                productToUpdate.brand = data.brand;
-                                // В data из формы лежит base_name (snake_case),
-                                // перекладываем его в baseName (camelCase) для базы
-                                productToUpdate.baseName = data.base_name;
-                                productToUpdate.specs = data.specs;
-                                productToUpdate.calories = data.calories;
-                                productToUpdate.protein = data.protein;
-                                productToUpdate.fat = data.fat;
-                                productToUpdate.carbs = data.carbs;
+                                if (productToUpdate) {
+                                    productToUpdate.brand = data.brand;
+                                    productToUpdate.baseName = data.base_name;
+                                    productToUpdate.specs = data.specs;
+                                    productToUpdate.calories = data.calories;
+                                    productToUpdate.protein = data.protein;
+                                    productToUpdate.fat = data.fat;
+                                    productToUpdate.carbs = data.carbs;
+                                }
+                            } else {
+                                // РЕЖИМ ДОБАВЛЕНИЯ НОВОЙ ЗАПИСИ
+                                realm.create("FoodProduct", {
+                                    _id: new Realm.BSON.ObjectId(), // Генерируем новый ID
+                                    brand: data.brand,
+                                    baseName: data.base_name,
+                                    specs: data.specs,
+                                    calories: data.calories,
+                                    protein: data.protein,
+                                    fat: data.fat,
+                                    carbs: data.carbs,
+                                });
                             }
                         });
                         console.log("Успешно сохранено в базу Realm!");
