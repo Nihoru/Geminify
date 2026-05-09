@@ -1,46 +1,52 @@
 import { useRouter } from "expo-router";
-import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import React, { useMemo, useState } from "react";
+import { Animated, StyleSheet, View } from "react-native";
 import {
     IconButton,
     Text,
     TouchableRipple,
     useTheme,
 } from "react-native-paper";
-import { DatePickerModal } from "react-native-paper-dates"; // <-- Новый импорт календаря M3
+import { DatePickerModal } from "react-native-paper-dates";
 import { EdgeInsets } from "react-native-safe-area-context";
-import { CustomSegmentedControl } from "./CustomSegmentedControl";
 import { MaterialSymbol } from "./MaterialSymbol";
 
 interface UnifiedHeaderProps {
-    period: string;
-    onPeriodChange: (period: string) => void;
     insets: EdgeInsets;
-    selectedDate: Date; // <-- Получаем выбранную дату
-    onDateChange: (date: Date) => void; // <-- Функция для изменения даты
+    selectedDate: Date;
+    onDateChange: (date: Date) => void;
+    dates: Date[];
+    scrollX: Animated.Value;
+    pagingWidth: number;
 }
 
 const TOP_ROW_HEIGHT = 64;
-const HEADER_PADDING_BOTTOM = 20;
+const DATE_ITEM_WIDTH = 100;
 
 export const UnifiedHeader = ({
-    period,
-    onPeriodChange,
     insets,
     selectedDate,
     onDateChange,
+    dates,
+    scrollX,
+    pagingWidth,
 }: UnifiedHeaderProps) => {
     const theme = useTheme();
     const router = useRouter();
     const [isDatePickerVisible, setDatePickerVisible] = useState(false);
 
-    // Форматируем дату в стиле "Сегодня, 26 апр." или просто "25 апр."
-    const isToday = new Date().toDateString() === selectedDate.toDateString();
-    const dateStr = selectedDate.toLocaleDateString("ru-RU", {
-        day: "numeric",
-        month: "short",
+    const { inputRange, outputRange } = useMemo(() => {
+        return {
+            inputRange: dates.map((_, i) => i * pagingWidth),
+            outputRange: dates.map((_, i) => -i * DATE_ITEM_WIDTH),
+        };
+    }, [dates, pagingWidth]);
+
+    const translateX = scrollX.interpolate({
+        inputRange,
+        outputRange,
+        extrapolate: "clamp",
     });
-    const titleText = isToday ? `Сегодня, ${dateStr}` : dateStr;
 
     const onConfirmDate = (params: any) => {
         setDatePickerVisible(false);
@@ -49,57 +55,150 @@ export const UnifiedHeader = ({
         }
     };
 
+    // Возврат на сегодняшний день при клике на окошко
+    const handleGoToToday = () => {
+        onDateChange(new Date());
+    };
+
     return (
         <View
             style={[
                 styles.unifiedHeader,
                 {
                     paddingTop: insets.top,
+                    // Хедер выступает как "верхний" слой
                     backgroundColor: theme.colors.elevation.level2,
+                    paddingBottom: 16,
                 },
             ]}
         >
             <View style={[styles.headerTopRow, { height: TOP_ROW_HEIGHT }]}>
-                {/* Оборачиваем заголовок в TouchableRipple для эффекта нажатия */}
-                <TouchableRipple
-                    onPress={() => setDatePickerVisible(true)}
-                    borderless
-                    style={styles.titleTouchable}
+                {/* МАСКА (ОКНО) */}
+                <View
+                    style={[
+                        styles.dateWindow,
+                        {
+                            // Для создания эффекта "выреза" (дыры) используем более глубокий/тёмный цвет
+                            // Если surfaceVariant кажется недостаточно глубоким, можно попробовать theme.colors.background
+                            backgroundColor: theme.colors.surfaceVariant,
+                        },
+                    ]}
                 >
-                    <Text
-                        variant="headlineMedium"
-                        style={{
-                            color: theme.colors.onSurface,
-                            fontWeight: "700",
-                            textTransform: "capitalize",
-                        }}
+                    <Animated.View
+                        style={[
+                            styles.dateTape,
+                            { transform: [{ translateX }] },
+                        ]}
                     >
-                        {titleText}
-                    </Text>
-                </TouchableRipple>
+                        {dates.map((date, index) => {
+                            const isToday =
+                                new Date().toDateString() ===
+                                date.toDateString();
 
-                <IconButton
-                    icon={(props: any) => (
-                        <MaterialSymbol name="settings" {...props} />
-                    )}
-                    iconColor={theme.colors.onSurface}
-                    onPress={() => router.push({ pathname: "/settings" })}
-                />
+                            const dayNum = date
+                                .getDate()
+                                .toString()
+                                .padStart(2, "0");
+                            const monthName = date
+                                .toLocaleDateString("ru-RU", { month: "short" })
+                                .replace(".", "");
+                            const weekdayName = date.toLocaleDateString(
+                                "ru-RU",
+                                {
+                                    weekday: "short",
+                                },
+                            );
+
+                            return (
+                                <View
+                                    key={index}
+                                    style={styles.dateItemContainer}
+                                >
+                                    <TouchableRipple
+                                        // Теперь при клике перебрасывает на "Сегодня"
+                                        onPress={handleGoToToday}
+                                        style={styles.titleTouchable}
+                                    >
+                                        <View style={styles.dateContentRow}>
+                                            <Text
+                                                style={[
+                                                    styles.tapeDayNum,
+                                                    {
+                                                        color: isToday
+                                                            ? theme.colors
+                                                                  .primary
+                                                            : theme.colors
+                                                                  .onSurfaceVariant,
+                                                    },
+                                                ]}
+                                            >
+                                                {dayNum}
+                                            </Text>
+                                            <View
+                                                style={
+                                                    styles.tapeMonthWeekColumn
+                                                }
+                                            >
+                                                <Text
+                                                    style={[
+                                                        styles.tapeMonth,
+                                                        {
+                                                            color: isToday
+                                                                ? theme.colors
+                                                                      .primary
+                                                                : theme.colors
+                                                                      .onSurfaceVariant,
+                                                        },
+                                                    ]}
+                                                >
+                                                    {monthName}
+                                                </Text>
+                                                <Text
+                                                    style={[
+                                                        styles.tapeWeekday,
+                                                        {
+                                                            color: isToday
+                                                                ? theme.colors
+                                                                      .primary
+                                                                : theme.colors
+                                                                      .outline,
+                                                        },
+                                                    ]}
+                                                >
+                                                    {weekdayName}
+                                                </Text>
+                                            </View>
+                                        </View>
+                                    </TouchableRipple>
+                                </View>
+                            );
+                        })}
+                    </Animated.View>
+                </View>
+
+                {/* БЛОК КНОПОК */}
+                <View style={styles.actionButtonsGroup}>
+                    <IconButton
+                        icon={(props: any) => (
+                            <MaterialSymbol name="calendar_month" {...props} />
+                        )}
+                        iconColor={theme.colors.onSurfaceVariant}
+                        containerColor={theme.colors.surfaceVariant}
+                        size={24} // Немного уменьшили иконки для аккуратности
+                        onPress={() => setDatePickerVisible(true)}
+                    />
+                    <IconButton
+                        icon={(props: any) => (
+                            <MaterialSymbol name="settings" {...props} />
+                        )}
+                        iconColor={theme.colors.onSurfaceVariant}
+                        containerColor={theme.colors.surfaceVariant}
+                        size={24}
+                        onPress={() => router.push({ pathname: "/settings" })}
+                    />
+                </View>
             </View>
 
-            <View
-                style={[
-                    styles.headerBottomRow,
-                    { paddingBottom: HEADER_PADDING_BOTTOM },
-                ]}
-            >
-                <CustomSegmentedControl
-                    period={period}
-                    onPeriodChange={onPeriodChange}
-                />
-            </View>
-
-            {/* Сам M3 Календарь */}
             <DatePickerModal
                 locale="ru"
                 mode="single"
@@ -107,7 +206,7 @@ export const UnifiedHeader = ({
                 onDismiss={() => setDatePickerVisible(false)}
                 date={selectedDate}
                 onConfirm={onConfirmDate}
-                validRange={{ endDate: new Date() }} // Опционально: запрещаем выбирать дни в будущем
+                validRange={{ endDate: new Date() }} // Запрет выбора дат из будущего, если требуется
             />
         </View>
     );
@@ -127,15 +226,60 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        paddingHorizontal: 24,
+        paddingHorizontal: 20,
+    },
+    dateWindow: {
+        width: DATE_ITEM_WIDTH,
+        height: 52,
+        borderRadius: 26,
+        overflow: "hidden",
+        justifyContent: "center",
+    },
+    dateTape: {
+        flexDirection: "row",
+        alignItems: "center",
+        height: "100%",
+    },
+    dateItemContainer: {
+        width: DATE_ITEM_WIDTH,
+        height: "100%",
+        justifyContent: "center",
+        alignItems: "center",
     },
     titleTouchable: {
-        borderRadius: 8,
-        paddingHorizontal: 4,
-        paddingVertical: 2,
-        marginLeft: -4, // Компенсация паддинга для ровного выравнивания
+        width: "100%",
+        height: "100%",
+        justifyContent: "center",
+        alignItems: "center",
     },
-    headerBottomRow: {
-        paddingHorizontal: 16,
+    dateContentRow: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    tapeDayNum: {
+        fontSize: 28,
+        fontWeight: "900",
+        marginRight: 6,
+        lineHeight: 28,
+    },
+    tapeMonthWeekColumn: {
+        justifyContent: "center",
+    },
+    tapeMonth: {
+        fontSize: 12,
+        fontWeight: "800",
+        textTransform: "uppercase",
+        marginBottom: -2,
+    },
+    tapeWeekday: {
+        fontSize: 10,
+        fontWeight: "500",
+    },
+    // Новый класс для группировки кнопок
+    actionButtonsGroup: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 4, // Отступ между кнопками
     },
 });

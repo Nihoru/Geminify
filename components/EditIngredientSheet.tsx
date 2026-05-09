@@ -55,7 +55,7 @@ export const EditIngredientSheet = ({
     useEffect(() => {
         if (visible && ingredient) {
             setBrand(ingredient.brand || "");
-            setBaseName(ingredient.base_name || "");
+            setBaseName(ingredient.baseName || "");
             setSpecs(ingredient.specs || "");
             setCalories(String(ingredient.calories || "0"));
             setProtein(String(ingredient.protein || "0"));
