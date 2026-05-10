@@ -134,7 +134,7 @@ export default function TabLayout() {
             <Tabs.Screen
                 name="goal"
                 options={{
-                    tabBarLabel: "Цели",
+                    tabBarLabel: "Цель",
                     tabBarIcon: ({ focused, color }) => (
                         <View
                             style={{

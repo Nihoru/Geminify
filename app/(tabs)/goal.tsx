@@ -17,41 +17,68 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { MaterialSymbol } from "@/components/MaterialSymbol";
 import { CustomSegmentedControl } from "../../components/CustomSegmentedControl";
+import { InfoChip } from "../../components/InfoChip";
+import { UnifiedHeader } from "../../components/UnifiedHeader";
+
+import { storage, STORAGE_KEYS } from "../../src/shared/store/storage";
+import { calculateMacroLimits, GoalId } from "../../src/utils/userMath";
+
+// Опции активности
+const ACTIVITY_OPTIONS = [
+    {
+        id: "low",
+        label: "Низкая",
+        multiplier: 1.2,
+        icon: "self_improvement",
+        desc: "Сидячий образ жизни",
+    },
+    {
+        id: "med",
+        label: "Средняя",
+        multiplier: 1.375,
+        icon: "directions_walk",
+        desc: "1-3 тренировки в неделю",
+    },
+    {
+        id: "high",
+        label: "Высокая",
+        multiplier: 1.55,
+        icon: "fitness_center",
+        desc: "Интенсивные нагрузки",
+    },
+] as const;
+
+type ActivityId = (typeof ACTIVITY_OPTIONS)[number]["id"];
 
 const GOAL_OPTIONS = [
     {
-        id: "lose",
+        id: "lose" as GoalId,
         label: "Сброс",
         fullLabel: "Сброс веса",
         icon: "trending_down",
     },
-    { id: "maintain", label: "Баланс", fullLabel: "Поддержание", icon: "sync" },
     {
-        id: "gain",
+        id: "maintain" as GoalId,
+        label: "Баланс",
+        fullLabel: "Поддержание",
+        icon: "sync",
+    },
+    {
+        id: "gain" as GoalId,
         label: "Набор",
         fullLabel: "Набор массы",
         icon: "trending_up",
     },
-] as const;
-
-type GoalId = (typeof GOAL_OPTIONS)[number]["id"];
+];
 
 const getAgeSuffix = (ageString: string): string => {
     const age = parseInt(ageString, 10);
     if (isNaN(age)) return "лет";
-
     const lastTwoDigits = Math.abs(age) % 100;
     const lastDigit = Math.abs(age) % 10;
-
-    if (lastTwoDigits >= 11 && lastTwoDigits <= 14) {
-        return "лет";
-    }
-    if (lastDigit === 1) {
-        return "год";
-    }
-    if (lastDigit >= 2 && lastDigit <= 4) {
-        return "года";
-    }
+    if (lastTwoDigits >= 11 && lastTwoDigits <= 14) return "лет";
+    if (lastDigit === 1) return "год";
+    if (lastDigit >= 2 && lastDigit <= 4) return "года";
     return "лет";
 };
 
@@ -61,8 +88,6 @@ export default function GoalScreen() {
 
     const [statPeriod, setStatPeriod] = useState("day");
     const [goalMenuVisible, setGoalMenuVisible] = useState(false);
-
-    // Стейт для ручного отслеживания высоты клавиатуры
     const [keyboardHeight, setKeyboardHeight] = useState(0);
 
     const [userData, setUserData] = useState({
@@ -71,27 +96,36 @@ export default function GoalScreen() {
         age: "20",
         gender: "male",
         goal: "lose" as GoalId,
+        activity: "med" as ActivityId, // Новое поле
     });
 
     const [editData, setEditData] = useState(userData);
-
     const bottomSheetRef = useRef<BottomSheetModal>(null);
 
-    // Слушатель событий клавиатуры
     useEffect(() => {
-        // Для Android иногда лучше работает keyboardDidShow, для iOS - keyboardWillShow
+        const loadProfile = async () => {
+            const savedProfile = await storage.getObject<typeof userData>(
+                STORAGE_KEYS.USER_PROFILE,
+            );
+            if (savedProfile) {
+                setUserData(savedProfile);
+                setEditData(savedProfile);
+            }
+        };
+        loadProfile();
+    }, []);
+
+    useEffect(() => {
         const showEvent =
             Platform.OS === "ios" ? "keyboardWillShow" : "keyboardDidShow";
         const hideEvent =
             Platform.OS === "ios" ? "keyboardWillHide" : "keyboardDidHide";
-
-        const showSub = Keyboard.addListener(showEvent, (e) => {
-            setKeyboardHeight(e.endCoordinates.height);
-        });
-        const hideSub = Keyboard.addListener(hideEvent, () => {
-            setKeyboardHeight(0);
-        });
-
+        const showSub = Keyboard.addListener(showEvent, (e) =>
+            setKeyboardHeight(e.endCoordinates.height),
+        );
+        const hideSub = Keyboard.addListener(hideEvent, () =>
+            setKeyboardHeight(0),
+        );
         return () => {
             showSub.remove();
             hideSub.remove();
@@ -108,14 +142,37 @@ export default function GoalScreen() {
         bottomSheetRef.current?.dismiss();
     }, []);
 
+    const recalculateAndSave = async (newData: typeof userData) => {
+        setUserData(newData);
+
+        // Находим множитель активности
+        const activityMultiplier =
+            ACTIVITY_OPTIONS.find((a) => a.id === newData.activity)
+                ?.multiplier || 1.375;
+
+        const limits = calculateMacroLimits({
+            weight: parseFloat(newData.weight) || 0,
+            height: parseFloat(newData.height) || 0,
+            age: parseInt(newData.age, 10) || 0,
+            gender: newData.gender as "male" | "female",
+            goal: newData.goal,
+            activityMultiplier, // Передаем его в утилиту
+        });
+
+        await storage.setObject(STORAGE_KEYS.USER_PROFILE, newData);
+        await storage.setObject(STORAGE_KEYS.MACRO_LIMITS, limits);
+    };
+
     const handleSaveParams = () => {
-        setUserData({ ...userData, ...editData });
+        const newData = { ...userData, ...editData };
+        recalculateAndSave(newData);
         closeSheet();
     };
 
     const handleGoalChange = (newGoal: GoalId) => {
-        setUserData({ ...userData, goal: newGoal });
-        setGoalMenuVisible(false); // Закрываем меню после выбора
+        const newData = { ...userData, goal: newGoal };
+        recalculateAndSave(newData);
+        setGoalMenuVisible(false);
     };
 
     const renderBackdrop = useCallback(
@@ -132,7 +189,10 @@ export default function GoalScreen() {
     );
 
     const currentGoalInfo = GOAL_OPTIONS.find((g) => g.id === userData.goal)!;
-    const headerHeight = insets.top + 72;
+    const currentActivity =
+        ACTIVITY_OPTIONS.find((a) => a.id === userData.activity) ||
+        ACTIVITY_OPTIONS[1];
+    const [headerHeight, setHeaderHeight] = useState(insets.top + 72);
 
     const renderParamSquare = (
         label: string,
@@ -185,51 +245,6 @@ export default function GoalScreen() {
         </View>
     );
 
-    const renderSegmentedControl = (
-        options: { id: string; label: string }[],
-        currentValue: string,
-        onChange: (val: any) => void,
-    ) => (
-        <View
-            style={[
-                styles.segContainer,
-                { backgroundColor: theme.colors.secondaryContainer },
-            ]}
-        >
-            {options.map((opt) => {
-                const isActive = currentValue === opt.id;
-                return (
-                    <TouchableRipple
-                        key={opt.id}
-                        onPress={() => onChange(opt.id)}
-                        style={[
-                            styles.segButton,
-                            {
-                                backgroundColor: isActive
-                                    ? theme.colors.primary
-                                    : "transparent",
-                            },
-                        ]}
-                        borderless
-                    >
-                        <Text
-                            style={[
-                                styles.segText,
-                                {
-                                    color: isActive
-                                        ? theme.colors.onPrimary
-                                        : theme.colors.onSecondaryContainer,
-                                },
-                            ]}
-                        >
-                            {opt.label}
-                        </Text>
-                    </TouchableRipple>
-                );
-            })}
-        </View>
-    );
-
     return (
         <View
             style={[
@@ -237,20 +252,14 @@ export default function GoalScreen() {
                 { backgroundColor: theme.colors.surface },
             ]}
         >
-            <View
-                style={[
-                    styles.unifiedHeader,
-                    {
-                        paddingTop: insets.top,
-                        backgroundColor: theme.colors.elevation.level2,
-                    },
-                ]}
-            >
-                <View style={styles.headerTopRow}>
+            <UnifiedHeader
+                onHeightChange={setHeaderHeight}
+                leftNode={
                     <Text variant="headlineMedium" style={styles.boldText}>
                         Моя цель
                     </Text>
-
+                }
+                rightNode={
                     <Menu
                         visible={goalMenuVisible}
                         onDismiss={() => setGoalMenuVisible(false)}
@@ -318,8 +327,8 @@ export default function GoalScreen() {
                             />
                         ))}
                     </Menu>
-                </View>
-            </View>
+                }
+            />
 
             <ScrollView
                 scrollEventThrottle={16}
@@ -329,6 +338,7 @@ export default function GoalScreen() {
                 ]}
                 showsVerticalScrollIndicator={false}
             >
+                {/* Секция статистики */}
                 <View
                     style={[
                         styles.section,
@@ -339,8 +349,13 @@ export default function GoalScreen() {
                         Статистика
                     </Text>
                     <CustomSegmentedControl
-                        period={statPeriod}
-                        onPeriodChange={setStatPeriod}
+                        value={statPeriod}
+                        options={[
+                            { id: "day", label: "День" },
+                            { id: "week", label: "Неделя" },
+                            { id: "month", label: "Месяц" },
+                        ]}
+                        onChange={setStatPeriod}
                     />
                     <View
                         style={[
@@ -370,6 +385,7 @@ export default function GoalScreen() {
                     </View>
                 </View>
 
+                {/* Секция параметров */}
                 <View
                     style={[
                         styles.section,
@@ -398,26 +414,86 @@ export default function GoalScreen() {
                             />
                         </TouchableRipple>
                     </View>
-                    <View style={styles.macrosContainer}>
-                        {renderParamChip(
-                            theme.colors.secondaryContainer,
-                            theme.colors.onSecondaryContainer,
-                            "Вес",
-                            `${userData.weight} кг`,
-                        )}
-                        {renderParamChip(
-                            theme.colors.tertiaryContainer,
-                            theme.colors.onTertiaryContainer,
-                            "Рост",
-                            `${userData.height} см`,
-                        )}
-                        {/* Обновленный блок возраста */}
-                        {renderParamChip(
-                            theme.colors.primaryContainer,
-                            theme.colors.onPrimaryContainer,
-                            "Возраст",
-                            `${userData.age} ${getAgeSuffix(userData.age)}`,
-                        )}
+
+                    <View style={styles.paramsGrid}>
+                        <View style={styles.macrosContainer}>
+                            <InfoChip
+                                bg={theme.colors.secondaryContainer}
+                                fg={theme.colors.onSecondaryContainer}
+                                label="Вес"
+                                value={`${userData.weight} кг`}
+                            />
+                            <InfoChip
+                                bg={theme.colors.tertiaryContainer}
+                                fg={theme.colors.onTertiaryContainer}
+                                label="Рост"
+                                value={`${userData.height} см`}
+                            />
+                            <InfoChip
+                                bg={theme.colors.primaryContainer}
+                                fg={theme.colors.onPrimaryContainer}
+                                label="Возраст"
+                                value={`${userData.age} ${getAgeSuffix(userData.age)}`}
+                            />
+                        </View>
+
+                        {/* НОВАЯ ТАБЛЕТКА АКТИВНОСТИ */}
+                        <View
+                            style={[
+                                styles.activityPill,
+                                {
+                                    backgroundColor:
+                                        theme.colors.surfaceVariant,
+                                },
+                            ]}
+                        >
+                            <View style={styles.activityPillLeft}>
+                                <View
+                                    style={[
+                                        styles.activityIconCircle,
+                                        {
+                                            backgroundColor:
+                                                theme.colors.surface,
+                                        },
+                                    ]}
+                                >
+                                    <MaterialSymbol
+                                        name={currentActivity.icon}
+                                        size={20}
+                                        color={theme.colors.primary}
+                                    />
+                                </View>
+                                <View style={{ marginLeft: 12 }}>
+                                    <Text
+                                        variant="labelLarge"
+                                        style={{
+                                            fontWeight: "800",
+                                            color: theme.colors.onSurface,
+                                        }}
+                                    >
+                                        {currentActivity.label} активность
+                                    </Text>
+                                    <Text
+                                        variant="labelSmall"
+                                        style={{
+                                            color: theme.colors
+                                                .onSurfaceVariant,
+                                        }}
+                                    >
+                                        {currentActivity.desc}
+                                    </Text>
+                                </View>
+                            </View>
+                            <Text
+                                variant="titleMedium"
+                                style={{
+                                    fontWeight: "900",
+                                    color: theme.colors.primary,
+                                }}
+                            >
+                                x{currentActivity.multiplier}
+                            </Text>
+                        </View>
                     </View>
                 </View>
             </ScrollView>
@@ -440,7 +516,6 @@ export default function GoalScreen() {
                 <BottomSheetView
                     style={[
                         styles.sheetContent,
-                        // Наш главный хак: увеличиваем отступ снизу на высоту клавиатуры
                         {
                             paddingBottom:
                                 keyboardHeight > 0 ? keyboardHeight + 20 : 40,
@@ -468,15 +543,42 @@ export default function GoalScreen() {
                         )}
                     </View>
 
-                    <View style={{ marginBottom: 24, marginTop: 16 }}>
-                        {renderSegmentedControl(
-                            [
+                    <View style={{ gap: 12, marginTop: 16, marginBottom: 24 }}>
+                        <CustomSegmentedControl
+                            value={editData.gender}
+                            options={[
                                 { id: "male", label: "Мужчина" },
                                 { id: "female", label: "Женщина" },
-                            ],
-                            editData.gender,
-                            (val) => setEditData({ ...editData, gender: val }),
-                        )}
+                            ]}
+                            onChange={(val) =>
+                                setEditData({ ...editData, gender: val })
+                            }
+                        />
+
+                        {/* ВЫБОР АКТИВНОСТИ В РЕДАКТОРЕ */}
+                        <Text
+                            variant="labelLarge"
+                            style={{
+                                marginLeft: 8,
+                                fontWeight: "700",
+                                color: theme.colors.onSurfaceVariant,
+                            }}
+                        >
+                            Активность
+                        </Text>
+                        <CustomSegmentedControl
+                            value={editData.activity}
+                            options={ACTIVITY_OPTIONS.map((a) => ({
+                                id: a.id,
+                                label: a.label,
+                            }))}
+                            onChange={(val) =>
+                                setEditData({
+                                    ...editData,
+                                    activity: val as ActivityId,
+                                })
+                            }
+                        />
                     </View>
 
                     <Button
@@ -494,56 +596,20 @@ export default function GoalScreen() {
     );
 }
 
-const renderParamChip = (
-    bg: string,
-    fg: string,
-    label: string,
-    val: string | number,
-) => (
-    <View style={[styles.macroChip, { backgroundColor: bg }]}>
-        <Text variant="labelSmall" style={{ color: fg, opacity: 0.7 }}>
-            {label}
-        </Text>
-        <Text variant="titleMedium" style={{ color: fg, fontWeight: "700" }}>
-            {val}
-        </Text>
-    </View>
-);
-
 const styles = StyleSheet.create({
     container: { flex: 1 },
-    unifiedHeader: {
-        position: "absolute",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 10,
-        borderBottomLeftRadius: 36,
-        borderBottomRightRadius: 36,
-    },
-    headerTopRow: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-        paddingHorizontal: 24,
-        paddingBottom: 16,
-        minHeight: 72,
-    },
-    headerBottomRow: {
-        paddingHorizontal: 16,
-        paddingBottom: 24, // Даем пространство снизу перед концом шапки
-    },
     headerGoalChip: {
-        borderRadius: 16,
+        borderRadius: 100,
+        height: 44,
+        justifyContent: "center",
         overflow: "hidden",
     },
     goalChipContent: {
         flexDirection: "row",
         alignItems: "center",
-        paddingHorizontal: 12,
-        paddingVertical: 8,
+        paddingHorizontal: 16,
     },
-    boldText: { fontWeight: "700" },
+    boldText: { fontWeight: "700", paddingHorizontal: 8 },
     scrollContent: { paddingHorizontal: 16, paddingBottom: 40, gap: 12 },
     section: { borderRadius: 24, padding: 16 },
     sectionTitle: { fontWeight: "700", marginBottom: 12 },
@@ -567,31 +633,28 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
     },
+    paramsGrid: { gap: 8 },
     macrosContainer: { flexDirection: "row", gap: 6 },
-    macroChip: {
-        flex: 1,
-        paddingVertical: 12,
-        paddingHorizontal: 12,
-        borderRadius: 16,
-    },
-
-    sheetContent: { paddingHorizontal: 20, paddingBottom: 40 },
-
-    segContainer: {
+    activityPill: {
         flexDirection: "row",
-        height: 52,
-        borderRadius: 100,
-        padding: 6,
-        gap: 6,
+        alignItems: "center",
+        justifyContent: "space-between",
+        padding: 12,
+        borderRadius: 20,
+        marginTop: 2,
     },
-    segButton: {
-        flex: 1,
+    activityPillLeft: {
+        flexDirection: "row",
+        alignItems: "center",
+    },
+    activityIconCircle: {
+        width: 40,
+        height: 40,
+        borderRadius: 20,
         justifyContent: "center",
         alignItems: "center",
-        borderRadius: 100,
     },
-    segText: { fontSize: 14, fontWeight: "700" },
-
+    sheetContent: { paddingHorizontal: 20, paddingBottom: 40 },
     inputGrid: { flexDirection: "row", gap: 8 },
     paramSquare: {
         flex: 1,
@@ -600,6 +663,5 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     nativeInput: { padding: 0, minWidth: 40 },
-
     saveButton: { borderRadius: 20 },
 });

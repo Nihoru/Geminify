@@ -13,6 +13,8 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { EditIngredientSheet } from "@/components/EditIngredientSheet";
 import { MaterialSymbol } from "@/components/MaterialSymbol";
 import { LAYOUT } from "@/src/constants/layout";
+import { InfoChip } from "../../components/InfoChip";
+import { UnifiedHeader } from "../../components/UnifiedHeader";
 import { FoodProduct, MealRealmContext } from "../../src/shared/store/models";
 
 // Утилита для заглавной буквы
@@ -20,20 +22,6 @@ const capitalize = (str: string) => {
     if (!str) return "";
     return str.charAt(0).toUpperCase() + str.slice(1);
 };
-
-// Вспомогательный компонент для мини-макросов
-const renderMiniMacro = (
-    bg: string,
-    fg: string,
-    label: string,
-    val: number,
-) => (
-    <View style={[styles.miniMacroChip, { backgroundColor: bg }]}>
-        <Text variant="labelSmall" style={{ color: fg, opacity: 0.9 }}>
-            {label} <Text style={{ fontWeight: "700" }}>{val}</Text>
-        </Text>
-    </View>
-);
 
 export default function KitchenScreen() {
     const theme = useTheme();
@@ -140,24 +128,27 @@ export default function KitchenScreen() {
                     <View
                         style={[styles.ingMacrosRow, { alignItems: "center" }]}
                     >
-                        {renderMiniMacro(
-                            theme.colors.secondaryContainer,
-                            theme.colors.onSecondaryContainer,
-                            "Б",
-                            item.protein,
-                        )}
-                        {renderMiniMacro(
-                            theme.colors.tertiaryContainer,
-                            theme.colors.onTertiaryContainer,
-                            "Ж",
-                            item.fat,
-                        )}
-                        {renderMiniMacro(
-                            theme.colors.primaryContainer,
-                            theme.colors.onPrimaryContainer,
-                            "У",
-                            item.carbs,
-                        )}
+                        <InfoChip
+                            isMini
+                            bg={theme.colors.secondaryContainer}
+                            fg={theme.colors.onSecondaryContainer}
+                            label="Б"
+                            value={item.protein}
+                        />
+                        <InfoChip
+                            isMini
+                            bg={theme.colors.tertiaryContainer}
+                            fg={theme.colors.onTertiaryContainer}
+                            label="Ж"
+                            value={item.fat}
+                        />
+                        <InfoChip
+                            isMini
+                            bg={theme.colors.primaryContainer}
+                            fg={theme.colors.onPrimaryContainer}
+                            label="У"
+                            value={item.carbs}
+                        />
                         <Text
                             variant="labelSmall"
                             style={{
@@ -193,7 +184,8 @@ export default function KitchenScreen() {
         );
     };
 
-    const paddingTop = insets.top + 64 + 60 + 20 + 16;
+    const [headerHeight, setHeaderHeight] = useState(insets.top + 80);
+    const paddingTop = headerHeight + 16;
 
     return (
         <View
@@ -202,28 +194,21 @@ export default function KitchenScreen() {
                 { backgroundColor: theme.colors.surface },
             ]}
         >
-            <View
-                style={[
-                    styles.unifiedHeader,
-                    {
-                        paddingTop: insets.top,
-                        backgroundColor: theme.colors.elevation.level2,
-                    },
-                ]}
-            >
-                <View style={styles.headerTopRow}>
+            <UnifiedHeader
+                onHeightChange={setHeaderHeight}
+                leftNode={
                     <Text
                         variant="headlineMedium"
                         style={{
                             color: theme.colors.onSurface,
                             fontWeight: "700",
+                            paddingHorizontal: 8,
                         }}
                     >
                         Кухня
                     </Text>
-                </View>
-
-                <View style={styles.headerBottomRow}>
+                }
+                bottomNode={
                     <Searchbar
                         placeholder="Поиск ингредиента..."
                         onChangeText={setSearchQuery}
@@ -242,8 +227,8 @@ export default function KitchenScreen() {
                         iconColor={theme.colors.onSecondaryContainer}
                         elevation={0}
                     />
-                </View>
-            </View>
+                }
+            />
 
             <FlatList
                 onScroll={onScroll}

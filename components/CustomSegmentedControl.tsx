@@ -2,22 +2,23 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Text, TouchableRipple, useTheme } from "react-native-paper";
 
+interface SegmentOption {
+    id: string;
+    label: string;
+}
+
 interface CustomSegmentedControlProps {
-    period: string;
-    onPeriodChange: (period: string) => void;
+    value: string;
+    options: SegmentOption[];
+    onChange: (id: string) => void;
 }
 
 export const CustomSegmentedControl = ({
-    period,
-    onPeriodChange,
+    value,
+    options,
+    onChange,
 }: CustomSegmentedControlProps) => {
     const theme = useTheme();
-
-    const options = [
-        { id: "day", label: "День" },
-        { id: "week", label: "Неделя" },
-        { id: "month", label: "Месяц" },
-    ];
 
     return (
         <View
@@ -27,17 +28,17 @@ export const CustomSegmentedControl = ({
             ]}
         >
             {options.map((opt) => {
-                const isActive = period === opt.id;
+                const isActive = value === opt.id;
                 return (
                     <TouchableRipple
                         key={opt.id}
-                        onPress={() => onPeriodChange(opt.id)}
+                        onPress={() => onChange(opt.id)}
                         style={[
                             styles.segButton,
                             {
                                 backgroundColor: isActive
                                     ? theme.colors.primary
-                                    : theme.colors.secondaryContainer,
+                                    : "transparent",
                             },
                         ]}
                         borderless

@@ -1,3 +1,4 @@
+import { useFocusEffect, useRouter } from "expo-router";
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import {
     Alert,
@@ -8,13 +9,15 @@ import {
     StyleSheet,
     View,
 } from "react-native";
-import { AnimatedFAB, Text, useTheme } from "react-native-paper";
+import { AnimatedFAB, IconButton, Text, useTheme } from "react-native-paper";
+import { DatePickerModal } from "react-native-paper-dates";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { LAYOUT } from "@/src/constants/layout";
 import { AddMealModal } from "../../components/AddMealModal";
 import { AiAdviceCard } from "../../components/AiAdviceCard";
 import { DailyMacrosCard } from "../../components/DailyMacrosCard";
+import { DateSlider } from "../../components/DateSlider";
 import { MaterialSymbol } from "../../components/MaterialSymbol";
 import { MealDetailSheet } from "../../components/MealDetailSheet";
 import { MealFeedItem } from "../../components/MealFeedItem";
@@ -22,7 +25,9 @@ import { UnifiedHeader } from "../../components/UnifiedHeader";
 
 import { foodAnalysisService } from "../../src/services/foodAnalysis";
 import { MealRealmContext } from "../../src/shared/store/models";
+import { storage, STORAGE_KEYS } from "../../src/shared/store/storage";
 import { getMealTypeFromDate } from "../../src/utils/mealHelpers";
+import { MacroLimits } from "../../src/utils/userMath";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
 const DAYS_RANGE = 365;
@@ -33,11 +38,13 @@ const DayContent = React.memo(
     ({
         date,
         paddingTop,
+        dailyLimits,
         onMealPress,
         onScroll,
     }: {
         date: Date;
         paddingTop: number;
+        dailyLimits: MacroLimits;
         onMealPress: (meal: any) => void;
         onScroll: (e: any) => void;
     }) => {
@@ -120,9 +127,13 @@ const DayContent = React.memo(
             >
                 <DailyMacrosCard
                     currentCalories={dailyStats.calories}
+                    targetCalories={dailyLimits.calories}
                     currentProtein={dailyStats.protein}
+                    targetProtein={dailyLimits.protein}
                     currentFat={dailyStats.fat}
+                    targetFat={dailyLimits.fat}
                     currentCarbs={dailyStats.carbs}
+                    targetCarbs={dailyLimits.carbs}
                 />
 
                 <AiAdviceCard adviceText="Белок и жиры уже набраны! До конца дня старайся налегать на сложные углеводы: добавь к ужину порцию гречки или цельнозерновой хлеб." />
@@ -150,23 +161,22 @@ const DayContent = React.memo(
 export default function HomeScreen() {
     const theme = useTheme();
     const insets = useSafeAreaInsets();
-    const paddingTop = insets.top + 64 + 20 + 24;
+    const [headerHeight, setHeaderHeight] = useState(insets.top + 80);
+    const paddingTop = headerHeight + 16;
 
     const { useRealm } = MealRealmContext;
     const realm = useRealm();
+    const router = useRouter();
 
-    // Якорь для центрирования массива дат
+    const [isDatePickerVisible, setDatePickerVisible] = useState(false);
     const [anchorDate, setAnchorDate] = useState(() => {
         const d = new Date();
         d.setHours(0, 0, 0, 0);
         return d;
     });
 
-    // === ИЗМЕНЕНИЕ 1: Привязываем генерацию массива к anchorDate ===
     const dates = useMemo(() => {
         const arr = [];
-
-        // Фиксируем сегодняшний день для проверки
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
@@ -175,24 +185,44 @@ export default function HomeScreen() {
             d.setDate(anchorDate.getDate() + i);
             d.setHours(0, 0, 0, 0);
 
-            // БЛОКИРОВКА БУДУЩЕГО:
-            // Если дата, которую мы пытаемся добавить, больше сегодняшней,
-            // мы просто прерываем цикл.
-            if (d.getTime() > today.getTime()) {
-                break;
-            }
-
+            if (d.getTime() > today.getTime()) break;
             arr.push(d);
         }
         return arr;
     }, [anchorDate]);
 
-    // Инициализируем выбранную дату центром массива
     const [selectedDate, setSelectedDate] = useState(dates[DAYS_RANGE]);
     const [isExtended, setIsExtended] = useState(true);
     const [selectedMeal, setSelectedMeal] = useState<any>(null);
     const [isModalVisible, setModalVisible] = useState(false);
     const [isAnalyzing, setIsAnalyzing] = useState(false);
+
+    // --- Лимиты пользователя ---
+    const [dailyLimits, setDailyLimits] = useState<MacroLimits>({
+        calories: 2000,
+        protein: 150,
+        fat: 70,
+        carbs: 200,
+    });
+
+    // Загружаем актуальные лимиты при каждом показе экрана
+    useFocusEffect(
+        useCallback(() => {
+            let isActive = true;
+            const loadLimits = async () => {
+                const limits = await storage.getObject<MacroLimits>(
+                    STORAGE_KEYS.MACRO_LIMITS,
+                );
+                if (isActive && limits) {
+                    setDailyLimits(limits);
+                }
+            };
+            loadLimits();
+            return () => {
+                isActive = false;
+            };
+        }, []),
+    );
 
     const flatListRef = useRef<FlatList>(null);
     const scrollX = useRef(
@@ -212,13 +242,10 @@ export default function HomeScreen() {
 
     const viewabilityConfig = useRef({
         itemVisiblePercentThreshold: 50,
-        // minimumViewTime: 250,
     }).current;
 
-    // === ИЗМЕНЕНИЕ 2: Обработка далеких прыжков ===
     const handleDateChangeFromHeader = (newDate: Date) => {
         newDate.setHours(0, 0, 0, 0);
-
         const newIndex = dates.findIndex(
             (d) => d.getTime() === newDate.getTime(),
         );
@@ -235,8 +262,6 @@ export default function HomeScreen() {
             });
             setSelectedDate(newDate);
         } else {
-            // ДАЛЕКИЙ ПРЫЖОК: Даты нет в текущем массиве
-            // Меняем якорь, что спровоцирует полный перерендер FlatList на нужной дате
             setAnchorDate(newDate);
             setSelectedDate(newDate);
             scrollX.setValue(DAYS_RANGE * SCREEN_WIDTH);
@@ -286,9 +311,6 @@ export default function HomeScreen() {
             ]}
         >
             <AnimatedFlatList
-                // === ИЗМЕНЕНИЕ 3: Привязываем ключ к якорю ===
-                // При смене якоря (далекий прыжок), React убивает старый список
-                // и мгновенно создает новый, уже отцентрированный на нужной дате
                 key={anchorDate.getTime()}
                 ref={flatListRef}
                 data={dates}
@@ -320,6 +342,7 @@ export default function HomeScreen() {
                     <DayContent
                         date={item}
                         paddingTop={paddingTop}
+                        dailyLimits={dailyLimits}
                         onMealPress={setSelectedMeal}
                         onScroll={handleScrollVertical}
                     />
@@ -327,12 +350,65 @@ export default function HomeScreen() {
             />
 
             <UnifiedHeader
-                insets={insets}
-                selectedDate={selectedDate}
-                onDateChange={handleDateChangeFromHeader}
-                dates={dates}
-                scrollX={scrollX}
-                pagingWidth={SCREEN_WIDTH}
+                onHeightChange={setHeaderHeight}
+                leftNode={
+                    <DateSlider
+                        dates={dates}
+                        selectedDate={selectedDate}
+                        onDateChange={handleDateChangeFromHeader}
+                        scrollX={scrollX}
+                        pagingWidth={SCREEN_WIDTH}
+                    />
+                }
+                rightNode={
+                    <View
+                        style={{
+                            flexDirection: "row",
+                            backgroundColor: theme.colors.surfaceVariant,
+                            borderRadius: 26,
+                            height: 52,
+                            alignItems: "center",
+                            paddingHorizontal: 4,
+                        }}
+                    >
+                        <IconButton
+                            icon={(props) => (
+                                <MaterialSymbol
+                                    name="calendar_month"
+                                    {...props}
+                                />
+                            )}
+                            iconColor={theme.colors.onSurfaceVariant}
+                            size={24}
+                            style={{ margin: 0, padding: 0 }}
+                            onPress={() => setDatePickerVisible(true)}
+                        />
+                        <IconButton
+                            icon={(props) => (
+                                <MaterialSymbol name="settings" {...props} />
+                            )}
+                            iconColor={theme.colors.onSurfaceVariant}
+                            size={24}
+                            style={{ margin: 0, padding: 0 }}
+                            onPress={() =>
+                                router.push({ pathname: "/settings" })
+                            }
+                        />
+                    </View>
+                }
+            />
+
+            <DatePickerModal
+                locale="ru"
+                mode="single"
+                visible={isDatePickerVisible}
+                onDismiss={() => setDatePickerVisible(false)}
+                date={selectedDate}
+                onConfirm={(params) => {
+                    setDatePickerVisible(false);
+                    if (params.date) handleDateChangeFromHeader(params.date);
+                }}
+                validRange={{ endDate: new Date() }}
             />
 
             <AnimatedFAB
