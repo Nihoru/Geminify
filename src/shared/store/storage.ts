@@ -5,6 +5,7 @@ export const STORAGE_KEYS = {
     GEMINI_MODEL: "gemini_model",
     USER_PROFILE: "user_profile",
     MACRO_LIMITS: "macro_limits",
+    AI_ADVICE: "ai_advice",
 };
 
 export const storage = {

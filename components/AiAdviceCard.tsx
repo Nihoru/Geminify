@@ -31,7 +31,7 @@ export const AiAdviceCard = ({ adviceText }: AiAdviceCardProps) => {
                         fontWeight: "600",
                     }}
                 >
-                    Совет от Geminify
+                    Geminify
                 </Text>
             </View>
             <Text

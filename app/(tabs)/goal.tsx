@@ -8,7 +8,6 @@ import { Keyboard, Platform, StyleSheet, TextInput, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import {
     Button,
-    Menu,
     Text,
     TouchableRipple,
     useTheme,
@@ -19,9 +18,12 @@ import { MaterialSymbol } from "@/components/MaterialSymbol";
 import { CustomSegmentedControl } from "../../components/CustomSegmentedControl";
 import { InfoChip } from "../../components/InfoChip";
 import { UnifiedHeader } from "../../components/UnifiedHeader";
+import { GoalMenu } from "../../components/GoalMenu";
+import { StatisticsSection } from "../../components/StatisticsSection";
+import { LAYOUT } from "@/src/constants/layout";
 
 import { storage, STORAGE_KEYS } from "../../src/shared/store/storage";
-import { calculateMacroLimits, GoalId } from "../../src/utils/userMath";
+import { calculateMacroLimits, GoalId, MacroLimits } from "../../src/utils/userMath";
 
 // Опции активности
 const ACTIVITY_OPTIONS = [
@@ -50,27 +52,6 @@ const ACTIVITY_OPTIONS = [
 
 type ActivityId = (typeof ACTIVITY_OPTIONS)[number]["id"];
 
-const GOAL_OPTIONS = [
-    {
-        id: "lose" as GoalId,
-        label: "Сброс",
-        fullLabel: "Сброс веса",
-        icon: "trending_down",
-    },
-    {
-        id: "maintain" as GoalId,
-        label: "Баланс",
-        fullLabel: "Поддержание",
-        icon: "sync",
-    },
-    {
-        id: "gain" as GoalId,
-        label: "Набор",
-        fullLabel: "Набор массы",
-        icon: "trending_up",
-    },
-];
-
 const getAgeSuffix = (ageString: string): string => {
     const age = parseInt(ageString, 10);
     if (isNaN(age)) return "лет";
@@ -87,7 +68,6 @@ export default function GoalScreen() {
     const insets = useSafeAreaInsets();
 
     const [statPeriod, setStatPeriod] = useState("day");
-    const [goalMenuVisible, setGoalMenuVisible] = useState(false);
     const [keyboardHeight, setKeyboardHeight] = useState(0);
 
     const [userData, setUserData] = useState({
@@ -99,6 +79,7 @@ export default function GoalScreen() {
         activity: "med" as ActivityId, // Новое поле
     });
 
+    const [limits, setLimits] = useState<MacroLimits | undefined>();
     const [editData, setEditData] = useState(userData);
     const bottomSheetRef = useRef<BottomSheetModal>(null);
 
@@ -110,6 +91,12 @@ export default function GoalScreen() {
             if (savedProfile) {
                 setUserData(savedProfile);
                 setEditData(savedProfile);
+            }
+            const savedLimits = await storage.getObject<MacroLimits>(
+                STORAGE_KEYS.MACRO_LIMITS,
+            );
+            if (savedLimits) {
+                setLimits(savedLimits);
             }
         };
         loadProfile();
@@ -150,7 +137,7 @@ export default function GoalScreen() {
             ACTIVITY_OPTIONS.find((a) => a.id === newData.activity)
                 ?.multiplier || 1.375;
 
-        const limits = calculateMacroLimits({
+        const newLimits = calculateMacroLimits({
             weight: parseFloat(newData.weight) || 0,
             height: parseFloat(newData.height) || 0,
             age: parseInt(newData.age, 10) || 0,
@@ -159,8 +146,9 @@ export default function GoalScreen() {
             activityMultiplier, // Передаем его в утилиту
         });
 
+        setLimits(newLimits);
         await storage.setObject(STORAGE_KEYS.USER_PROFILE, newData);
-        await storage.setObject(STORAGE_KEYS.MACRO_LIMITS, limits);
+        await storage.setObject(STORAGE_KEYS.MACRO_LIMITS, newLimits);
     };
 
     const handleSaveParams = () => {
@@ -172,7 +160,6 @@ export default function GoalScreen() {
     const handleGoalChange = (newGoal: GoalId) => {
         const newData = { ...userData, goal: newGoal };
         recalculateAndSave(newData);
-        setGoalMenuVisible(false);
     };
 
     const renderBackdrop = useCallback(
@@ -188,7 +175,6 @@ export default function GoalScreen() {
         [],
     );
 
-    const currentGoalInfo = GOAL_OPTIONS.find((g) => g.id === userData.goal)!;
     const currentActivity =
         ACTIVITY_OPTIONS.find((a) => a.id === userData.activity) ||
         ACTIVITY_OPTIONS[1];
@@ -260,73 +246,10 @@ export default function GoalScreen() {
                     </Text>
                 }
                 rightNode={
-                    <Menu
-                        visible={goalMenuVisible}
-                        onDismiss={() => setGoalMenuVisible(false)}
-                        anchorPosition="bottom"
-                        contentStyle={{
-                            backgroundColor: theme.colors.elevation.level3,
-                            borderRadius: 20,
-                        }}
-                        anchor={
-                            <TouchableRipple
-                                onPress={() => setGoalMenuVisible(true)}
-                                style={[
-                                    styles.headerGoalChip,
-                                    {
-                                        backgroundColor:
-                                            theme.colors.secondaryContainer,
-                                    },
-                                ]}
-                                borderless
-                            >
-                                <View style={styles.goalChipContent}>
-                                    <MaterialSymbol
-                                        name={currentGoalInfo.icon}
-                                        size={18}
-                                        color={
-                                            theme.colors.onSecondaryContainer
-                                        }
-                                    />
-                                    <Text
-                                        variant="labelLarge"
-                                        style={{
-                                            color: theme.colors
-                                                .onSecondaryContainer,
-                                            marginLeft: 8,
-                                            marginRight: 4,
-                                            fontWeight: "700",
-                                        }}
-                                    >
-                                        {currentGoalInfo.label}
-                                    </Text>
-                                    <MaterialSymbol
-                                        name="arrow_drop_down"
-                                        size={20}
-                                        color={
-                                            theme.colors.onSecondaryContainer
-                                        }
-                                    />
-                                </View>
-                            </TouchableRipple>
-                        }
-                    >
-                        {GOAL_OPTIONS.map((option) => (
-                            <Menu.Item
-                                key={option.id}
-                                onPress={() => handleGoalChange(option.id)}
-                                title={option.fullLabel}
-                                leadingIcon={(props) => (
-                                    <MaterialSymbol
-                                        name={option.icon}
-                                        size={24}
-                                        color={props.color}
-                                    />
-                                )}
-                                style={{ maxWidth: 200 }}
-                            />
-                        ))}
-                    </Menu>
+                    <GoalMenu
+                        currentGoal={userData.goal}
+                        onGoalChange={handleGoalChange}
+                    />
                 }
             />
 
@@ -334,7 +257,10 @@ export default function GoalScreen() {
                 scrollEventThrottle={16}
                 contentContainerStyle={[
                     styles.scrollContent,
-                    { paddingTop: headerHeight + 16 },
+                    { 
+                        paddingTop: headerHeight + 16,
+                        paddingBottom: LAYOUT.BOTTOM_NAV_THRESHOLD + 24,
+                    },
                 ]}
                 showsVerticalScrollIndicator={false}
             >
@@ -357,32 +283,7 @@ export default function GoalScreen() {
                         ]}
                         onChange={setStatPeriod}
                     />
-                    <View
-                        style={[
-                            styles.statChartPlaceholder,
-                            { backgroundColor: theme.colors.surfaceVariant },
-                        ]}
-                    >
-                        <MaterialSymbol
-                            name="bar_chart"
-                            size={32}
-                            color={theme.colors.onSurfaceVariant}
-                        />
-                        <Text
-                            variant="labelLarge"
-                            style={{
-                                color: theme.colors.onSurfaceVariant,
-                                marginTop: 8,
-                            }}
-                        >
-                            Данные за{" "}
-                            {statPeriod === "day"
-                                ? "день"
-                                : statPeriod === "week"
-                                  ? "неделю"
-                                  : "месяц"}
-                        </Text>
-                    </View>
+                    <StatisticsSection period={statPeriod} limits={limits} />
                 </View>
 
                 {/* Секция параметров */}
@@ -598,28 +499,10 @@ export default function GoalScreen() {
 
 const styles = StyleSheet.create({
     container: { flex: 1 },
-    headerGoalChip: {
-        borderRadius: 100,
-        height: 44,
-        justifyContent: "center",
-        overflow: "hidden",
-    },
-    goalChipContent: {
-        flexDirection: "row",
-        alignItems: "center",
-        paddingHorizontal: 16,
-    },
     boldText: { fontWeight: "700", paddingHorizontal: 8 },
-    scrollContent: { paddingHorizontal: 16, paddingBottom: 40, gap: 12 },
+    scrollContent: { paddingHorizontal: 16, gap: 12 },
     section: { borderRadius: 24, padding: 16 },
     sectionTitle: { fontWeight: "700", marginBottom: 12 },
-    statChartPlaceholder: {
-        height: 140,
-        marginTop: 12,
-        borderRadius: 16,
-        justifyContent: "center",
-        alignItems: "center",
-    },
     paramsHeader: {
         flexDirection: "row",
         justifyContent: "space-between",

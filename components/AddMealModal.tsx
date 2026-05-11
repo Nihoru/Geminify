@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { TextInput as RNTextInput, StyleSheet, View } from "react-native";
 import { Button, Modal, Portal, Surface, useTheme } from "react-native-paper";
 
@@ -16,11 +16,13 @@ export const AddMealModal = ({
     isAnalyzing,
 }: AddMealModalProps) => {
     const [foodText, setFoodText] = useState("");
+    const [resetKey, setResetKey] = useState(0);
     const theme = useTheme();
 
     useEffect(() => {
         if (visible) {
             setFoodText("");
+            setResetKey((prev) => prev + 1);
         }
     }, [visible]);
 
@@ -29,6 +31,18 @@ export const AddMealModal = ({
             onSave(foodText);
         }
     };
+
+    const inputStyle = useMemo(
+        () => [
+            styles.nativeInput,
+            {
+                ...theme.fonts.bodyLarge,
+                color: theme.colors.onSurface,
+                fontSize: 16,
+            },
+        ],
+        [theme],
+    );
 
     return (
         <Portal>
@@ -52,19 +66,13 @@ export const AddMealModal = ({
                         ]}
                     >
                         <RNTextInput
-                            style={[
-                                styles.nativeInput,
-                                {
-                                    ...theme.fonts.bodyLarge,
-                                    color: theme.colors.onSurface,
-                                    fontSize: 16,
-                                },
-                            ]}
+                            key={resetKey}
+                            style={inputStyle}
                             placeholder="Просто опишите блюдо, а ИИ рассчитает КБЖУ. Например: порция роллов Калифорния и шоколадный милкшейк"
                             placeholderTextColor={
                                 theme.colors.onSurfaceVariant + "99"
                             }
-                            value={foodText}
+                            defaultValue=""
                             onChangeText={setFoodText}
                             multiline
                             textAlignVertical="top"

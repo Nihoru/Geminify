@@ -24,10 +24,13 @@ import { MealFeedItem } from "../../components/MealFeedItem";
 import { UnifiedHeader } from "../../components/UnifiedHeader";
 
 import { foodAnalysisService } from "../../src/services/foodAnalysis";
+import { llmService } from "../../src/services/llmService";
 import { MealRealmContext } from "../../src/shared/store/models";
 import { storage, STORAGE_KEYS } from "../../src/shared/store/storage";
 import { getMealTypeFromDate } from "../../src/utils/mealHelpers";
 import { MacroLimits } from "../../src/utils/userMath";
+
+import { ErrorModal } from "../../components/ErrorModal";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
 const DAYS_RANGE = 365;
@@ -39,12 +42,14 @@ const DayContent = React.memo(
         date,
         paddingTop,
         dailyLimits,
+        adviceText,
         onMealPress,
         onScroll,
     }: {
         date: Date;
         paddingTop: number;
         dailyLimits: MacroLimits;
+        adviceText: string;
         onMealPress: (meal: any) => void;
         onScroll: (e: any) => void;
     }) => {
@@ -136,7 +141,7 @@ const DayContent = React.memo(
                     targetCarbs={dailyLimits.carbs}
                 />
 
-                <AiAdviceCard adviceText="Белок и жиры уже набраны! До конца дня старайся налегать на сложные углеводы: добавь к ужину порцию гречки или цельнозерновой хлеб." />
+                <AiAdviceCard adviceText={adviceText} />
 
                 <View style={styles.feed}>
                     {mappedMeals.length === 0 && (
@@ -196,6 +201,8 @@ export default function HomeScreen() {
     const [selectedMeal, setSelectedMeal] = useState<any>(null);
     const [isModalVisible, setModalVisible] = useState(false);
     const [isAnalyzing, setIsAnalyzing] = useState(false);
+    const [advices, setAdvices] = useState<Record<string, string>>({});
+    const [error, setError] = useState<Error | string | null>(null);
 
     // --- Лимиты пользователя ---
     const [dailyLimits, setDailyLimits] = useState<MacroLimits>({
@@ -205,19 +212,24 @@ export default function HomeScreen() {
         carbs: 200,
     });
 
-    // Загружаем актуальные лимиты при каждом показе экрана
+    // Загружаем актуальные лимиты и советы при каждом показе экрана
     useFocusEffect(
         useCallback(() => {
             let isActive = true;
-            const loadLimits = async () => {
+            const loadData = async () => {
                 const limits = await storage.getObject<MacroLimits>(
                     STORAGE_KEYS.MACRO_LIMITS,
                 );
-                if (isActive && limits) {
-                    setDailyLimits(limits);
+                const storedAdvices = await storage.getObject<
+                    Record<string, string>
+                >(STORAGE_KEYS.AI_ADVICE);
+
+                if (isActive) {
+                    if (limits) setDailyLimits(limits);
+                    if (storedAdvices) setAdvices(storedAdvices);
                 }
             };
-            loadLimits();
+            loadData();
             return () => {
                 isActive = false;
             };
@@ -295,9 +307,43 @@ export default function HomeScreen() {
                 });
             });
             setModalVisible(false);
-        } catch (error: any) {
-            console.error("Ошибка при сохранении:", error);
-            Alert.alert("Ошибка", "Не удалось распознать еду.");
+
+            // --- Генерация совета после сохранения ---
+            const startOfDay = new Date(selectedDate);
+            startOfDay.setHours(0, 0, 0, 0);
+            const endOfDay = new Date(selectedDate);
+            endOfDay.setHours(23, 59, 59, 999);
+
+            const meals = realm
+                .objects("Meal")
+                .filtered("createdAt >= $0 AND createdAt <= $1", startOfDay, endOfDay);
+
+            const stats = meals.reduce(
+                (acc, meal: any) => {
+                    acc.calories += meal.totalCalories || 0;
+                    acc.protein += meal.totalProtein || 0;
+                    acc.fat += meal.totalFat || 0;
+                    acc.carbs += meal.totalCarbs || 0;
+                    return acc;
+                },
+                { calories: 0, protein: 0, fat: 0, carbs: 0 },
+            );
+
+            const advice = await llmService.generateAdvice(
+                stats,
+                dailyLimits,
+                meals.length,
+            );
+
+            const newAdvices = {
+                ...advices,
+                [selectedDate.toDateString()]: advice,
+            };
+            setAdvices(newAdvices);
+            await storage.setObject(STORAGE_KEYS.AI_ADVICE, newAdvices);
+        } catch (err: any) {
+            console.error("Ошибка при сохранении:", err);
+            setError(err);
         } finally {
             setIsAnalyzing(false);
         }
@@ -343,6 +389,10 @@ export default function HomeScreen() {
                         date={item}
                         paddingTop={paddingTop}
                         dailyLimits={dailyLimits}
+                        adviceText={
+                            advices[item.toDateString()] ||
+                            "Добавьте приём пищи, чтобы получить совет!"
+                        }
                         onMealPress={setSelectedMeal}
                         onScroll={handleScrollVertical}
                     />
@@ -432,10 +482,16 @@ export default function HomeScreen() {
                 onSave={handleSaveMeal}
                 isAnalyzing={isAnalyzing}
             />
+            <ErrorModal
+                visible={!!error}
+                error={error}
+                onDismiss={() => setError(null)}
+            />
             <MealDetailSheet
                 visible={!!selectedMeal}
                 meal={selectedMeal}
                 onDismiss={() => setSelectedMeal(null)}
+                topOffset={paddingTop}
             />
         </View>
     );

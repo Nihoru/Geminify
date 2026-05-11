@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { FlatList, StyleSheet, View } from "react-native";
+import { ActivityIndicator, FlatList, StyleSheet, View } from "react-native";
 import {
     AnimatedFAB,
     Searchbar,
@@ -11,9 +11,11 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 // Импортируем компоненты и контекст базы данных
 import { EditIngredientSheet } from "@/components/EditIngredientSheet";
+import { IngredientListItem } from "@/components/IngredientListItem";
 import { MaterialSymbol } from "@/components/MaterialSymbol";
+import { SortChip } from "@/components/SortChip";
 import { LAYOUT } from "@/src/constants/layout";
-import { InfoChip } from "../../components/InfoChip";
+import { SortOption, sortItems } from "@/src/utils/searchHelpers";
 import { UnifiedHeader } from "../../components/UnifiedHeader";
 import { FoodProduct, MealRealmContext } from "../../src/shared/store/models";
 
@@ -36,6 +38,10 @@ export default function KitchenScreen() {
 
     const [searchQuery, setSearchQuery] = useState("");
     const [isExtended, setIsExtended] = useState(true);
+    const [sortBy, setSortBy] = useState<SortOption>("relevance");
+    const [isDescending, setIsDescending] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
+    const [displayData, setDisplayData] = useState<any[]>([]);
 
     const [selectedIngredient, setSelectedIngredient] = useState<any>(null);
     const [isEditVisible, setEditVisible] = useState(false);
@@ -45,130 +51,57 @@ export default function KitchenScreen() {
         setIsExtended(y <= 20);
     };
 
-    // ВСТРОЕННЫЙ МЕХАНИЗМ ПОИСКА REALM (вместо Fuse.js)
-    // ВСТРОЕННЫЙ УМНЫЙ ПОИСК REALM
-    const displayData = useMemo(() => {
-        const query = searchQuery.trim().toLowerCase();
+    // ОБРАБОТКА ПОИСКА И СОРТИРОВКИ С ИНДИКАТОРОМ ЗАГРУЗКИ
+    React.useEffect(() => {
+        setIsLoading(true);
 
-        if (query === "") {
-            return allProducts;
-        }
+        const timer = setTimeout(() => {
+            const query = searchQuery.trim().toLowerCase();
+            let filtered = allProducts;
 
-        // 1. Разбиваем запрос на слова (по пробелам)
-        const words = query.split(/\s+/);
+            if (query !== "" || sortBy !== "relevance") {
+                if (query !== "") {
+                    const words = query.split(/\s+/);
+                    const queryConditions = words.map(
+                        (_, index) =>
+                            `(brand CONTAINS[c] $${index} OR baseName CONTAINS[c] $${index} OR specs CONTAINS[c] $${index})`,
+                    );
+                    const finalQueryString = queryConditions.join(" AND ");
+                    filtered = allProducts.filtered(finalQueryString, ...words);
+                }
+                const sorted = sortItems(filtered, query, sortBy, isDescending);
+                setDisplayData(sorted);
+            } else {
+                setDisplayData(Array.from(allProducts));
+            }
+            setIsLoading(false);
+        }, 0);
 
-        // 2. Для каждого слова создаем условие: "искать это слово хоть в одном из трех полей"
-        const queryConditions = words.map(
-            (_, index) =>
-                `(brand CONTAINS[c] $${index} OR baseName CONTAINS[c] $${index} OR specs CONTAINS[c] $${index})`,
-        );
-
-        // 3. Склеиваем условия через AND.
-        // Если юзер ввел "йогурт клубника", Realm найдет продукт, где есть ОБА слова (неважно в каких полях и в каком порядке)
-        const finalQueryString = queryConditions.join(" AND ");
-
-        // 4. Передаем саму строку запроса и развернутый массив слов как аргументы
-        return allProducts.filtered(finalQueryString, ...words);
-    }, [searchQuery, allProducts]);
+        return () => clearTimeout(timer);
+    }, [searchQuery, allProducts, sortBy, isDescending]);
 
     const renderItem = ({ item }: { item: any }) => {
-        // ОБРАТИ ВНИМАНИЕ: используем item.baseName (camelCase), так как это схема Realm
         const fullName = [item.brand, item.baseName, item.specs]
             .filter(Boolean)
             .join(" ");
 
         return (
-            <View
-                style={[
-                    styles.itemCard,
-                    { backgroundColor: theme.colors.elevation.level1 },
-                ]}
-            >
-                <View
-                    style={[
-                        styles.ingLeadingBadge,
-                        { backgroundColor: theme.colors.primaryContainer },
-                    ]}
-                >
-                    <Text
-                        variant="titleMedium"
-                        style={{
-                            color: theme.colors.onPrimaryContainer,
-                            fontWeight: "800",
-                            lineHeight: 20,
-                        }}
-                    >
-                        {item.calories}
-                    </Text>
-                    <Text
-                        variant="labelSmall"
-                        style={{
-                            color: theme.colors.onPrimaryContainer,
-                            opacity: 0.8,
-                            fontSize: 9,
-                            lineHeight: 12,
-                        }}
-                    >
-                        ккал
-                    </Text>
-                </View>
-
-                <View style={styles.ingMainContent}>
-                    <Text
-                        variant="titleSmall"
-                        style={{
-                            color: theme.colors.onSurface,
-                            fontWeight: "700",
-                            marginBottom: 4,
-                        }}
-                        numberOfLines={1}
-                    >
-                        {capitalize(fullName)}
-                    </Text>
-                    <View
-                        style={[styles.ingMacrosRow, { alignItems: "center" }]}
-                    >
-                        <InfoChip
-                            isMini
-                            bg={theme.colors.secondaryContainer}
-                            fg={theme.colors.onSecondaryContainer}
-                            label="Б"
-                            value={item.protein}
-                        />
-                        <InfoChip
-                            isMini
-                            bg={theme.colors.tertiaryContainer}
-                            fg={theme.colors.onTertiaryContainer}
-                            label="Ж"
-                            value={item.fat}
-                        />
-                        <InfoChip
-                            isMini
-                            bg={theme.colors.primaryContainer}
-                            fg={theme.colors.onPrimaryContainer}
-                            label="У"
-                            value={item.carbs}
-                        />
-                        <Text
-                            variant="labelSmall"
-                            style={{
-                                color: theme.colors.onSurfaceVariant,
-                                marginLeft: 4,
-                            }}
-                        >
-                            / 100г
-                        </Text>
-                    </View>
-                </View>
-
-                <View style={styles.ingTrailing}>
+            <IngredientListItem
+                title={capitalize(fullName)}
+                calories={item.calories}
+                protein={item.protein}
+                fat={item.fat}
+                carbs={item.carbs}
+                showPer100g
+                style={{ marginBottom: 12 }}
+                trailing={
                     <TouchableRipple
                         onPress={() => {
                             setSelectedIngredient(item);
                             setEditVisible(true);
                         }}
                         style={[
-                            styles.editButtonFull,
+                            styles.editButton,
                             { backgroundColor: theme.colors.surfaceVariant },
                         ]}
                         borderless
@@ -179,8 +112,8 @@ export default function KitchenScreen() {
                             color={theme.colors.onSurfaceVariant}
                         />
                     </TouchableRipple>
-                </View>
-            </View>
+                }
+            />
         );
     };
 
@@ -208,6 +141,14 @@ export default function KitchenScreen() {
                         Кухня
                     </Text>
                 }
+                rightNode={
+                    <SortChip
+                        sortBy={sortBy}
+                        onSortChange={setSortBy}
+                        isDescending={isDescending}
+                        onDirectionChange={setIsDescending}
+                    />
+                }
                 bottomNode={
                     <Searchbar
                         placeholder="Поиск ингредиента..."
@@ -230,36 +171,56 @@ export default function KitchenScreen() {
                 }
             />
 
-            <FlatList
-                onScroll={onScroll}
-                scrollEventThrottle={16}
-                data={displayData}
-                // Используем _id как уникальный ключ
-                keyExtractor={(item) => item._id.toHexString()}
-                renderItem={renderItem}
-                initialNumToRender={15}
-                maxToRenderPerBatch={20}
-                windowSize={5}
-                removeClippedSubviews={true}
-                contentContainerStyle={[
-                    styles.listContent,
-                    {
-                        paddingTop: paddingTop,
-                        paddingBottom: LAYOUT.BOTTOM_NAV_THRESHOLD + 12,
-                    },
-                ]}
-                showsVerticalScrollIndicator={false}
-                ListEmptyComponent={
-                    <View style={styles.emptyState}>
-                        <Text
-                            variant="bodyLarge"
-                            style={{ color: theme.colors.onSurfaceVariant }}
-                        >
-                            Ничего не найдено :(
-                        </Text>
-                    </View>
-                }
-            />
+            {isLoading ? (
+                <View style={styles.loadingContainer}>
+                    <ActivityIndicator
+                        animating={true}
+                        color={theme.colors.primary}
+                        size="large"
+                    />
+                    <Text
+                        variant="bodyMedium"
+                        style={{
+                            marginTop: 12,
+                            color: theme.colors.onSurfaceVariant,
+                        }}
+                    >
+                        Сортировка...
+                    </Text>
+                </View>
+            ) : (
+                <FlatList
+                    onScroll={onScroll}
+                    scrollEventThrottle={16}
+                    data={displayData}
+                    keyExtractor={(item) =>
+                        item._id ? item._id.toHexString() : Math.random().toString()
+                    }
+                    renderItem={renderItem}
+                    initialNumToRender={15}
+                    maxToRenderPerBatch={20}
+                    windowSize={5}
+                    removeClippedSubviews={true}
+                    contentContainerStyle={[
+                        styles.listContent,
+                        {
+                            paddingTop: paddingTop,
+                            paddingBottom: LAYOUT.BOTTOM_NAV_THRESHOLD + 12,
+                        },
+                    ]}
+                    showsVerticalScrollIndicator={false}
+                    ListEmptyComponent={
+                        <View style={styles.emptyState}>
+                            <Text
+                                variant="bodyLarge"
+                                style={{ color: theme.colors.onSurfaceVariant }}
+                            >
+                                Ничего не найдено :(
+                            </Text>
+                        </View>
+                    }
+                />
+            )}
 
             <AnimatedFAB
                 icon={(props: any) => <MaterialSymbol name="add" {...props} />}
@@ -273,7 +234,6 @@ export default function KitchenScreen() {
                 ]}
                 color={theme.colors.onPrimary}
                 onPress={() => {
-                    // Очищаем выбранный ингредиент и открываем шторку
                     setSelectedIngredient(null);
                     setEditVisible(true);
                 }}
@@ -290,7 +250,6 @@ export default function KitchenScreen() {
                     try {
                         realm.write(() => {
                             if (data._id) {
-                                // РЕЖИМ РЕДАКТИРОВАНИЯ
                                 const productToUpdate =
                                     realm.objectForPrimaryKey<any>(
                                         "FoodProduct",
@@ -307,9 +266,8 @@ export default function KitchenScreen() {
                                     productToUpdate.carbs = data.carbs;
                                 }
                             } else {
-                                // РЕЖИМ ДОБАВЛЕНИЯ НОВОЙ ЗАПИСИ
                                 realm.create("FoodProduct", {
-                                    _id: new Realm.BSON.ObjectId(), // Генерируем новый ID
+                                    _id: new Realm.BSON.ObjectId(),
                                     brand: data.brand,
                                     baseName: data.base_name,
                                     specs: data.specs,
@@ -334,26 +292,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    unifiedHeader: {
-        position: "absolute",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 10,
-        borderBottomLeftRadius: 36,
-        borderBottomRightRadius: 36,
-    },
-    headerTopRow: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-        paddingHorizontal: 24,
-        height: 64,
-    },
-    headerBottomRow: {
-        paddingHorizontal: 16,
-        paddingBottom: 20,
-    },
     searchBar: {
         borderRadius: 26,
         height: 52,
@@ -364,39 +302,7 @@ const styles = StyleSheet.create({
     listContent: {
         paddingHorizontal: 16,
     },
-    itemCard: {
-        flexDirection: "row",
-        alignItems: "center",
-        borderRadius: 24,
-        padding: 12,
-        marginBottom: 12,
-    },
-    ingLeadingBadge: {
-        width: 48,
-        height: 48,
-        borderRadius: 16,
-        justifyContent: "center",
-        alignItems: "center",
-        marginRight: 12,
-    },
-    ingMainContent: {
-        flex: 1,
-        justifyContent: "center",
-    },
-    ingMacrosRow: {
-        flexDirection: "row",
-        gap: 4,
-    },
-    miniMacroChip: {
-        paddingHorizontal: 6,
-        paddingVertical: 2,
-        borderRadius: 6,
-    },
-    ingTrailing: {
-        marginLeft: 8,
-        justifyContent: "center",
-    },
-    editButtonFull: {
+    editButton: {
         width: 40,
         height: 48,
         borderRadius: 16,
@@ -408,5 +314,10 @@ const styles = StyleSheet.create({
     emptyState: {
         alignItems: "center",
         marginTop: 40,
+    },
+    loadingContainer: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
     },
 });

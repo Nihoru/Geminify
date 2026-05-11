@@ -1,6 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import {
     extractionSchema,
+    getAiAdvicePrompt,
     getFoodAnalysisPrompt,
 } from "../constants/geminiConfig"; // Вынесенные константы
 import { storage, STORAGE_KEYS } from "../shared/store/storage";
@@ -28,6 +29,38 @@ export class LLMService {
         const finalPrompt = getFoodAnalysisPrompt(textPrompt);
         const result = await model.generateContent(finalPrompt);
         return JSON.parse(result.response.text());
+    }
+
+    public async generateAdvice(
+        stats: { calories: number; protein: number; fat: number; carbs: number },
+        limits: { calories: number; protein: number; fat: number; carbs: number },
+        mealCount: number,
+    ) {
+        console.log(`[LLMService] 💡 Запрос совета по питанию. Приёмов пищи: ${mealCount}`);
+        const apiKey = await storage.getString(STORAGE_KEYS.GEMINI_API_KEY);
+        const modelName =
+            (await storage.getString(STORAGE_KEYS.GEMINI_MODEL)) ||
+            "gemini-2.5-flash";
+
+        if (!apiKey) {
+            throw new Error("API ключ не найден. Перейдите в настройки.");
+        }
+
+        const genAI = new GoogleGenerativeAI(apiKey);
+        const model = genAI.getGenerativeModel({
+            model: modelName,
+        });
+
+        const finalPrompt = getAiAdvicePrompt(stats, limits, mealCount);
+        try {
+            const result = await model.generateContent(finalPrompt);
+            const advice = result.response.text();
+            console.log(`[LLMService] ✅ Совет успешно получен: "${advice}"`);
+            return advice;
+        } catch (error) {
+            console.error("[LLMService] ❌ Ошибка при получении совета:", error);
+            throw error;
+        }
     }
 
     public async generateEmbedding(text: string): Promise<number[]> {

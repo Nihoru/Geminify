@@ -219,3 +219,27 @@ export const extractionSchema: Schema = {
     },
     required: ["mealName", "dishes"],
 };
+
+export const getAiAdvicePrompt = (
+    stats: { calories: number; protein: number; fat: number; carbs: number },
+    limits: { calories: number; protein: number; fat: number; carbs: number },
+    mealCount: number,
+): string => {
+    return `You are a professional nutritionist. Analyze the user's daily nutritional intake and provide a short, helpful advice for the rest of the day.
+
+Current intake:
+- Calories: ${stats.calories} / ${limits.calories} kcal
+- Proteins: ${stats.protein} / ${limits.protein} g
+- Fats: ${stats.fat} / ${limits.fat} g
+- Carbs: ${stats.carbs} / ${limits.carbs} g
+- Meals logged: ${mealCount}
+
+Instructions:
+1. Provide a concise advice (max 30 words).
+2. No "fluff" or empty phrases.
+3. Give specific recommendations on what macros to focus on or limit for the remaining meals.
+4. Style: User-friendly, encouraging, and professional.
+5. Language: Russian.
+
+Example: "Вы набрали норму белка. На ужин сфокусируйтесь на сложных углеводах, например, гречке, чтобы восполнить энергию в рамках калорийности."`;
+};

@@ -8,6 +8,7 @@ import { StyleSheet, View, useWindowDimensions } from "react-native";
 import { List, Text, useTheme } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { getMealAppearance } from "../src/utils/mealHelpers";
+import { IngredientListItem } from "./IngredientListItem";
 
 const capitalize = (str: string) => {
     if (!str) return "";
@@ -46,19 +47,21 @@ interface MealDetailSheetProps {
         isRecipe?: boolean;
         instructions?: string;
     } | null;
+    topOffset: number;
 }
 
 export const MealDetailSheet = ({
     visible,
     onDismiss,
     meal,
+    topOffset,
 }: MealDetailSheetProps) => {
     const theme = useTheme();
     const insets = useSafeAreaInsets();
     const { height: screenHeight } = useWindowDimensions();
     const bottomSheetRef = useRef<BottomSheetModal>(null);
 
-    const maxSnapPoint = screenHeight - insets.top - 146;
+    const maxSnapPoint = screenHeight - topOffset;
     const snapPoints = useMemo(() => ["60%", maxSnapPoint], [maxSnapPoint]);
 
     useEffect(() => {
@@ -231,99 +234,24 @@ export const MealDetailSheet = ({
                             theme={{ colors: { background: "transparent" } }}
                         >
                             {dish.ingredients.map((ing, ingIndex) => (
-                                <View
+                                <IngredientListItem
                                     key={ingIndex}
-                                    style={[
-                                        styles.ingredientCard,
-                                        {
-                                            backgroundColor: "transparent", // Фон дает сам аккордеон
-                                            paddingLeft: meal.isRecipe ? 8 : 24, // Ещё меньше отступ для рецептов
-                                            paddingRight: meal.isRecipe ? 8 : 16,
-                                            paddingBottom:
-                                                ingIndex ===
-                                                dish.ingredients.length - 1
-                                                    ? 16
-                                                    : 4, // Отступ у последнего элемента
-                                        },
-                                    ]}
-                                >
-                                    {/* --- ТУТ НАЧИНАЕТСЯ ТВОЯ СТАРАЯ ВЕРСТКА КАРТОЧКИ --- */}
-                                    <View
-                                        style={[
-                                            styles.ingLeadingBadge,
-                                            {
-                                                backgroundColor:
-                                                    theme.colors
-                                                        .primaryContainer,
-                                            },
-                                        ]}
-                                    >
-                                        <Text
-                                            variant="titleMedium"
-                                            style={{
-                                                color: theme.colors
-                                                    .onPrimaryContainer,
-                                                fontWeight: "800",
-                                                lineHeight: 20,
-                                            }}
-                                        >
-                                            {ing.calories}
-                                        </Text>
-                                        <Text
-                                            variant="labelSmall"
-                                            style={{
-                                                color: theme.colors
-                                                    .onPrimaryContainer,
-                                                opacity: 0.8,
-                                                fontSize: 9,
-                                                lineHeight: 12,
-                                            }}
-                                        >
-                                            ккал
-                                        </Text>
-                                    </View>
-
-                                    <View style={styles.ingMainContent}>
-                                        <Text
-                                            variant="titleSmall"
-                                            style={{
-                                                color: theme.colors.onSurface,
-                                                fontWeight: "700",
-                                            }}
-                                            numberOfLines={1}
-                                        >
-                                            {capitalize(ing.name)}
-                                        </Text>
-                                        <View
-                                            style={[
-                                                styles.ingMacrosRow,
-                                                { marginTop: 4 },
-                                            ]}
-                                        >
-                                            {renderMiniMacro(
-                                                theme.colors.secondaryContainer,
-                                                theme.colors
-                                                    .onSecondaryContainer,
-                                                "Б",
-                                                ing.protein,
-                                            )}
-                                            {renderMiniMacro(
-                                                theme.colors.tertiaryContainer,
-                                                theme.colors
-                                                    .onTertiaryContainer,
-                                                "Ж",
-                                                ing.fat,
-                                            )}
-                                            {renderMiniMacro(
-                                                theme.colors.primaryContainer,
-                                                theme.colors.onPrimaryContainer,
-                                                "У",
-                                                ing.carbs,
-                                            )}
-                                        </View>
-                                    </View>
-
-                                    <View style={styles.ingTrailing}>
+                                    title={capitalize(ing.name)}
+                                    calories={ing.calories}
+                                    protein={ing.protein}
+                                    fat={ing.fat}
+                                    carbs={ing.carbs}
+                                    style={{
+                                        backgroundColor: "transparent",
+                                        paddingLeft: meal.isRecipe ? 8 : 24,
+                                        paddingRight: meal.isRecipe ? 8 : 16,
+                                        paddingBottom:
+                                            ingIndex ===
+                                            dish.ingredients.length - 1
+                                                ? 16
+                                                : 4,
+                                    }}
+                                    trailing={
                                         <Text
                                             variant="labelMedium"
                                             style={{
@@ -334,9 +262,8 @@ export const MealDetailSheet = ({
                                         >
                                             {ing.cookedWeight}г
                                         </Text>
-                                    </View>
-                                    {/* --- ТУТ ЗАКАНЧИВАЕТСЯ ТВОЯ СТАРАЯ ВЕРСТКА КАРТОЧКИ --- */}
-                                </View>
+                                    }
+                                />
                             ))}
                         </List.Accordion>
                     ))}
@@ -386,22 +313,6 @@ const renderMacro = (bg: string, fg: string, label: string, val: number) => (
     </View>
 );
 
-const renderMiniMacro = (
-    bg: string,
-    fg: string,
-    label: string,
-    val: number,
-) => (
-    <View style={[styles.miniMacroChip, { backgroundColor: bg }]}>
-        <Text
-            variant="labelSmall"
-            style={{ color: fg, opacity: 0.9, fontSize: 10 }}
-        >
-            {label} <Text style={{ fontWeight: "700" }}>{val}</Text>
-        </Text>
-    </View>
-);
-
 const styles = StyleSheet.create({
     staticHeader: {
         paddingHorizontal: 16,
@@ -413,7 +324,6 @@ const styles = StyleSheet.create({
     },
     scrollContent: {
         paddingHorizontal: 16,
-        // paddingTop: 16 <--- УБЕРИ эту строку отсюда, так как мы теперь вычисляем её динамически в JSX
     },
     boldText: {
         fontWeight: "700",
@@ -424,7 +334,7 @@ const styles = StyleSheet.create({
     statsWrapper: {
         borderRadius: 24,
         padding: 12,
-        marginBottom: 0, // БЫЛО 4, ставим 0, так как теперь есть paddingBottom у staticHeader
+        marginBottom: 0,
     },
     statsHeader: {
         flexDirection: "row",
@@ -468,36 +378,5 @@ const styles = StyleSheet.create({
         borderRadius: 24,
         padding: 16,
         marginBottom: 24,
-    },
-    ingredientCard: {
-        flexDirection: "row",
-        alignItems: "center",
-        padding: 10,
-        borderRadius: 24,
-    },
-    ingLeadingBadge: {
-        width: 48,
-        height: 48,
-        borderRadius: 16,
-        justifyContent: "center",
-        alignItems: "center",
-        marginRight: 12,
-    },
-    ingMainContent: {
-        flex: 1,
-        justifyContent: "center",
-    },
-    ingMacrosRow: {
-        flexDirection: "row",
-        gap: 4,
-    },
-    miniMacroChip: {
-        paddingHorizontal: 6,
-        paddingVertical: 2,
-        borderRadius: 6,
-    },
-    ingTrailing: {
-        marginLeft: 8,
-        justifyContent: "center",
     },
 });
