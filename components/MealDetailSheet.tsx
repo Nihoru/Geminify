@@ -43,6 +43,8 @@ interface MealDetailSheetProps {
         typeCode: string;
         macros: { p: number; f: number; c: number };
         dishes: DishInfo[];
+        isRecipe?: boolean;
+        instructions?: string;
     } | null;
 }
 
@@ -207,18 +209,6 @@ export const MealDetailSheet = ({
                 ]}
                 showsVerticalScrollIndicator={false}
             >
-                <View style={styles.ingredientsHeader}>
-                    <Text variant="titleMedium" style={styles.boldText}>
-                        Состав
-                    </Text>
-                    <Text
-                        variant="labelMedium"
-                        style={{ color: theme.colors.onSurfaceVariant }}
-                    >
-                        {meal.dishes.length} блюд(а)
-                    </Text>
-                </View>
-
                 <View style={styles.ingredientsList}>
                     {meal.dishes.map((dish, dishIndex) => (
                         <List.Accordion
@@ -247,8 +237,8 @@ export const MealDetailSheet = ({
                                         styles.ingredientCard,
                                         {
                                             backgroundColor: "transparent", // Фон дает сам аккордеон
-                                            paddingLeft: 24, // Сдвигаем левее для визуальной иерархии
-                                            paddingRight: 16,
+                                            paddingLeft: meal.isRecipe ? 8 : 24, // Ещё меньше отступ для рецептов
+                                            paddingRight: meal.isRecipe ? 8 : 16,
                                             paddingBottom:
                                                 ingIndex ===
                                                 dish.ingredients.length - 1
@@ -351,6 +341,35 @@ export const MealDetailSheet = ({
                         </List.Accordion>
                     ))}
                 </View>
+
+                {/* Способ приготовления (для рецептов) */}
+                {meal.instructions && (
+                    <View
+                        style={[
+                            styles.instructionsWrapper,
+                            {
+                                backgroundColor: theme.colors.elevation.level1,
+                                marginTop: 16,
+                            },
+                        ]}
+                    >
+                        <Text
+                            variant="titleMedium"
+                            style={[styles.boldText, { marginBottom: 8 }]}
+                        >
+                            Способ приготовления
+                        </Text>
+                        <Text
+                            variant="bodyMedium"
+                            style={{
+                                color: theme.colors.onSurfaceVariant,
+                                lineHeight: 22,
+                            }}
+                        >
+                            {meal.instructions}
+                        </Text>
+                    </View>
+                )}
             </BottomSheetScrollView>
         </BottomSheetModal>
     );
@@ -444,6 +463,11 @@ const styles = StyleSheet.create({
     },
     ingredientsList: {
         gap: 8, // Плотный список карточек
+    },
+    instructionsWrapper: {
+        borderRadius: 24,
+        padding: 16,
+        marginBottom: 24,
     },
     ingredientCard: {
         flexDirection: "row",
