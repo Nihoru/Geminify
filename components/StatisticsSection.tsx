@@ -1,19 +1,19 @@
-import React, { useEffect, useState, useMemo } from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { Text, useTheme, Menu, TouchableRipple } from "react-native-paper";
-import { MaterialSymbol } from "./MaterialSymbol";
-import { MealRealmContext, Meal } from "../src/shared/store/models";
+import React, { useEffect, useMemo, useState } from "react";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { Menu, Text, TouchableRipple, useTheme } from "react-native-paper";
+import { Meal, MealRealmContext } from "../src/shared/store/models";
 import { storage, STORAGE_KEYS } from "../src/shared/store/storage";
-import { MacroLimits } from "../src/utils/userMath";
 import {
-    getDailyStats,
-    getWeeklyStats,
-    getMonthlyStats,
     formatPeriodLabel,
+    getDailyStats,
+    getMonthlyStats,
+    getWeeklyStats,
 } from "../src/utils/statisticsHelpers";
+import { MacroLimits } from "../src/utils/userMath";
 import { DailyStats } from "./DailyStats";
-import { WeeklyStats } from "./WeeklyStats";
+import { MaterialSymbol } from "./MaterialSymbol";
 import { MonthlyStats } from "./MonthlyStats";
+import { WeeklyStats } from "./WeeklyStats";
 
 interface StatisticsSectionProps {
     period: string; // "day" | "week" | "month"
@@ -33,7 +33,10 @@ interface MetricInfo {
     onContColor: string;
 }
 
-export const StatisticsSection = ({ period, limits: limitsProp }: StatisticsSectionProps) => {
+export const StatisticsSection = ({
+    period,
+    limits: limitsProp,
+}: StatisticsSectionProps) => {
     const theme = useTheme();
     const { useQuery } = MealRealmContext;
     const meals = useQuery(Meal);
@@ -66,8 +69,7 @@ export const StatisticsSection = ({ period, limits: limitsProp }: StatisticsSect
         const mealsArray = Array.from(meals);
         if (period === "day") return [getDailyStats(mealsArray, currentDate)];
         if (period === "week") return getWeeklyStats(mealsArray, currentDate);
-        if (period === "month")
-            return getMonthlyStats(mealsArray, currentDate);
+        if (period === "month") return getMonthlyStats(mealsArray, currentDate);
         return [];
     }, [meals, currentDate, period]);
 
@@ -172,7 +174,10 @@ export const StatisticsSection = ({ period, limits: limitsProp }: StatisticsSect
                         onPress={() => setMenuVisible(true)}
                         style={[
                             styles.metricChip,
-                            { backgroundColor: theme.colors.secondaryContainer },
+                            {
+                                backgroundColor:
+                                    theme.colors.secondaryContainer,
+                            },
                         ]}
                         borderless
                     >
@@ -269,9 +274,9 @@ export const StatisticsSection = ({ period, limits: limitsProp }: StatisticsSect
                     disabled={isFuture}
                     style={[
                         styles.navButton,
-                        { 
+                        {
                             backgroundColor: theme.colors.surfaceVariant,
-                            opacity: isFuture ? 0.3 : 1 
+                            opacity: isFuture ? 0.3 : 1,
                         },
                     ]}
                 >
@@ -295,7 +300,7 @@ export const StatisticsSection = ({ period, limits: limitsProp }: StatisticsSect
                     <WeeklyStats
                         stats={stats}
                         selectedMetric={selectedMetric}
-                        limits={limits}
+                        limits={limits as unknown as Record<string, number>}
                         barColor={currentMetricInfo.mainColor}
                         renderMetricSelector={renderMetricSelector}
                     />
@@ -304,7 +309,7 @@ export const StatisticsSection = ({ period, limits: limitsProp }: StatisticsSect
                     <MonthlyStats
                         stats={stats}
                         selectedMetric={selectedMetric}
-                        limits={limits}
+                        limits={limits as unknown as Record<string, number>}
                         mainColor={currentMetricInfo.mainColor}
                         contColor={currentMetricInfo.contColor}
                         renderMetricSelector={renderMetricSelector}
